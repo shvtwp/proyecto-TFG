@@ -2,6 +2,59 @@
 
 \section{Metodología utilizada}
 
+\subsection{Herramientas utilizadas}
+
+\subsubsection{Memoria}
+Para la realización de esta memoria, se ha establecido como requisito mínimo que
+el documento esté libre de faltas de ortografía y compile correctamente. Partiendo de que 
+está escrito en \LaTeX, se han buscado herramientas que permitan la automatización de estas 
+comprobaciones. Para ello se han estudiado dos tipos de herramientas: las destinadas a la
+corrección gramatical y de estilo, y las empleadas para compilar la memoria.
+\\
+
+Entre las \textbf{herramientas para la corrección ortográfica}, han sido analizadas las siguientes
+opciones:
+
+\begin{itemize}
+    \item \textbf{Textidote}: es una solución de código abierto diseñada específicamente para
+    \LaTeX\, lo que evita falsos positivos por malinterpretar los comandos. Requiere Java.
+    \item \textbf{LanguageTool}: esta opción de código abierto es más avanzada que la anterior 
+    debido a que usa redes neuronales para comprobar la gramática y el estilo. 
+    Sin embargo, no está diseñada específicamente para \LaTeX, lo que hace necesario 
+    invertir tiempo extra en eliminar los comandos antes de realizar las verificaciones.
+    Tiene una versión gratuita y una versión prémium con funcionalidades avanzadas.
+    \item \textbf{GNU Aspell}: es el corrector ortográfico estándar de GNU, aunque compila para
+    otros sistemas operativos. Es de código abierto, no corrige gramática ni estilo, solo
+    ortografía, y no está diseñado específicamente para \LaTeX.
+\end{itemize}
+
+Después de la comparativa, la opción elegida ha sido \textbf{Textidote}, porque a pesar de 
+no ser tan avanzada en la corrección, supone un ahorro considerable de tiempo el hecho de no 
+tener que eliminar los comandos de \LaTeX\ al verificar la gramática y el estilo, como sucede
+con las otras dos alternativas analizadas.
+\\
+
+Con respecto a las \textbf{herramientas para la compilación de la memoria}, se han estudiado:
+
+\begin{itemize}
+    \item \textbf{TeX Live}: es la distribución por defecto de \LaTeX\ para Linux. Sin embargo,
+    la instalación puede ser pesada y excesiva si únicamente se necesita compilar documentos
+    sencillos.
+    \item \textbf{Overleaf}: es un editor \LaTeX\ basado en la nube, por lo que no requiere 
+    instalación previa. Es ideal para trabajar de manera colaborativa al permitir
+    a varios usuarios trabajar en el mismo documento y ver los cambios a tiempo real.
+    No obstante, tiene limitaciones en cuanto a capacidad, que pueden solventarse con
+    la versión de pago.
+    \item \textbf{TinyTex}: es una versión basada en Tex Live, pero mucho más ligera. Está orientada
+    sobre todo a usuarios de R, aunque es posible instalar manualmente los paquetes 
+    específicos que sean necesarios, lo que la convierte en una buena opción en un contexto 
+    en el que los recursos están limitados.
+\end{itemize}
+
+Dado a la complejidad añadida de instalar manualmente los paquetes específicos necesarios
+para el proyecto y que los recursos no son limitantes en este caso, la herramienta elegida
+es \textbf{TeX Live}. Se descarta \textbf{Overleaf} debido a la limitación de la versión gratuita,
+además de que no será necesario un entorno de trabajo colaborativo.
 
 \section{Temporización}
 
