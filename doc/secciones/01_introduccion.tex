@@ -1,43 +1,21 @@
 \chapter{Introducción}
 
+En este capítulo se presenta la motivación del proyecto, así como la definición
+del problema que busca abordar. Se incluyen además las historias de usuario que
+justifican el desarrollo de la solución propuesta, los objetivos iniciales y la
+estructura del documento.
+
+\section{Motivación}
 La heráldica es un sistema de representación gráfica codificado que permite
 la representación visual de linajes, instituciones y territorios a través de
-escudos de armas. Existen ciertas reglas de diseño y composición, lo que establece
-un lenguaje visual propio con el fin de facilitar su identificación y lectura.
-Los elementos distintivos de los escudos heráldicos son:
-\begin{itemize}
-    \item El campo, el fondo sobre el que se disponen los elementos.
-    \item La boca, el perímetro que delimita al campo.
-    \item Las particiones, divisiones geométricas en el escudo.
-    \item Los esmaltes, metales, colores y forros, utilizados con reglas estrictas
-    de contraste.
-    \item Las figuras, que pueden ser naturales, artificiales o fantásticas.
-    \item Adornos exteriores, tales como yelmos, coronas, lambrequines o brisuras.
-    En la heráldica eclesiástica se usan timbres concretos como la tiara para el papa
-    o la mitra para los obispos.
-\end{itemize}
+un conjunto no arbitrario de reglas de diseño y composición. Estas normas
+establecidas la hacen un campo apropiado para el análisis estructurado y la
+automatización mediante herramientas digitales.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figuras/escudo-papa-francisco.png}
-    \caption{Escudo de armas del papa Francisco.}
-\end{figure}
-
-El desarrollo de esta considerada ciencia-arte, tiene sus raíces en la Europa medieval,
-cuando la equipación militar hizo que fuese imposible identificar a simple vista a un 
-caballero en combate, lo que los llevó a pintar símbolos en sus escudos. Con el tiempo,
-estos símbolos fueron adquiriendo carácter hereditario y evolucionando hacia un sistema
-de representación de linajes y alianzas. Paralelamente, en el siglo XIII surge la 
-heráldica eclesiástica, adaptando este lenguaje gráfico a la jerarquía y simbología
-de la Iglesia. Sobre los siglos XIV y XV, la heráldica se consolidó y comenzó a ser 
-empleada como decoración en la arquitectura y como seña de identidad de instituciones, 
-familias y territorios. \cite{messia1990,delgado2019,pierrerer1858}
-
-Actualmente, la heráldica sigue siendo un campo de estudio relevante en disciplinas
-como la historia y la historia del arte, pero presenta obstáculos que dificultan el 
-acceso y la comprensión a quien desea introducirse a ella. La falta de una completa
-digitalización y estandarización de esta disciplina, y la ausencia de tecnologías
-actuales que faciliten su estudio, resulta en barreras para su aprendizaje, 
+Sin embargo, actualmente el estudio de esta ciencia-arte presenta ciertos 
+obstáculos que dificultan el acceso y la comprensión a quien desea
+introducirse en ella, debido a que su documentación se encuentra dispersa y
+no está completamente digitalizada. Estas barreras complican su aprendizaje,
 aplicación académica y divulgación.
 
 Con la finalidad de hacer menos hostil el aprendizaje de esta ciencia-arte, este
@@ -45,5 +23,86 @@ proyecto busca desarrollar una herramienta que modernice y agilice el aprendizaj
 de la heráldica, facilitando su comprensión y análisis, aspirando a ofrecer un 
 recurso digital accesible que contribuya a la preservación y divulgación de esta 
 disciplina.
+
+\section{Definición del problema}
+El principal problema que enfrenta el estudio de la heráldica es la falta de una 
+herramienta tecnológica que permita analizar y clasificar escudos de armas de manera 
+eficiente. En la actualidad, la interpretación y el estudio de los escudos heráldicos 
+requieren conocimientos especializados y un acceso a fuentes dispersas, ya que no
+existe un sistema automatizado que permita identificar escudos a partir de
+su estructura o sus elementos gráficos.
+
+Esta situación presenta varias dificultades:
+
+\begin{itemize}
+    \item La consulta de escudos requiere revisar múltiples fuentes dispersas, 
+    muchas de ellas no digitalizadas.
+    \item No existen bases de datos estandarizadas que permitan buscar escudos por
+    características visuales o estructurales.
+    \item Los investigadores deben realizar análisis manuales, lo que ralentiza el
+    proceso y puede generar errores.
+\end{itemize}
+
+El objetivo de este proyecto es desarrollar una base de datos estructurada de escudos
+heráldicos junto con herramientas que permitan su consulta y análisis digital. De este
+modo, se busca facilitar la investigación y el aprendizaje de la heráldica mediante un
+sistema accesible y eficiente.
+
+\subsection{Historias de usuario}
+Con el fin de exponer y comprender mejor las necesidades a las que responde este
+proyecto, se presentan los siguientes casos de uso:
+
+\begin{itemize}
+    \item \textbf{HU0: Tribunal del Trabajo de Fin de Grado - } Como tribunal del Trabajo
+    Final de Grado, necesito que este presente una solución bién justificada, cuyos
+    aspectos a valorar son la búsqueda y el tratamiento de la información, la autonomía
+    e iniciativa, una planificación clara, la solidez del análisis del problema, una 
+    correcta comunicación escrita y una implementación que demuestre calidad técnica,
+    de modo que pueda evaluar la viabilidad y el impacto del proyecto.
+    \item \textbf{HU1: Estudiante de Historia del Arte - } Un estudiante de Historia del 
+    Arte está paseando por Roma y se encuentra con una obra arquitectónica en cuya fachada
+    hay un escudo heráldico. Se pregunta de quién será y qué representa. Sigue caminando 
+    y se encuentra con más escudos, lo que le hace pensar en lo oportuna que sería una 
+    plataforma que le ayude a identificarlos y obtener información sobre ellos de manera 
+    sencilla.
+    \item \textbf{HU2: Investigador en heráldica - } Un investigador necesita clasificar
+    escudos en función de su estructura, colores, figuras, etc. Al no disponer de 
+    herramientas digitales que faciliten el proceso, debe hacerlo manualmente, revisando
+    manuscritos y otros documentos analógicos, tarea tediosa y propensa a errores.
+
+\end{itemize}
+
+\subsection{Objetivos iniciales}
+A partir de las anteriores historias de usuario se plantean los siguientes objetivos
+iniciales:
+
+\begin{enumerate}
+    \item \textbf{Definir una infraestructura técnica adecuada,} estableciendo las herramientas
+    necesarias para el desarollo del sistema.
+    \item \textbf{Diseñar un modelo de representación de la heráldica} que permita clasificar y 
+    describir los escudos en función de sus elementos gráficos.
+    \item \textbf{Implementar una base de datos} que almacene la información heráldica de manera
+    organizada, facilitando la consulta y el análisis.
+    \item \textbf{Desarrollar una interfaz de consulta} que permita a los usuarios buscar escudos
+    según sus características.
+    \item \textbf{Elaborar tests} para comprobar el correcto funcionamiento del sistema.
+\end{enumerate}
+
+\section{Estructura del proyecto}
+Es resto del documento se organiza en los siguientes capítulos:
+
+\begin{itemize}
+    \item \textbf{Capítulo 2: Estado del arte -} Se analizan trabajos previos relacionados
+    con la digitalización de la heráldica y las herramientas existentes, estableciendo
+    el contexto teórico del proyecto.
+    \item \textbf{Capítulo 3: Planificación - } Se explica la planificación y metodología
+    que se emplean en el desarrollo. Se habla de los milestones del proyecto.
+    \item \textbf{Capítulo 4: Análisis - } Define qué debe hacer la herramienta y habla
+    sobre su diseño y arquitectura.
+    \item \textbf{Capítulo 5: Implementación - }Describe cómo se ha desarrollado y validado
+    la herramienta. 
+    \item \textbf{Capítulo 6: Conclusiones - } Se resumen los resultados obtenidos y se
+    discuten posibles mejoras y líneas futuras de investigación.
+\end{itemize}
 
 Este proyecto es software libre, y está liberado con la licencia \cite{gplv3}.
