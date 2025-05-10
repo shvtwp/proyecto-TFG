@@ -1,0 +1,5 @@
+--check es
+--output html
+--dict ./diccionario.txt
+--ignore sh:nsubdiv,sh:seclen,sh:stacked,sh:nobreak,sh:nonp,lt:es:SPACE_UNITIES
+--remove titlepage

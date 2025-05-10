@@ -1,0 +1,41 @@
+name: LaTeX workflow
+
+on:
+    push:
+        paths:
+            - 'doc/**/*.tex'
+
+jobs:
+    latex-check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            
+            - name: Comprueba ortografía y gramática
+              uses: ChiefGokhlayeh/textidote-action@v5
+              id: textidote
+              with:
+                working_directory: doc
+                root_file: proyecto.tex
+
+            - name: Subir informe de TeXtidote
+              uses: actions/upload-artifact@v4
+              with:
+                name: informe_textidote
+                path: doc/report.html
+
+            - name: Lanzar un error si existen advertencias de textidote
+              if: ${{ steps.textidote.outputs.num_warnings != 0 }}
+              run: 'echo "::error file=proyecto.tex::num_warnings: ${{ steps.textidote.outputs.num_warnings }}"; exit 1;'
+
+            - name: Compila la memoria
+              uses: xu-cheng/latex-action@v3
+              with:
+                working_directory: doc
+                root_file: proyecto.tex
+
+            - name: Subir PDF
+              uses: actions/upload-artifact@v4
+              with:
+                name: memoria-PDF
+                path: doc/proyecto.pdf
