@@ -23,6 +23,3 @@ Guervós
 2.5ex
 centering
 textwidth
-INGENIERIA
-INFORMATICA
-centeroffset}{0.5\
