@@ -23,3 +23,6 @@ Guervós
 2.5ex
 centering
 textwidth
+SCRUM
+Git
+Actions
