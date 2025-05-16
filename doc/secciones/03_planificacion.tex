@@ -1,8 +1,79 @@
 \chapter{Planificación}
+En esta sección se presenta la planificación del proyecto. Se describen tanto la
+metodología empleada como las herramientas elegidas para llevar a cabo el desarrollo,
+asegurando la calidad del producto y su entrega continua. Además, se describen las historias
+de usuario que exponen las necesidades que este trabajo deberá satisfacer, así como los
+primeros hitos que se buscará alcanzar.
 
 \section{Metodología utilizada}
+Para la planificación y el desarrollo del proyecto se aplicará un enfoque ágil,
+priorizando la entrega continua de valor y la flexibilidad ante los cambios.
+En lugar de plantear el desarrollo desde el principio de una manera rígida y detallada,
+se definirán hitos, con tareas y objetivos a corto plazo, con entregas frecuentes
+y revisiones periódicas para poder detectar y corregir errores a tiempo.
+
+Dentro de este enfoque ágil, se usará una adaptación de SCRUM como marco
+de trabajo. Esta metodología ágil estructura el trabajo en ciclos cortos (\textit{sprints}),
+de los cuales resultan entregas incrementales del producto. 
+
+Concretamente, cada iteración de este proyecto estará marcada por un hito (\textit{milestone}),
+cada uno compuesto por una serie de tareas (\textit{issues}) que se irán completando a lo largo
+del desarrollo.
+
+Al final de cada hito, se realizará una comprobación del progreso y se evaluará si cumple con los 
+objetivos establecidos, y en caso contrario, se ajustarán los requisitos y se planificarán 
+los siguientes hitos.
+
+\subsection{Historias de usuario}
+Como punto de partida para la planificación del proyecto, se han definido una seria de 
+historias de usuario que reflejan las necesidades de los usuarios que el proyecto final
+debe satisfacer. Estas historias de usuario servirán como base para la definición de los hitos.
+Las historias de usuario definidas son las siguientes:
+\begin{itemize}
+    \item \textbf{HU1: Estudiante de Historia del Arte - }Un estudiante de Historia del 
+    Arte está paseando por Roma y se encuentra con una obra arquitectónica en cuya fachada
+    hay un escudo heráldico. Se pregunta de quién será y qué representa. Sigue caminando 
+    y se encuentra con más escudos, lo que le hace pensar en lo oportuna que sería una 
+    plataforma que le ayude a identificarlos y obtener información sobre ellos de manera 
+    sencilla.
+    \item \textbf{HU2: Investigador en heráldica - }Un investigador encuentra tedioso y
+    complicado analizar y comprobar escudos en fuentes analógicas, ya que hacerlo manualmente
+    de esta manera lo convierte en un proceso lento y propenso a errores.
+\end{itemize}
+
+\subsection{Objetivos iniciales}
+A partir de las anteriores historias de usuario, se puede establecer el primer
+producto mínimamente viable (o primer milestone):
+\begin{enumerate}
+    \item \textbf{Milestone 0: Infraestructura del proyecto - }Este primer hito tiene como 
+    objetivo crear la infraestructura del proyecto, incluyendo la creación del repositorio
+    en GitHub, la planificación de los hitos y tareas iniciales, y las herramientas para automatizar
+    la compilación y corrección ortográfica y gramatical de la memoria.
+    \item \textbf{Milestone 1: Modelo del problema - }Este milestone tiene como objetivo
+    elaborar una base sólida mediante la creación de una representación básica y estructurada
+    de los escudos, lo que permitirá almacenar y organizar sus atributos clave.
+\end{enumerate}
+
+A medida que se avance en este milestone, se establecerá el siguiente paso de manera iterativa,
+ajustándose a los resultados obtenidos y con la finalidad de ofrecer valor continuo al usuario.
+
+\subsection{Calidad y entrega continua}
+Con el fin de garantizar la calidad del producto y minimizar los errores, se aplicará
+un enfoque de control de calidad continuo. Esto implica la implementación de pruebas unitarias
+y de integración, así como la revisión y verificación de la documentación generada.
+Implementar un enfoque de entrega continua (CD/CI) permitirá automatizar el proceso.
+
 
 \subsection{Herramientas utilizadas}
+Para dar soporte al flujo de trabajo, se utilizarán las siguientes herramientas:
+\begin{itemize}
+    \item \textbf{Git}: se empleará como sistema de control de versiones para gestionar el código,
+    realizar un seguimiento de los cambios, crear ramas de desarrollo y mantener un historial
+    claro y ordenado del proyecto.
+    \item \textbf{GitHub}: se utilizará como plataforma centralizada para alojar el repositorio
+    de código, facilitando la gestión de los \textit{issues} y \textit{milestones}, además de la
+    configuración de la integración continua (CI/CD) mediante \textit{GitHub Actions.}
+\end{itemize}
 
 \subsubsection{Memoria}
 Para la realización de esta memoria, se ha establecido como requisito mínimo que
@@ -57,5 +128,5 @@ es \textbf{TeX Live}. Se descarta \textbf{Overleaf} debido a la limitación de l
 además de que no será necesario un entorno de trabajo colaborativo.
 
 \section{Temporización}
-
-\section{Seguimiento del desarrollo}
+La temporización se establecerá en función de los hitos y las tareas necesarias para 
+alcanzar los objetivos propuestos.
