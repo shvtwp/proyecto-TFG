@@ -1,67 +1,65 @@
 \chapter{Estado del arte}
 
 En este capítulo se realiza un análisis de las herramientas y tecnologías
-disponibles que pueden ser utilizadas en el proyecto. Dado que el trabajo se 
-encuentra en una fase inicial, aún no se pueden definir completamente todos
-los requisitos funcionales. Sin embargo, a partir de las necesidades
-generales identificadas, se puede llevar a cabo un estudio del estado actual
-de las soluciones disponibles.
-
-El objetivo de este capítulo es servir como base para la toma de 
-decisiones tecnológicas en fases posteriores del proyecto.
+existentes que abordan la representación digital de la heráldica, con el fin
+de determinar en qué medida responden a las necesidades del cliente.
+El objetivo de este capítulo es identificar qué aspectos están ya resueltos,
+cuáles son sus limitaciones y qué vacíos justifican la propuesta del proyecto.
+Además, servirá como base para la toma de decisiones tecnológicas en fases posteriores.
 
 \section{Enfoque del análisis}
-Como no es posible definir todos los requisitos funcionales del proyecto
-desde el inicio, se establecen unos criterios básicos y flexibles para
-poder guiar el análisis de las herramientas y tecnologías:
+El objetivo de este capítulo es estudiar cómo se ha abordado hasta ahora el problema de 
+la representación digital de escudos de armas desde distintos enfoques, y evaluar en qué 
+medida estas soluciones responden a las necesidades del proyecto y sus futuros usuarios.
+Los aspectos que se compararán incluyen:
 
 \begin{itemize}
-    \item \textbf{Flexibilidad}: Se desean herramientas que no limiten el desarrollo
-    futuro del proyecto, permitiendo adaptaciones y ampliaciones sin aumentar la dificultad.
-    \item \textbf{Comunidad y soporte}: Se priorizarán aquellas con una comunidad activa
-    y buena documentación.
-    \item \textbf{Compatibilidad}: Se deberán integrar fácilmente con otras tecnologías
-    que se vayan a emplear.
-    \item \textbf{Licencia}: Se preferirán herramientas de código abierto debido al
-    contexto académico del proyecto.
-    \item \textbf{Rendimiento}: Se valorará su capacidad para manejar grandes volúmenes
-    de datos o tareas complejas.
+    \item \textbf{Representación visual}: Se examinarán las herramientas que permiten
+    generar imágenes de escudos a partir de descripciones textuales o mediante interfaces 
+    gráficas. Es un aspecto clave para usuarios que desean identificar los escudos de
+    forma intuitiva, por ejemplo, en la fachada de un edificio.
+    \item \textbf{Estructuración semántica}: Se revisarán las ontologías y esquemas que
+    organizan la información heráldica de manera estructurada y reutilizable para facilitar
+    su análisis y procesamiento automático.
+    \item \textbf{Usabilidad y accesibilidad}: Se evaluará la facilidad de uso de las herramientas
+    para usuarios no expertos, además de su utilidad para tareas de análisis o generación automática.
+    \item \textbf{Tipo de heráldica}: El tipo de heráldica que cubren (nacional, eclesiástica, etc.).
 \end{itemize}
 
-Estas directrices servirán para evaluar las diferentes opciones y seleccionar las más 
-adecuadas para el proyecto.
+Este análisis hará posible la identificación de las limitaciones y las áreas que aún no han sido
+cubiertas, lo que justificará el desarrollo de este proyecto.
 
 \section{Tecnologías actuales en el ámbito de la heráldica}
-En esta sección se revisan las tecnologías y herramientas existentes que pueden ser
-aplicadas al ámbito de la heráldica, con el fin de identificar tanto sus puntos fuertes
-como las necesidades que aún no están cubiertas.
+En esta sección se analizan las tecnologías y herramientas existentes aplicadas a la representación
+digital de la heráldica, con el fin de detectar las limitaciones actuales y las oportunidades
+de mejora.
 
 Por un lado, se analizarán las herramientas de software que ya representan escudos heráldicos,
 y por otro, se explorarán propuestas de organización de la información más estructuradas
 (como ontologías o esquemas semánticos). Estos recursos permiten definir con precisión
-qué elementos componen un escudo y cómo se relacionan entre sí, lo cual resulta útil si
-en fases futuras se desea automatizar su interpretación o generar documentación técnica.
+qué elementos componen un escudo y cómo se relacionan entre sí, lo cual resulta útil para
+quienes deseen identificar un escudo a partir de su descripción textual.
 
 \subsection{Sistemas de representación heráldica}
 En el contexto del modelado digital de blasones, existen diversas herramientas y repositorios
-que ya trabajan con representaciones heráldicas de forma más o menos estructurada. Algunos 
-sistemas se centran en la generación visual de escudos, otros en la interpretación computacional
-del lenguaje heráldico, y otros simplemente recopilan grandes volúmenes de información sin un
-tratamiento semántico explícito. A continuación, se analizan algunos ejemplos:
+que ya trabajan con representaciones heráldicas. Algunos sistemas se centran en la generación 
+visual de escudos, otros en la interpretación computacional del lenguaje heráldico, y otros 
+simplemente recopilan grandes volúmenes de información sin un tratamiento semántico explícito. 
+A continuación, se analizan algunos ejemplos desde los criterios previamente mencionados:
 
 \begin{itemize}
-    \item \textbf{DrawShield:} es una herramienta online que permite generar escudos de armas
+    \item \textbf{DrawShield \cite{drawshield}:} es una herramienta online que permite generar escudos de armas
     a partir de blasones escritos en inglés. Utiliza un lenguaje formalizado cercano al blasonado
     tradicional, y produce imágenes SVG, facilitando su utilización como recurso visual. Aunque está 
     centrada en la heráldica anglosajona y no es completamente de código abierto, su 
     uso es gratuito y posee suficiente documentación técnica pública para entender su 
     funcionamiento. Puede resultar útil como apoyo visual o para explorar la traducción del
     texto heráldico a imágenes.
-    \item \textbf{Coat of Arms Maker:} son un conjunto de herramientas gráficas que permiten
+    \item \textbf{Coat of Arms Maker \cite{coat_of_arms}:} son un conjunto de herramientas gráficas que permiten
     la creación de escudos desde una interfaz visual. Tiene fines recreativos y no sigue
     necesariamente las reglas formales del blasonado ni genera datos estructurados. Su alcance
     desde el punto de vista heráldico es bastante superficial.
-    \item \textbf{pyBlazon:} es una librería en Python orientada a procesar blasones escritos en
+    \item \textbf{pyBlazon \cite{pyBlazon}:} es una librería en Python orientada a procesar blasones escritos en
     inglés, con el objetivo de analizar su estructura. Aún está en desarrollo, por lo que tiene
     una cobertura del vocabulario heráldico limitada, centrada además en escudos ingleses.
     Reconoce los elementos básicos del blasonado, como figuras, esmaltes y particiones.
@@ -89,11 +87,11 @@ lógica y reutilizable, lo que resulta especialmente útil en aplicaciones digit
 datos, sistemas de recuperación de información o inteligencia artificial.
 
 \begin{itemize}
-    \item \textbf{HERO – Ontology of Heraldry:} desarrollada por los Archivos Nacionales de Finlandia, 
+    \item \textbf{HERO – Ontology of Heraldry \cite{hero_ontology}:} desarrollada por los Archivos Nacionales de Finlandia, 
     esta ontología proporciona un vocabulario estructurado destinado a describir conceptos heráldicos.
     Se utiliza en iniciativas como Europeana Heraldica con el fin de mejorar la búsqueda y la organización
     de bases de datos de escudos. Además, unifica los términos heráldicos en varios idiomas.
-    \item \textbf{Digital Heraldry Ontology (Humboldt-Universität zu Berlin):} esta ontología surge del
+    \item \textbf{Digital Heraldry Ontology (Humboldt-Universität zu Berlin) \cite{digital_heraldry}:} esta ontología surge del
     proyecto “Coats of Arms in Practice” y tiene como objetivo representar digitalmente escudos de armas
     siguiendo las reglas del lenguaje heráldico. Organiza la información de los componentes de un blasón,
     lo que facilita su análisis, clasificación y generación automática.
@@ -101,15 +99,27 @@ datos, sistemas de recuperación de información o inteligencia artificial.
 
 Ambas iniciativas muestran enfoques complementarios: mientras HERO se centra más en organizar y
 definir términos heráldicos, la Digital Heraldry Ontology se enfoca en representar y analizar
-formalmente los escudos, por lo que ambas podrían servir como referencia para crear un modelo
-semántico de blasones en proyectos digitales. 
+formalmente los escudos. No obstante, ambas presentan limitaciones para la heráldica española y
+eclesiástica, por lo que podrían servir como punto de partida para la creación de un modelo semántico
+más completo y adaptado a las necesidades específicas de este proyecto.
 
 \section{Conclusión del capítulo}
 Las herramientas actuales presentes en el ámbito de la heráldica digital abarcan un amplio
-rango de enfoques. Por un lado, las herramientas orientadas a la representación visual o
-recopilación de datos tratan de forma limitada la estructura semántica. Por otro lado,
+rango de enfoques, aunque incompletos. Por un lado, las herramientas orientadas a la representación
+visual o recopilación de datos tratan de forma limitada la estructura semántica. Por otro lado,
 las ontologías y esquemas semánticos ofrecen una mejor organización para la interpretación
 automática, pero aún no están suficientemente integradas en las herramientas de uso general y
-suelen estar enfocadas a ámbitos geográficos concretos. En particular, la heráldica española y papal
-no se encuentra suficientemente representada en ellas, lo que abre un espacio para el desarrollo
-de un modelo semántico que permita un análisis de escudos más preciso y automático.
+suelen estar enfocadas a ámbitos geográficos concretos. 
+
+En particular, la heráldica española y eclesiástica no se encuentran suficientemente representadas 
+en ellas, ni desde el punto de vista visual ni semántico, lo que evidencia la falta de soluciones 
+que respondan a las necesidades identificadas en las historias de usuario.
+
+Estas limitaciones no solo representan un reto técnico, sino que afectan directamente a los 
+usuarios finales. Tanto los estudiantes interesados en identificar escudos en su contexto patrimonial 
+como los investigadores que trabajan con fuentes dispersas y poco accesibles se enfrentan a 
+dificultades concretas que actualmente no están resueltas por las herramientas existentes.
+
+Estas carencias exponen la necesidad de un enfoque integral que combine representación
+visual, estructuración semántica y accesibilidad. Este proyecto pretende cubrir ese vacío,
+aportando una solución digital que responda a problemas reales.
