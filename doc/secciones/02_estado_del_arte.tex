@@ -7,6 +7,31 @@ El objetivo de este capítulo es identificar qué aspectos están ya resueltos,
 cuáles son sus limitaciones y qué vacíos justifican la propuesta del proyecto.
 Además, servirá como base para la toma de decisiones tecnológicas en fases posteriores.
 
+\section{La heráldica}
+
+Antes de analizar las herramientas y tecnologías existentes, conviene definir qué se entiende 
+por heráldica. Se trata de la disciplina que estudia los escudos de armas y sus componentes 
+simbólicos, estructurales y normativos.  
+A lo largo del tiempo, ha desarrollado un lenguaje técnico propio, el blasonado, que permite 
+describir escudos con precisión mediante palabras.  
+
+No obstante, la digitalización de este conocimiento plantea retos importantes, tanto por la 
+complejidad de su terminología como por la diversidad de tradiciones existentes. Estas varían 
+según la región geográfica (heráldica española, anglosajona, etc.) o el ámbito de aplicación 
+(civil, nobiliario, eclesiástico, etc.), lo que dificulta la creación de modelos informáticos 
+universales.
+
+Aunque comparten elementos comunes, las tradiciones heráldicas varían notablemente 
+según su origen. No es lo mismo un escudo inglés que uno español, ni uno civil que 
+uno eclesiástico. Cada estilo tiene convenciones propias en cuanto a formas, 
+terminología y reglas de composición.
+
+Adelanto que este proyecto se centrará específicamente en la heráldica española y eclesiástica, 
+atendiendo a las necesidades de los clientes las cuáles se exponen de manera más específica en 
+el próximo capítulo. Estas particularidades culturales y simbólicas deben tenerse en cuenta 
+desde el principio, ya que afectan tanto a la representación visual como a la estructuración 
+semántica de los escudos.
+
 \section{Enfoque del análisis}
 El objetivo de este capítulo es estudiar cómo se han abordado hasta ahora el análisis y
 clasificación de escudos de armas en el ámbito digital, y evaluar en qué medida estas soluciones 
@@ -15,10 +40,10 @@ Tal y como se indica en la descripción del problema, se compararán los siguien
 relacionados con el análisis y la clasificación de escudos de armas:
 
 \begin{itemize}
-    \item \textbf{Representación visual}: Se examinarán las herramientas que permiten
-    generar imágenes de escudos a partir de descripciones textuales o mediante interfaces 
-    gráficas. Es un aspecto clave para usuarios que desean identificar los escudos de
-    forma intuitiva, por ejemplo, en la fachada de un edificio.
+    \item \textbf{Representación visual}: Es un aspecto clave para usuarios que desean identificar
+    los escudos de forma intuitiva, por ejemplo, en la fachada de un edificio. Se examinarán las 
+    herramientas que permiten generar imágenes de escudos a partir de descripciones textuales o 
+    mediante interfaces gráficas.
     \item \textbf{Estructuración semántica}: Se revisarán las ontologías y esquemas que
     organizan la información heráldica de manera estructurada y reutilizable para facilitar
     su análisis y procesamiento automático.
@@ -54,18 +79,22 @@ A continuación, se analizan algunos ejemplos desde los criterios previamente me
     tradicional, y produce imágenes SVG, facilitando su utilización como recurso visual. Aunque está 
     centrada en la heráldica anglosajona y no es completamente de código abierto, su 
     uso es gratuito y posee suficiente documentación técnica pública para entender su 
-    funcionamiento. Puede resultar útil como apoyo visual o para explorar la traducción del
-    texto heráldico a imágenes.
+    funcionamiento. Puede resultar útil para comprender cómo formalizar el lenguaje heráldico
+    y traducirse automáticamente a representaciones visuales, aunque su enfoque no se adapta
+    completamente a la heráldica española o eclesiástica.
     \item \textbf{\href{https://coamaker.com/}{Coat of Arms Maker}} son un conjunto de herramientas gráficas que permiten
     la creación de escudos desde una interfaz visual. Tiene fines recreativos y no sigue
     necesariamente las reglas formales del blasonado ni genera datos estructurados. Su alcance
-    desde el punto de vista heráldico es bastante superficial.
+    desde el punto de vista heráldico es bastante superficial. No tiene mucha utilidad real
+    en el proyecto, pero puede servir como referencia para entender cómo se pueden representar
+    visualmente los elementos heráldicos de forma intuitiva.
     \item \textbf{\href{https://web.meson.org/pyBlazon/}{pyBlazon}} es una librería en Python orientada a procesar blasones escritos en
     inglés, con el objetivo de analizar su estructura. Aún está en desarrollo, por lo que tiene
     una cobertura del vocabulario heráldico limitada, centrada además en escudos ingleses.
     Reconoce los elementos básicos del blasonado, como figuras, esmaltes y particiones.
     No genera representaciones visuales por sí sola, pero puede ser útil como un punto de partida
-    para estudiar cómo se puede interpretar el lenguaje heráldico de forma automática.
+    para estudiar cómo se puede interpretar el lenguaje heráldico de forma automática. Habría que
+    adaptarla para que pueda trabajar con la heráldica española y eclesiástica.
     \item \textbf{Wikipedia y Wikimedia Commons:} si bien no son herramientas en sentido estricto,
     estas plataformas representan una gran fuente de escudos digitalizados con descripciones
     textuales (blasones) en múltiples idiomas. Aunque la representación no sigue un sistema formal 
@@ -91,11 +120,16 @@ datos, sistemas de recuperación de información o inteligencia artificial.
     \item \textbf{\href{https://finto.fi/en/ontology/heraldica/}{HERO – Ontology of Heraldry}} desarrollada por los Archivos Nacionales de Finlandia, 
     esta ontología proporciona un vocabulario estructurado destinado a describir conceptos heráldicos.
     Se utiliza en iniciativas como Europeana Heraldica con el fin de mejorar la búsqueda y la organización
-    de bases de datos de escudos. Además, unifica los términos heráldicos en varios idiomas.
+    de bases de datos de escudos. Además, unifica los términos heráldicos en varios idiomas, aunque se
+    centra en la tradición nórdica y europea central. Puede servir como referencia para estructurar un
+    vocabulario propio adaptado.
     \item \textbf{\href{https://digitalheraldry.org/digital-heraldry-ontology/heraldry/documentation/index-en.html}{Digital Heraldry Ontology (Humboldt-Universität zu Berlin)}} esta ontología surge del
     proyecto “Coats of Arms in Practice” y tiene como objetivo representar digitalmente escudos de armas
     siguiendo las reglas del lenguaje heráldico. Organiza la información de los componentes de un blasón,
-    lo que facilita su análisis, clasificación y generación automática.
+    lo que facilita su análisis, clasificación y generación automática. Tiene gran potencial, aunque está
+    redactada en inglés y se centra principalmente en la heráldica alemana, lo que limita su aplicabilidad
+    a la heráldica española y eclesiástica. Aun así, puede servir como base para desarrollar un modelo
+    semántico adaptado a las necesidades del proyecto.
 \end{itemize}
 
 Ambas iniciativas muestran enfoques complementarios: mientras HERO se centra más en organizar y
