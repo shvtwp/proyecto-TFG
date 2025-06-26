@@ -7,31 +7,6 @@ El objetivo de este capítulo es identificar qué aspectos están ya resueltos,
 cuáles son sus limitaciones y qué vacíos justifican la propuesta del proyecto.
 Además, servirá como base para la toma de decisiones tecnológicas en fases posteriores.
 
-\section{La heráldica}
-
-Antes de analizar las herramientas y tecnologías existentes, conviene definir qué se entiende 
-por heráldica. Se trata de la disciplina que estudia los escudos de armas y sus componentes 
-simbólicos, estructurales y normativos.  
-A lo largo del tiempo, ha desarrollado un lenguaje técnico propio, el blasonado, que permite 
-describir escudos con precisión mediante palabras.  
-
-No obstante, la digitalización de este conocimiento plantea retos importantes, tanto por la 
-complejidad de su terminología como por la diversidad de tradiciones existentes. Estas varían 
-según la región geográfica (heráldica española, anglosajona, etc.) o el ámbito de aplicación 
-(civil, nobiliario, eclesiástico, etc.), lo que dificulta la creación de modelos informáticos 
-universales.
-
-Aunque comparten elementos comunes, las tradiciones heráldicas varían notablemente 
-según su origen. No es lo mismo un escudo inglés que uno español, ni uno civil que 
-uno eclesiástico. Cada estilo tiene convenciones propias en cuanto a formas, 
-terminología y reglas de composición.
-
-Adelanto que este proyecto se centrará específicamente en la heráldica española y eclesiástica, 
-atendiendo a las necesidades de los clientes las cuales se exponen de manera más específica en 
-el próximo capítulo. Estas particularidades culturales y simbólicas deben tenerse en cuenta 
-desde el principio, ya que afectan tanto a la representación visual como a la estructuración 
-semántica de los escudos.
-
 \section{Enfoque del análisis}
 El objetivo de este capítulo es estudiar cómo se han abordado hasta ahora el análisis y
 clasificación de escudos de armas en el ámbito digital, y evaluar en qué medida estas soluciones 
@@ -77,7 +52,7 @@ A continuación, se analizan algunos ejemplos desde los criterios previamente me
     \item \textbf{\href{https://drawshield.net/index.html}{DrawShield}} es una herramienta online que permite generar escudos de armas
     a partir de blasones escritos en inglés. Utiliza un lenguaje formalizado cercano al blasonado
     tradicional, y produce imágenes SVG, facilitando su utilización como recurso visual. Aunque está 
-    centrada en la heráldica anglosajona y no es completamente de código abierto, su 
+    centrada en la \hyperref[sec:heraldica]{heráldica anglosajona} y no es completamente de código abierto, su 
     uso es gratuito y posee suficiente documentación técnica pública para entender su 
     funcionamiento. Puede resultar útil para comprender cómo formalizar el lenguaje heráldico
     y traducirse automáticamente a representaciones visuales, aunque su enfoque no se adapta
@@ -134,8 +109,8 @@ datos, sistemas de recuperación de información o inteligencia artificial.
 
 Ambas iniciativas muestran enfoques complementarios: mientras HERO se centra más en organizar y
 definir términos heráldicos, la Digital Heraldry Ontology se enfoca en representar y analizar
-formalmente los escudos. No obstante, ambas presentan limitaciones para la heráldica española y
-eclesiástica, por lo que podrían servir como punto de partida para la creación de un modelo semántico
+formalmente los escudos. No obstante, ambas presentan limitaciones para la \hyperref[sec:heraldica]{heráldica española y
+eclesiástica}, por lo que podrían servir como punto de partida para la creación de un modelo semántico
 más completo y adaptado a las necesidades específicas de este proyecto.
 
 \section{Conclusión del capítulo}
