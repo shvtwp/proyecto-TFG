@@ -46,3 +46,6 @@ hyperref
 sec
 heraldica
 historias_usuario
+Domain
+Driven
+Design
