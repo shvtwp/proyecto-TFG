@@ -14,3 +14,32 @@ evolución futura. Finalmente, se elegirán el lenguaje de programación y las h
 que servirán de base para las decisiones de implementación que se describirán en el capítulo 
 siguiente.
 
+\section{Modelado del problema}
+El modelado del problema se llevará a cabo utilizando un enfoque de Domain-Driven Design (DDD),
+una metodología que se basa en reconocer las \textit{entidades}, que son clases encargadas de 
+contener lógica de negocio y de gestionar otras estructuras relacionadas, así como los 
+\textit{objetos valor}, elementos inmutables cuyo ciclo de vida depende de las entidades que 
+los integran.
+Se ha elegido DDD porque permite estructurar de forma clara un dominio complejo como el heráldico, 
+facilitando que el software refleje fielmente sus conceptos y relaciones.
+
+\subsection{Entidades principales}
+A partir del análisis de las historias de usuario, se han identificado las siguientes entidades:
+
+\begin{itemize}
+    \item \textbf{Escudo: } Un escudo es la representación heráldica de una persona, linaje o institución.
+    Cada escudo tiene un nombre y una descripción (blasón), y está compuesto de:
+    \begin{itemize}
+        \item \textbf{Campo: } Superficie del escudo donde se sitúan las figuras.
+        \item \textbf{Boca: } Perímetro que delimita el escudo.
+        \item \textbf{Particiones: } Divisiones del escudo.
+        \item \textbf{Esmaltes: } Es el atributo cromático de un campo.
+        \item \textbf{Piezas heráldicas: } Suelen tocar casi siempre los bordes del escudo, y suelen ser de
+        esmalte diferente al del campo.
+        \item \textbf{Muebles o figuras: } Elementos que se sitúan sobre el campo del escudo. Pueden ser
+        figuras naturales, artificiales o fantásticas.
+        \item \textbf{Adornos exteriores: } Son todos aquellos elementos que no se encuentran dentro del 
+        campo del escudo. Los escudos eclesiásticos tienen adornos exteriores específicos.
+    \end{itemize}
+
+\end{itemize}
