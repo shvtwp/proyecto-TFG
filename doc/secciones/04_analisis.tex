@@ -1,2 +1,45 @@
 \chapter{Análisis del problema}
- 
+Este capítulo tiene como objetivo analizar en profundidad el problema al que se pretende 
+dar solución, abordando tanto los aspectos conceptuales del dominio como las implicaciones 
+técnicas y funcionales del sistema desde una perspectiva inicial. No se busca definir una
+solución, sino comprender el contexto del problema y acotarlo de manera realista.
+
+Además, se analizarán los riesgos técnicos asociados y se esbozarán posibles vías de 
+evolución futura. Finalmente, se elegirán el lenguaje de programación y las herramientas
+que servirán de base para las decisiones de implementación que se describirán en el capítulo 
+siguiente.
+
+\section{Casos de uso}
+A partir de las \hyperref[sec:historias_usuario]{historias de usuario} recopiladas, se han 
+identificado varios casos de uso que reflejan las interacciones esperadas entre los usuarios
+y el sistema:
+\begin{itemize}
+    \item \textbf{CU1: } Búsqueda de un escudo según sus elementos. Visto en la HU1.
+    \item \textbf{CU2: } Proporcionar información sobre un escudo: a quién pertenece. Visto en la HU1.
+    \item \textbf{CU3: } Filtrar escudos en función de sus elementos. Visto en la HU2.
+\end{itemize}
+
+Estos casos de uso delimitan las funcionalidades mínimas del sistema y orientan el futuro desarrollo.
+
+\section{Análisis de riesgos}
+Antes de comenzar el desarrollo se identifican los siguientes riesgos:
+
+\begin{itemize}
+    \item \textbf{Ambigüedad conceptual: } ciertos términos heráldicos pueden tener distintos
+    significados según la tradición.
+    \item \textbf{Falta de datos estructurados: } no existen fuentes públicas completas con escudos
+    de forma estandarizada y digital, lo que puede dificultar la extracción automática de información.
+\end{itemize}
+
+\section{Evolución futura}
+Aunque no forma parte del alcance inicial y siguiendo la metodología el desarrollo es incremental, 
+es importante considerar desde un principio ciertos aspectos que podrían evolucionar en el futuro:
+
+\begin{itemize}
+    \item \textbf{Integración de inteligencia artificial: } para identificar visualmente los escudos.
+    Puede ser un objetivo a largo plazo relacionado con la HU1.
+    \item \textbf{Ampliación del sistema: } a otras tradiciones heráldicas o idiomas.
+\end{itemize}
+
+Contemplar estas posibilidades desde el inicio permite que la selección de herramientas y tecnologías
+no limite o complique el crecimiento futuro del sistema.
