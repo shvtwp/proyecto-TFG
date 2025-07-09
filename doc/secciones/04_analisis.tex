@@ -37,8 +37,24 @@ del software, así como los criterios que se han seguido para su selección. La 
 herramientas se ha basado en las secciones previas.
 
 \subsection{Lenguaje de programación}
-Primero se presentan los criterios empleados para identificar y seleccionar los lenguajes de 
-programación más adecuados para el proyecto
+Antes de avanzar en el diseño del modelo de datos y la arquitectura del sistema, es necesario definir 
+el lenguaje de programación, ya que cada lenguaje ofrece estructuras, herramientas y recursos diferentes 
+para representar y manipular la información.
+
+Para seleccionar el lenguaje más adecuado, se han identificado una serie de requisitos técnicos derivados
+de las historias de usuario:
+
+\begin{itemize}
+    \item Debe permitir el desarrollo de una plataforma accesible desde distintos dispositivos 
+    (móviles y ordenadores) y, preferiblemente, con capacidad multiplataforma o web. (\hyperref[sec:hu1]{HU1})
+    \item Debe facilitar búsquedas rápidas de información. (\hyperref[sec:hu1]{HU1}, \hyperref[sec:hu2]{HU2})
+    \item Se valora la posibilidad de funcionamiento offline para situaciones sin conexión. (\hyperref[sec:hu1]{HU1})
+    \item Es recomendable que permita integrar técnicas de procesamiento de imagen y funcionalidades de inteligencia artificial. (\hyperref[sec:hu1]{HU1})
+    \item Debe facilitar la gestión de grandes volúmenes de datos y ofrecer mecanismos para su análisis, filtrado y clasificación. (\hyperref[sec:hu2]{HU2})
+\end{itemize}
+
+A partir de estos requisitos, se han definido los siguientes criterios de búsqueda y selección.
+
 
 \subsubsection{Criterios de búsqueda}
 Para la selección de lenguajes de programación se han considerado los siguientes criterios:
@@ -58,16 +74,10 @@ Para la selección de lenguajes de programación se han considerado los siguient
 Para la selección final del lenguaje de programación se han considerado los siguientes criterios:
 
 \begin{itemize}
-    \item \textbf{Curva de aprendizaje baja:} se priorizan lenguajes cuya sintaxis sea clara y que
-    cuenten con buena documentación.
-    \item \textbf{Ecosistema y disponibilidad de librerías: } se valoran positivamente los lenguajes
-    con abundantes bibliotecas que faciliten el manejo de datos.
-    \item \textbf{Comunidad activa: } la existencia de una comunidad sólida permite encontrar soluciones
-    a problemas comunes y reduce los tiempos de desarrollo.
-    \item \textbf{Soporte continuo: } se da preferencia a lenguajes con soporte continuo, lo que 
-    garantiza mayor sostenibilidad del sistema.
-    \item \textbf{Facilidad de despliegue:} se valoran lenguajes que sean fáciles de poner en marcha
-    en un servidor o en la nube sin requerir configuraciones complejas.
+    \item Facilidad de aprendizaje y sintaxis clara.
+    \item Ecosistema y disponibilidad de librerías.
+    \item Comunidad y soporte continuos.
+    \item Facilidad de despliegue y mantenimiento.
 \end{itemize}
 
 \subsubsection{Lenguajes considerados}
@@ -185,6 +195,6 @@ mejor se adaptan a los criterios de selección y a mis necesidades como desarrol
 En conclusión, después de comparar directamente los lenguajes entre ellos, es evidente
 que tanto TypeScript como Python son opciones muy sólidas y podría elegir cualquiera de las
 dos. Sin embargo, atendiendo a posibles líneas de evolución futura, he decidido optar por
-Python, ya que ofrece mayor versatilidad para trabajar con datos estructurados y permite, 
-a medio y largo plazo, integrar funcionalidades de inteligencia artificial sin grandes 
-cambios tecnológicos.
+\textbf{Python}, ya que ofrece mayor versatilidad para trabajar con datos estructurados y 
+permite, a medio y largo plazo, integrar funcionalidades de inteligencia artificial sin 
+grandes cambios tecnológicos.
