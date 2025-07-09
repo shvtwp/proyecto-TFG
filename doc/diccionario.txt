@@ -46,3 +46,9 @@ hyperref
 sec
 heraldica
 historias_usuario
+frameworks
+tipada
+cloud
+Rust
+Node
+js

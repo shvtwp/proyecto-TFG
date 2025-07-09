@@ -30,3 +30,161 @@ es importante considerar desde un principio ciertos aspectos que podrían evoluc
 
 Contemplar estas posibilidades desde el inicio permite que la selección de herramientas y tecnologías
 no limite o complique el crecimiento futuro del sistema.
+
+\section{Selección de herramientas}
+En esta sección se detallan las herramientas y tecnologías que se han considerado para el desarrollo
+del software, así como los criterios que se han seguido para su selección. La selección de estas
+herramientas se ha basado en las secciones previas.
+
+\subsection{Lenguaje de programación}
+Primero se presentan los criterios empleados para identificar y seleccionar los lenguajes de 
+programación más adecuados para el proyecto
+
+\subsubsection{Criterios de búsqueda}
+Para la selección de lenguajes de programación se han considerado los siguientes criterios:
+
+\begin{itemize}
+    \item \textbf{Curva de aprendizaje moderada: } que me permita como desarrolladora aprender
+    rápidamente y ser productiva desde el principio.
+    \item \textbf{Comunidad activa:} que asegure soporte continuo, documentación actualizada y 
+    disponibilidad de librerías externas.
+    \item \textbf{Adecuación al dominio del problema:} especialmente en lo relativo a 
+    manipulación de datos estructurados y representación semántica.
+    \item \textbf{Flexibilidad:} posibilidad de evolucionar el proyecto hacia otros ámbitos, 
+    como el desarrollo web o la integración de inteligencia artificial.
+\end{itemize}
+
+\subsubsection{Criterios de selección}
+Para la selección final del lenguaje de programación se han considerado los siguientes criterios:
+
+\begin{itemize}
+    \item \textbf{Curva de aprendizaje baja:} se priorizan lenguajes cuya sintaxis sea clara y que
+    cuenten con buena documentación.
+    \item \textbf{Ecosistema y disponibilidad de librerías: } se valoran positivamente los lenguajes
+    con abundantes bibliotecas que faciliten el manejo de datos.
+    \item \textbf{Comunidad activa: } la existencia de una comunidad sólida permite encontrar soluciones
+    a problemas comunes y reduce los tiempos de desarrollo.
+    \item \textbf{Soporte continuo: } se da preferencia a lenguajes con soporte continuo, lo que 
+    garantiza mayor sostenibilidad del sistema.
+    \item \textbf{Facilidad de despliegue:} se valoran lenguajes que sean fáciles de poner en marcha
+    en un servidor o en la nube sin requerir configuraciones complejas.
+\end{itemize}
+
+\subsubsection{Lenguajes considerados}
+Entre los lenguajes de programación que se han considerado para el desarrollo del software, se 
+incluyen los siguientes:
+
+\begin{itemize}
+    \item \textbf{JavaScript: }
+    \begin{itemize}
+        \item \textbf{Curva de aprendizaje baja:} sintaxis sencilla
+        y recursos de aprendizaje abundantes.
+        \item \textbf{Ecosistema:} muchas librerías y frameworks
+        para desarrollo web.
+        \item \textbf{Comunidad activa:} comunidad enorme y
+        soluciones para casi todo.
+        \item \textbf{Soporte continuo:} actualizaciones y mejoras
+        constantes.
+        \item \textbf{Facilidad de despliegue:} se ejecuta en
+        navegador o servidor con Node.js.
+    \end{itemize}
+
+    \item \textbf{TypeScript: }extensión de JavaScript tipada.
+    \begin{itemize}
+        \item \textbf{Curva de aprendizaje:} algo mayor que JS,
+        pero aporta robustez.
+        \item \textbf{Ecosistema:} mismo ecosistema que JS,
+        compatible con librerías.
+        \item \textbf{Comunidad activa:} gran comunidad y
+        uso creciente en proyectos grandes.
+        \item \textbf{Soporte continuo:} soporte de Microsoft,
+        mejoras constantes.
+        \item \textbf{Facilidad de despliegue:} se compila a
+        JavaScript y se despliega igual.
+    \end{itemize}
+        
+    \item \textbf{Python: }
+        \begin{itemize}
+        \item \textbf{Curva de aprendizaje baja:} sintaxis clara y sencilla, 
+        mucha documentación y ejemplos.
+        \item \textbf{Ecosistema:} enorme cantidad de librerías para 
+        manejo de datos y automatización.
+        \item \textbf{Comunidad activa:} comunidad muy grande y foros 
+        con soluciones para problemas comunes.
+        \item \textbf{Soporte continuo:} tiene soporte estable y 
+        actualizaciones frecuentes.
+        \item \textbf{Facilidad de despliegue:} se despliega bien 
+        en servidores y servicios cloud.
+    \end{itemize}
+
+    \item \textbf{Rust: }
+    \begin{itemize}
+        \item \textbf{Curva de aprendizaje:} más alta que Python
+        o JS por su enfoque bajo nivel.
+        \item \textbf{Ecosistema:} en crecimiento, aunque menos
+        librerías para datos.
+        \item \textbf{Comunidad activa:} comunidad activa y
+        muy colaborativa.
+        \item \textbf{Soporte continuo:} soporte sólido y
+        versiones estables.
+        \item \textbf{Facilidad de despliegue:} binarios ligeros
+        y fáciles de ejecutar.
+    \end{itemize}
+
+    \item \textbf{Go: }
+    \begin{itemize}
+        \item \textbf{Curva de aprendizaje:} sintaxis simple,
+        fácil de aprender.
+        \item \textbf{Ecosistema:} buenas librerías para web
+        y servidores.
+        \item \textbf{Comunidad activa:} comunidad sólida,
+        buena documentación.
+        \item \textbf{Soporte continuo:} soporte fuerte de Google,
+        actualizaciones regulares.
+        \item \textbf{Facilidad de despliegue:} genera binarios,
+        muy fácil de desplegar.
+    \end{itemize}
+
+    \item \textbf{C++: }
+    \begin{itemize}
+        \item \textbf{Curva de aprendizaje:} alta, sintaxis más
+        compleja y detallada. Sin embargo, es el lenguaje que 
+        mejor conozco.
+        \item \textbf{Ecosistema:} librerías maduras, aunque menos
+        cómodas para web y datos.
+        \item \textbf{Comunidad activa:} comunidad grande,
+        documentación extensa.
+        \item \textbf{Soporte continuo:} soporte estable,
+        estándar bien definido.
+        \item \textbf{Facilidad de despliegue:} requiere más
+        configuración y compilación.
+    \end{itemize}
+
+\end{itemize}
+
+\subsubsection{Lenguaje seleccionado}
+De la anterior lista, compararé ahora solo TypeScript, Python y Go, ya que son los que
+mejor se adaptan a los criterios de selección y a mis necesidades como desarrolladora.
+
+\begin{itemize}
+    \item \textbf{Curva de aprendizaje:} Python es el más fácil por su sintaxis clara y
+    natural, siendo famoso por ser lenguaje de iniciación a la programación.
+    \item \textbf{Ecosistema y librerías:} TypeScript tiene un ecosistema muy amplio 
+    para desarrollo web, mientras que Python destaca en ciencia de datos y automatización.
+    Go es más limitado.
+    \item \textbf{Comunidad activa:} TypeScript y Python tienen comunidades enormes y
+    activas, Go es más nicho.
+    \item \textbf{Soporte continuo:} los tres tienen soporte activo, aunque Python gana en
+    cuanto a trayectoria.
+    \item \textbf{Facilidad de despliegue:} Go es muy fácil de desplegar, ya que produce
+    binarios que no dependen de entornos externos. TypeScript requiere Node.js
+    y Python necesita un intérprete, lo que puede complicar el despliegue en algunos
+    entornos.
+\end{itemize}
+
+En conclusión, después de comparar directamente los lenguajes entre ellos, es evidente
+que tanto TypeScript como Python son opciones muy sólidas y podría elegir cualquiera de las
+dos. Sin embargo, atendiendo a posibles líneas de evolución futura, he decidido optar por
+Python, ya que ofrece mayor versatilidad para trabajar con datos estructurados y permite, 
+a medio y largo plazo, integrar funcionalidades de inteligencia artificial sin grandes 
+cambios tecnológicos.
