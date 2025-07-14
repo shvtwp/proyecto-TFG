@@ -54,3 +54,10 @@ Node
 js
 hu1
 hu2
+pip
+venv
+pipenv
+poetry
+Pipfile
+pyproject
+toml
