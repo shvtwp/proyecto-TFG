@@ -198,3 +198,47 @@ dos. Sin embargo, atendiendo a posibles líneas de evolución futura, he decidid
 \textbf{Python}, ya que ofrece mayor versatilidad para trabajar con datos estructurados y 
 permite, a medio y largo plazo, integrar funcionalidades de inteligencia artificial sin 
 grandes cambios tecnológicos.
+
+\subsection{Gestor de paquetes}
+Para poder garantizar que el proyecto sea reproducible, mantenible y fácil de instalar en 
+cualquier entorno, es fundamental contar con un gestor de paquetes. 
+Este permitirá instalar y documentar todas las dependencias necesarias de forma automática,
+evitando la instalación manual y reduciendo el riesgo de errores o incompatibilidades. 
+
+
+\subsubsection{Criterios de búsqueda}
+Se necesita un gestor de paquetes que:
+\begin{itemize}
+    \item Sea compatible con la versión de Python utilizada en el proyecto.
+    \item Permita aislar el entorno de desarrollo para evitar conflictos con otras instalaciones.
+    \item Sea fácil de usar y mantener en proyectos pequeños o medianos.
+    \item Esté bien documentado y cuente con soporte de la comunidad.
+\end{itemize}
+
+\subsubsection{Criterios de selección}
+Entre las opciones que cumplen los requisitos anteriores, se prioriza:
+\begin{itemize}
+    \item La simplicidad y facilidad de aprendizaje.
+    \item Que sea una herramienta estándar y ampliamente conocida.
+\end{itemize}
+
+\subsubsection{Herramientas consideradas}
+Se han comparado tres opciones:
+\begin{itemize}
+    \item \textbf{pip + venv}: Herramientas oficiales incluidas con Python que permiten instalar
+     paquetes y crear entornos virtuales de forma sencilla.
+    \item \textbf{pipenv}: Integra la gestión de dependencias y del entorno virtual en un solo
+    comando, usando un archivo \texttt{Pipfile}.
+    \item \textbf{poetry}: Más avanzado, orientado a proyectos que quieren distribuirse como 
+    paquetes, usa \texttt{pyproject.toml} para la gestión.
+\end{itemize}
+
+\subsubsection{Herramienta seleccionada}
+Se ha seleccionado \textbf{pip} junto con \textbf{venv} por ser la opción más simple, oficial y 
+suficiente para las necesidades actuales del proyecto. 
+Aunque \textbf{pipenv} ofrece la ventaja de integrar en un solo comando la gestión del entorno 
+virtual y de dependencias, añade una capa de complejidad innecesaria para un proyecto que, por 
+ahora, solo requiere definir unas pocas dependencias básicas. 
+Al ser herramientas incluidas directamente en Python, \textbf{pip} y \textbf{venv} también 
+garantizan mayor compatibilidad y menor curva de aprendizaje, lo que facilita entender y usar 
+el proyecto sin configuraciones adicionales.
