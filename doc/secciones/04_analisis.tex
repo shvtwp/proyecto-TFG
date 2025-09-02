@@ -199,45 +199,60 @@ dos. Sin embargo, atendiendo a posibles líneas de evolución futura, he decidid
 permite, a medio y largo plazo, integrar funcionalidades de inteligencia artificial sin 
 grandes cambios tecnológicos.
 
-\subsection{Gestor de paquetes}
+\subsection{Gestor de dependencias y del entorno}
 Para poder garantizar que el proyecto sea reproducible, mantenible y fácil de instalar en 
-cualquier entorno, es fundamental contar con un gestor de paquetes. 
-Este permitirá instalar y documentar todas las dependencias necesarias de forma automática,
+cualquier entorno, es fundamental contar con un gestor de dependencias y del entorno que
+siga los estándares oficiales de Python. 
+Esto permitirá instalar y documentar todas las dependencias necesarias de forma automática,
 evitando la instalación manual y reduciendo el riesgo de errores o incompatibilidades. 
 
+Los estándares relevantes están recogidos en:
+\begin{itemize}
+    \item \textbf{\href{https://peps.python.org/pep-0508/}{PEP 508: }} Especifica la sintaxis 
+    para declarar dependencias en Python (nombre del paquete, versión, extras, etc.).
+    \item \textbf{\href{https://peps.python.org/pep-0518/}{PEP 518: }} Define cómo los paquetes 
+    Python deben declarar sus dependencias necesarias para ejecutar el sistema de construcción. 
+    Además, introduce el archivo \texttt{pyproject.toml} como lugar centralizado para estas especificaciones.
+\end{itemize}
 
 \subsubsection{Criterios de búsqueda}
 Se necesita un gestor de paquetes que:
 \begin{itemize}
-    \item Sea compatible con Python 3.12, actualmente en soporte LTS.
-    \item Sea fácil de usar y mantener en proyectos pequeños o medianos.
-    \item Esté bien documentado y cuente con soporte de la comunidad.
+    \item Soporte los estándares actuales de Python (PEP 508 y 518).
+    \item Sea adecuada para un proyecto pequeño, priorizando simplicidad sobre complejidad 
+    innecesaria.
 \end{itemize}
 
 \subsubsection{Criterios de selección}
 Entre las opciones que cumplen los requisitos anteriores, se prioriza:
 \begin{itemize}
-    \item La simplicidad y facilidad de aprendizaje.
-    \item Que sea una herramienta estándar y ampliamente conocida.
+    \item Que se alinee con los estándares oficiales de Python.
+    \item Facilidad de instalación y curva de aprendizaje baja.
+    \item Esté bien documentado y cuente con soporte de la comunidad.
 \end{itemize}
 
 \subsubsection{Herramientas consideradas}
 Se han comparado tres opciones:
 \begin{itemize}
-    \item \textbf{pip + venv}: Herramientas oficiales incluidas con Python que permiten instalar
-     paquetes y crear entornos virtuales de manera sencilla.
-    \item \textbf{pipenv}: Integra la gestión de dependencias y del entorno virtual en un solo
-    comando, empleando un archivo \texttt{Pipfile}.
-    \item \textbf{poetry}: Más avanzado, orientado a proyectos que quieren distribuirse como 
-    paquetes, opera con \texttt{pyproject.toml} para la gestión.
+    \item \textbf{pip + venv}: Herramientas incluidas en Python, permiten gestionar dependencias 
+    con \texttt{requirements.txt}. No implementan directamente \texttt{pyproject.toml}, pero son 
+    estándar de facto y garantizan compatibilidad básica.
+    \item \textbf{pipenv}: Combina la gestión de dependencias y del entorno virtual en un solo
+    comando, empleando un archivo \texttt{Pipfile}. Sin embargo, su adopción ha disminuido frente 
+    a \texttt{pyproject.toml}.
+    \item \textbf{poetry}: Más avanzado, implementa de forma nativa los PEP 508 y 518, gestionando
+    dependencias y entorno con \texttt{pyproject.toml}. Es más completo, aunque introduce mayor 
+    complejidad.
 \end{itemize}
 
 \subsubsection{Herramienta seleccionada}
-Se ha seleccionado \textbf{pip} junto con \textbf{venv} por ser la opción más simple, oficial y 
-suficiente para las necesidades actuales del proyecto. 
-Aunque \textbf{pipenv} ofrece la ventaja de integrar en un único comando la gestión del entorno 
-virtual y de dependencias, añade una capa de complejidad innecesaria para un proyecto que, por 
-ahora, únicamente requiere definir unas pocas dependencias básicas. 
-Al ser herramientas incluidas directamente en Python, \textbf{pip} y \textbf{venv} también 
-garantizan mayor compatibilidad y menor curva de aprendizaje, lo que facilita entender y usar 
-el proyecto sin configuraciones adicionales.
+Se ha seleccionado \textbf{Poetry} por ajustarse mejor a los estándares actuales de Python, ya
+que utiliza \texttt{pyproject.toml}, definido en el \textit{PEP 518}, de manera nativa para la
+gestión de dependencias y soporta la especificación de versiones y extras según el \textit{PEP 508}.
+
+Frente a \textbf{pip} + \textbf{venv}, Poetry aporta una gestión unificada tanto del entorno virtual 
+como de las dependencias, reduciendo la complejidad de mantener varios ficheros y comandos. 
+En comparación con \textbf{pipenv}, cuenta con mayor adopción y alineación con los estándares oficiales. 
+
+Aunque añade una ligera curva de aprendizaje, su uso asegura que el proyecto sea reproducible, mantenible
+y compatible con las prácticas recomendadas en el ecosistema Python actual.
