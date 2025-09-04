@@ -200,20 +200,27 @@ permite, a medio y largo plazo, integrar funcionalidades de inteligencia artific
 grandes cambios tecnológicos.
 
 \subsection{Gestor de dependencias y del entorno}
-Para poder garantizar que el proyecto sea reproducible, mantenible y fácil de instalar en 
+Para poder garantizar que el proyecto sea idempotente, mantenible, idempotente y fácil de instalar en 
 cualquier entorno, es fundamental contar con un gestor de dependencias y del entorno que
 siga los estándares oficiales de Python. 
-Esto permitirá instalar y documentar todas las dependencias necesarias de forma automática,
-evitando la instalación manual y reduciendo el riesgo de errores o incompatibilidades. 
 
-Los estándares relevantes están recogidos en:
+Seguir los estándares oficiales de Python significa que la herramienta aplica las normas y recomendaciones
+definidas en los PEP (\textit{Python Enhancement Proposals}), que son documentos oficiales que describen 
+nuevas funcionalidades, mejoras o guías de estilo en Python. En particular, los PEP relevantes para la
+gestión de dependencias son:
+
 \begin{itemize}
     \item \textbf{\href{https://peps.python.org/pep-0508/}{PEP 508: }} Especifica la sintaxis 
     para declarar dependencias en Python (nombre del paquete, versión, extras, etc.).
     \item \textbf{\href{https://peps.python.org/pep-0518/}{PEP 518: }} Define cómo los paquetes 
-    Python deben declarar sus dependencias necesarias para ejecutar el sistema de construcción. 
-    Además, introduce el archivo \texttt{pyproject.toml} como lugar centralizado para estas especificaciones.
+    Python deben declarar sus dependencias necesarias para ejecutar el sistema de construcción. y en este 
+    caso también se aplica a proyectos de tipo aplicación como el nuestro para garantizar la idempotencia 
+    y reproducibilidad del entorno. Además, introduce el archivo \texttt{pyproject.toml} como lugar 
+    centralizado para estas especificaciones.
 \end{itemize}
+
+Esto permitirá instalar y documentar todas las dependencias necesarias de forma automática,
+evitando la instalación manual y reduciendo el riesgo de errores o incompatibilidades. 
 
 \subsubsection{Criterios de búsqueda}
 Se necesita un gestor de paquetes que:
