@@ -62,3 +62,11 @@ Pipfile
 pyproject
 toml
 PEP
+Enhancement
+Proposals
+Flit
+Hatch
+uv
+PDM
+virtualenv
+_pypackages
