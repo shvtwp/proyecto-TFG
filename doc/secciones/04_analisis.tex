@@ -243,12 +243,12 @@ Se han comparado tres opciones:
     \item \textbf{Poetry}: Implementa nativamente los PEP 508 y 518, gestionando dependencias
     y entorno con \texttt{pyproject.toml}. Asegura que las instalaciones sean reproducibles y
     ofrece una resolución de dependencias rápida y fiable.
-    \item \textbf{Flit:} Se centra en la creación de paquetes y su distribución, usa
+    \item \textbf{Flit:} Se centra en la creación de paquetes y su distribución, utiliza
     \texttt{pyproject.toml} para definir dependencias y es muy rápido. Sin embargo, no gestiona
     entornos virtuales, lo que supone varios problemas: las dependencias se instalan  en el sistema
     global, no quedan aisladas, lo que puede causar conflictos entre proyectos; rompe la idempotencia,
     ya que las instalaciones pueden variar según el entorno del sistema; y complica la automatización
-    de tests y despliegue, ya que no asegura un entorno consistente. Por lo tanto, esta herramienta por
+    de tests y despliegue, puesto que no asegura un entorno consistente. Por lo tanto, esta herramienta por
     sí sola no es suficiente para proyectos que requieren un entorno controlado.
     \item \textbf{Hatch:} También soporta \texttt{pyproject.toml} y ofrece gestión de entornos
     y dependencias. Es flexible y potente, aunque puede ser lenta en proyectos grandes. 
