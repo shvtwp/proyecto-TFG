@@ -198,3 +198,75 @@ dos. Sin embargo, atendiendo a posibles líneas de evolución futura, he decidid
 \textbf{Python}, ya que ofrece mayor versatilidad para trabajar con datos estructurados y 
 permite, a medio y largo plazo, integrar funcionalidades de inteligencia artificial sin 
 grandes cambios tecnológicos.
+
+\subsection{Gestor de dependencias y del entorno}
+Para poder garantizar que el proyecto sea idempotente, mantenible, idempotente y fácil de instalar en 
+cualquier entorno, es fundamental contar con un gestor de dependencias y del entorno que
+siga los estándares oficiales de Python. 
+
+Seguir los estándares oficiales de Python significa que la herramienta aplica las normas y recomendaciones
+definidas en los PEP (\textit{Python Enhancement Proposals}), que son documentos oficiales que describen 
+nuevas funcionalidades, mejoras o guías de estilo en Python. En particular, los PEP relevantes para la
+gestión de dependencias son:
+
+\begin{itemize}
+    \item \textbf{\href{https://peps.python.org/pep-0508/}{PEP 508: }} Especifica la sintaxis 
+    para declarar dependencias en Python (tales como nombre del paquete, versión y extras).
+    \item \textbf{\href{https://peps.python.org/pep-0518/}{PEP 518: }} Define cómo los paquetes 
+    Python deben declarar sus dependencias necesarias para ejecutar el sistema de construcción. y en este 
+    caso también se aplica a proyectos de tipo aplicación como el nuestro para garantizar la idempotencia 
+    y reproducibilidad del entorno. Además, introduce el archivo \texttt{pyproject.toml} como lugar 
+    centralizado para estas especificaciones.
+\end{itemize}
+
+Esto permitirá instalar y documentar todas las dependencias necesarias de forma automática,
+evitando la instalación manual y reduciendo el riesgo de errores o incompatibilidades. 
+
+\subsubsection{Criterios de búsqueda}
+Se necesita un gestor de paquetes que:
+\begin{itemize}
+    \item Soporte los estándares actuales de Python (PEP 508 y 518).
+    \item Sea adecuada para un proyecto pequeño, priorizando simplicidad sobre complejidad 
+    innecesaria.
+\end{itemize}
+Estas condiciones limitan las opciones a herramientas modernas que implementen \texttt{pyproject.toml},
+excluyendo herramientas usadas habitualmente como \texttt{pip} + \texttt{venv} o \texttt{pipenv}.
+
+\subsubsection{Criterios de selección}
+Entre las opciones que cumplen los requisitos anteriores, se prioriza la velocidad; la herramienta 
+debe resolver dependencias y crear o actualizar entornos rápidamente, minimizando el tiempo de 
+instalación y configuración.
+
+\subsubsection{Herramientas consideradas}
+Se han comparado tres opciones:
+\begin{itemize}
+    \item \textbf{Poetry}: Implementa nativamente los PEP 508 y 518, gestionando dependencias
+    y entorno con \texttt{pyproject.toml}. Asegura que las instalaciones sean reproducibles y
+    ofrece una resolución de dependencias rápida y fiable.
+    \item \textbf{Flit:} Se centra en la creación de paquetes y su distribución, utiliza
+    \texttt{pyproject.toml} para definir dependencias y es muy rápido. Sin embargo, no gestiona
+    entornos virtuales, lo que supone varios problemas: las dependencias se instalan  en el sistema
+    global, no quedan aisladas, lo que puede causar conflictos entre proyectos; rompe la idempotencia,
+    ya que las instalaciones pueden variar según el entorno del sistema; y complica la automatización
+    de tests y despliegue, puesto que no asegura un entorno consistente. Por lo tanto, esta herramienta por
+    sí sola no es suficiente para proyectos que requieren un entorno controlado.
+    \item \textbf{Hatch:} También soporta \texttt{pyproject.toml} y ofrece gestión de entornos
+    y dependencias. Es flexible y potente, aunque puede ser lenta en proyectos grandes. 
+    \item \textbf{uv: } Herramienta escrita en \texttt{Rust}, mucho más rápida que las demás.
+    Sin embargo, su adopción es aún limitada y su ecosistema es mucho más reducido que el de
+    \texttt{Poetry}, lo que podría dificultar su integración.
+    \item \textbf{PDM: } Se denomina como una mezcla entre \texttt{pip}, \texttt{poetry} y 
+    \texttt{virtualenv}, sin embargo, no es tan popular ni tiene tanta comunidad como \texttt{poetry}.
+    Está basado en \texttt{\href{https://peps.python.org/pep-0582/}{PEP 582}}, que propone una alternativa a los entornos virtuales tradicionales,
+    utilizando el directorio \texttt{\_\_pypackages\_\_} en lugar de \texttt{venv}. Sin embargo,
+    este PEP no está tan extendido ni es tan compatible con otras herramientas del ecosistema
+    Python como los PEP 508 y 518.
+\end{itemize}
+
+\subsubsection{Herramienta seleccionada}
+Se ha seleccionado \textbf{Poetry} por ajustarse mejor a los estándares actuales de Python, ya
+que emplea \texttt{pyproject.toml}, definido en el \textit{PEP 518}, de manera nativa para la
+gestión de dependencias y soporta la especificación de versiones y extras según el \textit{PEP 508}.
+
+Además, Poetry garantiza la idempotencia y reproducibilidad del entorno, ofreciendo el mejor equilibrio
+entre estabilidad, madurez, velocidad y soporte de la comunidad.
