@@ -211,7 +211,7 @@ gestión de dependencias son:
 
 \begin{itemize}
     \item \textbf{\href{https://peps.python.org/pep-0508/}{PEP 508: }} Especifica la sintaxis 
-    para declarar dependencias en Python (nombre del paquete, versión, extras, etc.).
+    para declarar dependencias en Python (tales como nombre del paquete, versión y extras).
     \item \textbf{\href{https://peps.python.org/pep-0518/}{PEP 518: }} Define cómo los paquetes 
     Python deben declarar sus dependencias necesarias para ejecutar el sistema de construcción. y en este 
     caso también se aplica a proyectos de tipo aplicación como el nuestro para garantizar la idempotencia 
@@ -230,14 +230,12 @@ Se necesita un gestor de paquetes que:
     innecesaria.
 \end{itemize}
 Estas condiciones limitan las opciones a herramientas modernas que implementen \texttt{pyproject.toml},
-excluyendo herramientas estándares de facto como \texttt{pip} + \texttt{venv} o \texttt{pipenv}.
+excluyendo herramientas usadas habitualmente como \texttt{pip} + \texttt{venv} o \texttt{pipenv}.
 
 \subsubsection{Criterios de selección}
-Entre las opciones que cumplen los requisitos anteriores, se prioriza:
-\begin{itemize}
-    \item \textbf{Velocidad:} la herramienta debe resolver dependencias y crear o actualizar 
-    entornos rápidamente, minimizando el tiempo de instalación y configuración.
-\end{itemize}
+Entre las opciones que cumplen los requisitos anteriores, se prioriza la velocidad; la herramienta 
+debe resolver dependencias y crear o actualizar entornos rápidamente, minimizando el tiempo de 
+instalación y configuración.
 
 \subsubsection{Herramientas consideradas}
 Se han comparado tres opciones:
@@ -245,8 +243,8 @@ Se han comparado tres opciones:
     \item \textbf{Poetry}: Implementa nativamente los PEP 508 y 518, gestionando dependencias
     y entorno con \texttt{pyproject.toml}. Asegura que las instalaciones sean reproducibles y
     ofrece una resolución de dependencias rápida y fiable.
-    \item \textbf{Flit:} Se centra en la distribución de paquetes y su distribución,
-    usa \texttt{pyproject.toml} para definir dependencias y es muy rápido, pero no gestiona entornos 
+    \item \textbf{Flit:} Se centra en la creación de paquetes y su distribución, usa
+    \texttt{pyproject.toml} para definir dependencias y es muy rápido, pero no gestiona entornos
     virtuales, ni todas las dependencias del proyecto.
     \item \textbf{Hatch:} También soporta \texttt{pyproject.toml} y ofrece gestión de entornos
     y dependencias. Es flexible y potente, aunque puede ser lenta en proyectos grandes. 
