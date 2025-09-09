@@ -270,3 +270,23 @@ gestión de dependencias y soporta la especificación de versiones y extras seg�
 
 Además, Poetry garantiza la idempotencia y reproducibilidad del entorno, ofreciendo el mejor equilibrio
 entre estabilidad, madurez, velocidad y soporte de la comunidad.
+
+\subsection{Herramienta de testeo}
+Para garantizar la calidad del código y poder aplicar desarrollo guiado por pruebas 
+(\textit{Test Driven Development, TDD}), es necesario seleccionar una herramienta de testeo antes de 
+comenzar el modelado del dominio. De esta forma, cada entidad y objeto de valor podrá validarse desde 
+el inicio mediante pruebas automatizadas.
+
+Python ya incluye en su biblioteca estándar el módulo \texttt{unittest}, considerado la herramienta
+de testeo por defecto. Sin embargo, su sintaxis es algo verbosa y obliga a escribir mucho código
+\textit{boilerplate} (es decir, código repetitivo) para definir pruebas sencillas, lo que puede 
+retrasar el desarrollo.
+
+Es por esta razón por la que se opta por usar \texttt{pytest}, una herramienta de testeo muy popular
+que ofrece una sintaxis mucho más simple y concisa, permitiendo escribir pruebas de manera rápida y
+eficiente. Además, \texttt{pytest} es compatible con \texttt{unittest}, lo que facilitaría la integración
+con cualquier código de prueba existente en caso de que la hubiera. 
+También cuenta con un amplio ecosistema de plugins que amplían sus funcionalidades, y aunque no son
+estrictamente necesarios, hay algunos que podrían resultar útiles, como \texttt{pytest-cov}, que hace 
+de puente entre \texttt{pytest} y \texttt{coverage.py} (herramienta estándar), y permite medir la 
+cobertura de código durante los test.
