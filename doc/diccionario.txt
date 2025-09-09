@@ -70,3 +70,11 @@ uv
 PDM
 virtualenv
 _pypackages
+Driven
+Development
+TDD
+unittest
+boilerplate
+pytest
+plugins
+cov
