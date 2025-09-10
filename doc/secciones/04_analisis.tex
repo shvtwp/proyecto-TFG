@@ -273,9 +273,11 @@ entre estabilidad, madurez, velocidad y soporte de la comunidad.
 
 \subsection{Herramienta de testeo}
 Para garantizar la calidad del código y poder aplicar desarrollo guiado por pruebas 
-(\textit{Test Driven Development, TDD}), es necesario seleccionar una herramienta de testeo antes de 
-comenzar el modelado del dominio. De esta forma, cada entidad y objeto de valor podrá validarse desde 
-el inicio mediante pruebas automatizadas.
+(\textit{Test Driven Development, TDD}), es necesario que se seleccione una herramienta de testeo antes de 
+comenzar a modelar el dominio. Esta práctica, propuesta inicialmente por Kent Beck \cite{beckTDD}, 
+consiste en escribir primero las pruebas y después el código que las satisface, lo que permite asegurar 
+que el sistema es fiable desde sus fases iniciales. De esta forma, cada entidad y objeto de valor podrá 
+validarse desde el inicio mediante pruebas automatizadas.
 
 Python ya incluye en su biblioteca estándar el módulo \texttt{unittest}, considerado la herramienta
 de testeo por defecto. Sin embargo, su sintaxis es algo verbosa y obliga a escribir mucho código
