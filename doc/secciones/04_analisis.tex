@@ -284,11 +284,14 @@ de testeo por defecto. Sin embargo, su sintaxis es algo verbosa y obliga a escri
 \textit{boilerplate} (es decir, código repetitivo) para definir pruebas sencillas, lo que puede 
 retrasar el desarrollo.
 
-Es por esta razón por la que se opta por usar \texttt{pytest}, una herramienta de testeo muy popular
-que ofrece una sintaxis mucho más simple y concisa, permitiendo escribir pruebas de manera rápida y
-eficiente. Además, \texttt{pytest} es compatible con \texttt{unittest}, lo que facilitaría la integración
-con cualquier código de prueba existente en caso de que la hubiera. 
-También cuenta con un amplio ecosistema de plugins que amplían sus funcionalidades, y aunque no son
-estrictamente necesarios, hay algunos que podrían resultar útiles, como \texttt{pytest-cov}, que hace 
-de puente entre \texttt{pytest} y \texttt{coverage.py} (herramienta estándar), y permite medir la 
-cobertura de código durante los test.
+Es por esta razón por la que se opta por usar \texttt{pytest}, una herramienta muy popular que actúa 
+como \textit{test runner}, es decir, se encarga de ejecutar las pruebas. \texttt{pytest} no sustituye 
+a \texttt{\href{https://docs.python.org/es/3/library/unittest.html}{unittest}}, sino que lo utiliza por 
+debajo, lo que permite que se mantenga la compatibilidad total con él. Esto significa que cualquier 
+prueba escrita con \texttt{unittest} funcionará perfectamente con \texttt{pytest}, siendo ambas 
+complementarias y no excluyentes.
+
+\texttt{pytest} cuenta con un amplio ecosistema de plugins que amplían sus funcionalidades, y aunque no son
+estrictamente necesarios, hay algunos que podrían resultar útiles, como \texttt{pytest-cov}, que hace
+de puente entre \texttt{pytest} y \texttt{\href{https://coverage.readthedocs.io/en/7.10.6/}{coverage.py}}
+(herramienta estándar), y permite medir la cobertura de código durante los test.
