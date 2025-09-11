@@ -270,3 +270,28 @@ gestión de dependencias y soporta la especificación de versiones y extras seg�
 
 Además, Poetry garantiza la idempotencia y reproducibilidad del entorno, ofreciendo el mejor equilibrio
 entre estabilidad, madurez, velocidad y soporte de la comunidad.
+
+\subsection{Herramienta de testeo}
+Para garantizar la calidad del código y poder aplicar desarrollo guiado por pruebas 
+(\textit{Test Driven Development, TDD}), es necesario que se seleccione una herramienta de testeo antes de 
+comenzar a modelar el dominio. Esta práctica, propuesta inicialmente por Kent Beck \cite{beckTDD}, 
+consiste en escribir primero las pruebas y después el código que las satisface, lo que permite asegurar 
+que el sistema es fiable desde sus fases iniciales. De esta forma, cada entidad y objeto de valor podrá 
+validarse desde el inicio mediante pruebas automatizadas.
+
+Python ya incluye en su biblioteca estándar el módulo \texttt{unittest}, considerado la herramienta
+de testeo por defecto. Sin embargo, su sintaxis es algo verbosa y obliga a escribir mucho código
+\textit{boilerplate} (es decir, código repetitivo) para definir pruebas sencillas, lo que puede 
+retrasar el desarrollo.
+
+Es por esta razón por la que se opta por usar \texttt{pytest}, una herramienta muy popular que actúa 
+como \textit{test runner}, es decir, se encarga de ejecutar las pruebas. \texttt{pytest} no sustituye 
+a \texttt{\href{https://docs.python.org/es/3/library/unittest.html}{unittest}}, sino que lo utiliza por 
+debajo, lo que permite que se mantenga la compatibilidad total con él. Esto significa que cualquier 
+prueba escrita con \texttt{unittest} funcionará perfectamente con \texttt{pytest}, siendo ambas 
+complementarias y no excluyentes.
+
+\texttt{pytest} cuenta con un amplio ecosistema de plugins que amplían sus funcionalidades, y aunque no son
+estrictamente necesarios, hay algunos que podrían resultar útiles, como \texttt{pytest-cov}, que hace
+de puente entre \texttt{pytest} y \texttt{\href{https://coverage.readthedocs.io/en/7.10.6/}{coverage.py}}
+(herramienta estándar), y permite medir la cobertura de código durante los test.
