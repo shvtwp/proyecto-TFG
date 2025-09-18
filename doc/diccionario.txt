@@ -79,3 +79,7 @@ pytest
 plugins
 cov
 runner
+dev
+lock
+Domain
+Design
