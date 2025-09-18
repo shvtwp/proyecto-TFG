@@ -35,3 +35,26 @@ poetry init -n
 Este comando genera automáticamente un archivo \texttt{pyproject.toml} en la raíz del
 repositorio, que contiene la información básica del proyecto y servirá como punto central
 para la gestión de dependencias.
+
+\subsubsection{Pytest}
+La herramienta seleccionada para las pruebas unitarias ha sido \texttt{pytest}.
+La elección de esta herramienta ya fue justificada en el capítulo anterior; aquí se documenta su 
+incorporación al proyecto mediante Poetry:
+
+\begin{lstlisting}[language=bash]
+poetry add --group dev pytest
+\end{lstlisting}
+
+Con esta instrucción, \texttt{pytest} se añade al grupo de dependencias \texttt{dev}. Esto significa
+que se instala únicamente para el entorno de desarrollo y no se considera una dependencia necesaria
+para la ejecución del prototipo en producción. De esta manera se mantiene una separación clara entre
+las librerías empleadas para programar y probar el software, y aquellas que serán estrictamente
+necesarias para su despliegue.
+
+Al instalar dependencias mediante Poetry, junto al archivo \texttt{pyproject.toml} se genera 
+automáticamente el archivo \texttt{poetry.lock}. El primero declara qué dependencias se requieren y 
+en qué rango de versiones son aceptables; en cambio, el archivo \texttt{poetry.lock} registra la 
+versión exacta de esas dependencias en el momento de la instalación. Gracias a este mecanismo se 
+garantiza la reproducibilidad del entorno, ya que cualquier persona que clone el repositorio e 
+instale las dependencias obtendrá exactamente las mismas versiones usadas en el desarrollo 
+original.
