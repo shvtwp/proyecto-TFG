@@ -12,3 +12,26 @@ desarrollar todo el sistema de una vez.
 En este primer hito se decidió el lenguaje de programación a utilizar para el desarrollo del software,
 siendo Python la opción elegida. Esta elección se justificó y documentó debidamente en el
 \hyperref[sec:lenguaje-programación]{anterior capítulo}.
+
+\section{Milestone 2: Modelo del problema}
+Este hito se centra en dos tareas principales: la configuración de las herramientas necesarias para
+el desarrollo guiado por pruebas, y la definición del modelo del dominio siguiendo el enfoque 
+\textit{Domain-Driven Design} (DDD).
+
+\subsection{Configuración del entorno de desarrollo}
+En el capítulo anterior se seleccionaron las herramientas que se utilizarían para 
+\hyperref[sec:gestor-dependencias]{gestionar las dependencias y el entorno} y 
+\hyperref[sec:herramienta-testeo]{realizar pruebas}. En este hito se procedió a su instalación y 
+configuración.
+
+\subsubsection{Poetry}
+Se ha utilizado \textit{Poetry} para gestionar las dependencias y el entorno virtual del proyecto.
+La configuración del gestor de dependencias se ha realizado con el comando:
+
+\begin{lstlisting}[language=bash]
+poetry init -n
+\end{lstlisting}
+
+Este comando genera automáticamente un archivo \texttt{pyproject.toml} en la raíz del
+repositorio, que contiene la información básica del proyecto y servirá como punto central
+para la gestión de dependencias.
