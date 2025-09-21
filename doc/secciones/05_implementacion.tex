@@ -61,19 +61,19 @@ original.
 
 \subsection{Modelo del dominio}
 El modelado del dominio se ha realizado siguiendo el enfoque \textit{Domain-Driven Design} (DDD)
-propuesto por Eric Evans \cite{evansDDD}. Este método de diseño de software se centra en que el
+propuesto por Eric Evans \cite{evansDDD}. Este método de diseño de software se centra en que
 el sistema refleje fielmente la realidad del dominio que se está modelando, evitando que los 
 aspectos técnicos o de implementación condicionen la representación del problema.
 
 Uno de los principios fundamentales de DDD es la creación de un \textit{lenguaje ubicuo}, que
-consiste en definir términos y conceptos específicos del dominio para que los conceptos usados en
+consiste en definir términos y conceptos específicos del dominio para que los conceptos empleados en
 el código coincidan con los del propio dominio. De este modo se facilita la comunicación entre el 
 análisis y la implementación. En este proyecto se ha definido el siguiente lenguaje ubicuo:
 
 \begin{itemize}
     \item \textbf{Escudo}: Entendemos como escudo a la representación gráfica de un conjunto de
     elementos heráldicos que identifican a una persona, entidad o institución.
-    \item \textbf{Blasón}: Decripción textual del escudo.
+    \item \textbf{Blasón}: Descripción textual del escudo.
     \item \textbf{Portador}: Persona, entidad o institución a la que pertenece el escudo.
     \item \textbf{Campo}: Superficie del escudo donde se disponen los elementos heráldicos.
     \item \textbf{Boca}: Forma exterior del escudo, es decir, su contorno.
@@ -86,3 +86,22 @@ análisis y la implementación. En este proyecto se ha definido el siguiente len
     \item \textbf{Adorno exterior}: Son todos aquellos elementos que no se encuentran dentro del campo
     del escudo.
 \end{itemize}
+
+A partir de este lenguaje ubicuo se identifican dos tipos de elementos: las \textit{entidades}, que
+tienen identidad propia, y los \textit{objetos de valor}, que se definen únicamente por sus atributos.
+Estas dos categorías de elementos constituyen el modelo del problema. En esta primera iteración del
+proyecto se han identificado las siguientes entidades y objetos de valor:
+
+\begin{itemize}
+    \item \textbf{Escudo}: Representa la entidad principal del dominio, con su propia identidad.
+    \item \textbf{Campo}: Objeto de valor que define las características del campo del escudo.
+    \item \textbf{Esmalte}: Objeto de valor que define los colores y metales usados en el escudo.
+\end{itemize}
+
+En esta primera iteración se ha decidido limitar el modelo a una parte reducida del lenguaje ubicuo. 
+Se ha identificado como entidad principal el \textbf{Escudo} y se han definido como objetos de valor 
+iniciales el \textbf{Campo}, la \textbf{Boca} y el \textbf{Esmalte}. 
+
+Otros elementos como el \textbf{Portador}, las \textbf{Particiones}, las \textbf{Piezas heráldicas}, 
+las \textbf{Figuras} o los \textbf{Adornos exteriores} se han recogido en el lenguaje ubicuo, pero se 
+abordarán en futuras iteraciones.
