@@ -58,3 +58,31 @@ versión exacta de esas dependencias en el momento de la instalación. Gracias a
 garantiza la reproducibilidad del entorno, ya que cualquier persona que clone el repositorio e 
 instale las dependencias obtendrá exactamente las mismas versiones usadas en el desarrollo 
 original.
+
+\subsection{Modelo del dominio}
+El modelado del dominio se ha realizado siguiendo el enfoque \textit{Domain-Driven Design} (DDD)
+propuesto por Eric Evans \cite{evansDDD}. Este método de diseño de software se centra en que el
+el sistema refleje fielmente la realidad del dominio que se está modelando, evitando que los 
+aspectos técnicos o de implementación condicionen la representación del problema.
+
+Uno de los principios fundamentales de DDD es la creación de un \textit{lenguaje ubicuo}, que
+consiste en definir términos y conceptos específicos del dominio para que los conceptos usados en
+el código coincidan con los del propio dominio. De este modo se facilita la comunicación entre el 
+análisis y la implementación. En este proyecto se ha definido el siguiente lenguaje ubicuo:
+
+\begin{itemize}
+    \item \textbf{Escudo}: Entendemos como escudo a la representación gráfica de un conjunto de
+    elementos heráldicos que identifican a una persona, entidad o institución.
+    \item \textbf{Blasón}: Decripción textual del escudo.
+    \item \textbf{Portador}: Persona, entidad o institución a la que pertenece el escudo.
+    \item \textbf{Campo}: Superficie del escudo donde se disponen los elementos heráldicos.
+    \item \textbf{Boca}: Forma exterior del escudo, es decir, su contorno.
+    \item \textbf{Partición}: Cada una de las divisiones del campo del escudo. 
+    \item \textbf{Esmalte}: Color o metal con el que se pinta un elemento heráldico.
+    \item \textbf{Pieza heráldica}: Son elementos de distinto esmalte al del campo que suelen tocar
+    los bordes del escudo.
+    \item \textbf{Figura o mueble}: Son todo aquello que se encuentra dentro del campo del escudo y
+    no resulta ser una pieza heráldica.
+    \item \textbf{Adorno exterior}: Son todos aquellos elementos que no se encuentran dentro del campo
+    del escudo.
+\end{itemize}
