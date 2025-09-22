@@ -26,30 +26,20 @@ configuración.
 
 \subsubsection{Poetry}
 Se ha usado \textit{Poetry} para gestionar las dependencias y el entorno virtual del proyecto.
-La configuración del gestor de dependencias se ha realizado con el comando:
 
-\begin{lstlisting}[language=bash]
-poetry init -n
-\end{lstlisting}
-
-Este comando genera automáticamente un archivo \texttt{pyproject.toml} en la raíz del
+Al inicializar el gestor, se genera automáticamente un archivo \texttt{pyproject.toml} en la raíz del
 repositorio, que contiene la información básica del proyecto y servirá como punto central
 para la gestión de dependencias.
 
 \subsubsection{Pytest}
 La herramienta seleccionada para las pruebas unitarias ha sido \texttt{pytest}.
-La elección de esta herramienta ya fue justificada en el capítulo anterior; aquí se documenta su 
-incorporación al proyecto mediante Poetry:
+La elección de esta herramienta ya fue justificada en el capítulo anterior.
 
-\begin{lstlisting}[language=bash]
-poetry add --group dev pytest
-\end{lstlisting}
-
-Con esta instrucción, \texttt{pytest} se añade al grupo de dependencias \texttt{dev}. Esto significa
-que se instala únicamente para el entorno de desarrollo y no se considera una dependencia necesaria
-para la ejecución del prototipo en producción. De esta manera se mantiene una separación clara entre
-las librerías empleadas para programar y probar el software, y aquellas que serán estrictamente
-necesarias para su despliegue.
+Se ha añadido \texttt{pytest} como dependencia, lo que significa que se instalará únicamente
+para el entorno de desarrollo y no se considera una dependencia necesaria para la ejecución del 
+prototipo en producción. De esta manera se mantiene una separación clara entre las librerías 
+empleadas para programar y probar el software, y aquellas que serán estrictamente necesarias para 
+su despliegue.
 
 Al instalar dependencias mediante Poetry, junto al archivo \texttt{pyproject.toml} se genera 
 automáticamente el archivo \texttt{poetry.lock}. El primero declara qué dependencias se requieren y 
