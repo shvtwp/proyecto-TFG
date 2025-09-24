@@ -1,10 +1,15 @@
+from dataclasses import dataclass
+
 _VALIDOS = {"azur", "gules", "sable", "sinople", "púrpura", "oro", "plata"}
 
+@dataclass(frozen=True)
 class Esmalte:
-    def __init__(self, nombre: str):
-        if not isinstance(nombre, str) or not nombre.strip():
+    nombre: str
+
+    def __post_init__(self):
+        if not isinstance(self.nombre, str) or not self.nombre.strip():
             raise ValueError("Esmalte inválido: vacío o no es texto.")
-        normal = nombre.strip().lower()
-        if normal not in _VALIDOS:
-            raise ValueError(f"Esmalte inválido: '{nombre}'.")
-        self.nombre = normal
+        nombre_normalizado = self.nombre.strip().lower()
+        if nombre_normalizado not in _VALIDOS:
+            raise ValueError(f"Esmalte inválido: '{self.nombre}'.")
+        object.__setattr__(self, "nombre", nombre_normalizado)
