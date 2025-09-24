@@ -111,7 +111,7 @@ del modelo: \texttt{Esmalte}, \texttt{Campo} y \texttt{Escudo}. Dichas pruebas v
 \begin{itemize}
     \item Que un \texttt{Escudo} válido puede crearse a partir de un \texttt{Campo} 
     con un \texttt{Esmalte} permitido.
-    \item Que los intentos de crear un \texttt{Esmalte} con valores no reconocidos producen 
+    \item Que los intentos de producir un \texttt{Esmalte} con valores no reconocidos producen 
     una excepción.
     \item Que no es posible instanciar un \texttt{Campo} sin un \texttt{Esmalte} válido.
 \end{itemize}
@@ -119,3 +119,14 @@ del modelo: \texttt{Esmalte}, \texttt{Campo} y \texttt{Escudo}. Dichas pruebas v
 Al principio estas pruebas no pasan, ya que no existe ninguna implementación. A continuación se
 escribe el código mínimo necesario para que todas las pruebas definidas pasen correctamente. Esto
 se repetirá cada vez que se añada una nueva funcionalidad al modelo.
+
+Como resultado surgieron las clases \texttt{Esmalte}, \texttt{Campo} y \texttt{Escudo}, que constituyen 
+la base mínima del dominio:
+
+\begin{itemize}
+    \item \texttt{Esmalte}: representa los colores y metales permitidos en heráldica. 
+    Comprueba que el valor introducido sea válido y lo normaliza.
+    \item \texttt{Campo}: representa la superficie del escudo. Solo puede generarse 
+    si se le proporciona un \texttt{Esmalte} válido.
+    \item \texttt{Escudo}: actúa como elemento principal y se compone de un \texttt{Campo}.
+\end{itemize}
