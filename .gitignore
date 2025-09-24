@@ -310,3 +310,11 @@ typings/
 *~
 
 informe.html
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Entorno virtual de Poetry
+.venv/
