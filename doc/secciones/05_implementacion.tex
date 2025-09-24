@@ -97,3 +97,25 @@ Otros elementos como la \textbf{Boca}, el \textbf{Portador}, las \textbf{Partici
 \textbf{Piezas heráldicas}, las \textbf{Figuras} o los \textbf{Adornos exteriores} se han recogido 
 en el lenguaje ubicuo, pero quedan fuera del alcance de esta iteración y se abordarán en futuras 
 extensiones del modelo.
+
+\subsection{Desarrollo dirigido por pruebas (TDD)}
+
+El modelo inicial del dominio se ha implementado siguiendo la metodología de 
+\textit{Test-Driven Development} (TDD) \cite{beckTDD}. Esto significa que antes de escribir 
+el código se definieron las pruebas que debía superar, y después se implementó lo mínimo necesario 
+para que pasaran.
+
+En esta primera iteración se definieron pruebas unitarias para los elementos básicos 
+del modelo: \texttt{Esmalte}, \texttt{Campo} y \texttt{Escudo}. Dichas pruebas validan:
+
+\begin{itemize}
+    \item Que un \texttt{Escudo} válido puede crearse a partir de un \texttt{Campo} 
+    con un \texttt{Esmalte} permitido.
+    \item Que los intentos de crear un \texttt{Esmalte} con valores no reconocidos producen 
+    una excepción.
+    \item Que no es posible instanciar un \texttt{Campo} sin un \texttt{Esmalte} válido.
+\end{itemize}
+
+Al principio estas pruebas no pasan, ya que no existe ninguna implementación. A continuación se
+escribe el código mínimo necesario para que todas las pruebas definidas pasen correctamente. Esto
+se repetirá cada vez que se añada una nueva funcionalidad al modelo.
