@@ -130,3 +130,37 @@ la base mínima del dominio:
     si se le proporciona un \texttt{Esmalte} válido.
     \item \texttt{Escudo}: actúa como elemento principal y se compone de un \texttt{Campo}.
 \end{itemize}
+
+\section{Milestone 3: Identificación y filtrado por esmalte}
+
+En este milestone se introduce la primera lógica de negocio, que consiste en filtrar los escudos
+por el esmalte del campo. Esto facilita la identificación de escudos de \hyperref[sec:hu1]{HU1} y 
+la clasificación y el filtrado de escudos de \hyperref[sec:hu2]{HU2}.
+
+Para ello, es necesario implementar un catálogo mínimo de ejemplo para poder realizar la consulta.
+
+Los criterios de aceptación son sencillos: (1) dado un esmalte válido, la consulta devuelve 
+solo escudos con ese campo; (2) sin criterio, se devuelve el catálogo completo; y 
+(3) con un criterio erróneo, la respuesta es una lista vacía.
+
+\subsection{Adición de un catálogo mínimo}
+
+En este punto no había ningún escudo cargado y, por tanto, no había nada que filtrar. Antes 
+de implementar la búsqueda por esmalte del campo, lo razonable era añadir al sistema un catálogo 
+base sobre el que poder trabajar y comprobar el comportamiento.
+
+Para este hito opté por un catálogo mínimo y en memoria, dentro del propio paquete. 
+Cada entrada se modela como una pequeña ficha con el nombre del escudo y el esmalte.
+El campo se guarda como un Esmalte, de modo que queda validado y normalizado desde
+el minuto uno y se evitan incoherencias.
+
+Se han añadido a este catálogo siete escudos, uno para cada esmalte canónico, con la finalidad de
+poder probar la búsqueda de cualquier esmalte. La decisión de mantener el catálogo en memoria
+simplifica la implementación inicial y permite centrarse en la funcionalidad de filtrado sin
+introducir complejidades adicionales que se tratarán en futuros hitos, como la implementación
+de una base de datos.
+
+Siguiendo TDD, primero escribí unas pruebas muy básicas: que el catálogo no esté vacío y que el 
+campo de cada ficha sea un Esmalte. Con esas pruebas en rojo implementé lo mínimo para ponerlas en
+verde: un catálogo pequeño en memoria y la función listar(). Con eso ya está lista la base para el
+siguiente paso: filtrar la búsqueda por el esmalte del campo.
