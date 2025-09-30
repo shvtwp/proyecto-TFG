@@ -164,3 +164,17 @@ Siguiendo TDD, primero escribí unas pruebas muy básicas: que el catálogo no e
 campo de cada ficha sea un Esmalte. Con esas pruebas en rojo implementé lo mínimo para ponerlas en
 verde: un catálogo pequeño en memoria y la función listar(). Con eso ya está lista la base para el
 siguiente paso: filtrar la búsqueda por el esmalte del campo.
+
+\subsection{Búsqueda por esmalte del campo}
+Para implementar la búsqueda por el esmalte del campo, primero escribí las pruebas que debía superar
+la función. Estas pruebas cubren los criterios de aceptación definidos:
+
+\begin{itemize}
+    \item Dado un esmalte canónico, la consulta devuelve únicamente escudos con ese campo.
+    \item Sin criterio, se devuelve el catálogo completo.
+    \item Con un criterio no canónico, la respuesta es una lista vacía.
+\end{itemize}
+
+Después implementé la función de filtrado para poner esos tests en verde. La validación y 
+normalización del criterio se delega en \texttt{Esmalte}, de forma que la lógica de
+búsqueda se mantiene simple.
