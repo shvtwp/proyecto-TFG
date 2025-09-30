@@ -178,3 +178,10 @@ la función. Estas pruebas cubren los criterios de aceptación definidos:
 Después implementé la función de filtrado para poner esos tests en verde. La validación y 
 normalización del criterio se delega en \texttt{Esmalte}, de forma que la lógica de
 búsqueda se mantiene simple.
+
+\subsection{Normalización del esmalte}
+Para que la búsqueda por esmalte sea más amigable y no requiera que el usuario conozca los términos
+heráldicos exactos, se ha añadido un mecanismo de normalización en la clase \texttt{Esmalte}. 
+Este mecanismo mapea términos coloquiales a sus equivalentes heráldicos canónicos. Por ejemplo,
+``rojo'' se mapea a ``gules'' y ``azul'' a ``azur''. De este modo, si el usuario introduce un término común,
+el sistema lo normaliza automáticamente, facilitando la búsqueda.

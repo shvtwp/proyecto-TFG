@@ -13,5 +13,10 @@ def test_sin_criterio_devuelve_todo():
 
 def test_criterio_no_valido_devuelve_vacio():
     fichas = listar()
-    r = filtrar_por_esmalte(fichas, "azul")
+    r = filtrar_por_esmalte(fichas, "fucsia")
     assert r == []
+
+def test_mapea_a_canonico():
+    fichas = listar()
+    r = filtrar_por_esmalte(fichas, "azul") 
+    assert len(r) >= 1 and all(f.campo.nombre == "azur" for f in r)
