@@ -1,0 +1,9 @@
+[
+  {"nombre": "Ejemplo Azur",    "campo": "azur"},
+  {"nombre": "Ejemplo Gules",   "campo": "gules"},
+  {"nombre": "Ejemplo Sable",   "campo": "sable"},
+  {"nombre": "Ejemplo Sinople", "campo": "sinople"},
+  {"nombre": "Ejemplo Púrpura", "campo": "púrpura"},
+  {"nombre": "Ejemplo Oro",     "campo": "oro"},
+  {"nombre": "Ejemplo Plata",   "campo": "plata"}
+]

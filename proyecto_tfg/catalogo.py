@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 from typing import List
+from pathlib import Path
+import json
 from .esmalte import Esmalte
 
 @dataclass(frozen=True)
@@ -7,15 +9,9 @@ class Ficha:
     nombre: str
     campo: Esmalte
 
-_CATALOGO: List[Ficha] = [
-    Ficha("Ejemplo Azur",    Esmalte("azur")),
-    Ficha("Ejemplo Gules",   Esmalte("gules")),
-    Ficha("Ejemplo Sable",   Esmalte("sable")),
-    Ficha("Ejemplo Sinople", Esmalte("sinople")),
-    Ficha("Ejemplo Púrpura", Esmalte("púrpura")),
-    Ficha("Ejemplo Oro",     Esmalte("oro")),
-    Ficha("Ejemplo Plata",   Esmalte("plata")),
-]
+_DATA = Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
 
 def listar() -> List[Ficha]:
-    return list(_CATALOGO)
+    with _DATA.open(encoding="utf-8") as f:
+        catalogo = json.load(f)
+    return [Ficha(item["nombre"], Esmalte(item["campo"])) for item in catalogo]
