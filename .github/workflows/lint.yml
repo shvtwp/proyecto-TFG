@@ -11,4 +11,4 @@ jobs:
       - name: Lint (ruff check)
         run: ruff check proyectotfg tests
       - name: Format consistency (ruff format --check)
-        run: ruff format --check proyecto_fg tests
+        run: ruff format --check proyectotfg tests
