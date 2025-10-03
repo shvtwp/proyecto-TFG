@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from .campo import Campo
 
+
 @dataclass(frozen=True)
 class Escudo:
     campo: Campo

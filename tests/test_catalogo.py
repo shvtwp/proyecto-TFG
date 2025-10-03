@@ -1,5 +1,6 @@
-from proyecto_tfg.catalogo import listar, Ficha
-from proyecto_tfg.esmalte import Esmalte
+from proyectotfg.catalogo import listar, Ficha
+from proyectotfg.esmalte import Esmalte
+
 
 def test_catalogo_no_vacio_y_usa_esmalte():
     escudos = listar()

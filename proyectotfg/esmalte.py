@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 _VALIDOS = {"azur", "gules", "sable", "sinople", "púrpura", "oro", "plata"}
 
+
 @dataclass(frozen=True)
 class Esmalte:
     nombre: str
