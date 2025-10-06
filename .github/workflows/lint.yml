@@ -7,8 +7,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: pipx install ruff
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+        
+      - name: Instala poetry
+        run: pipx install poetry
+        
+      - name: Instala las dependencias (incluye dev)
+        run: |
+          poetry install --with dev --no-interaction
+
       - name: Lint (ruff check)
         run: ruff check proyectotfg tests
-      - name: Format consistency (ruff format --check)
+
+      - name: Comprueba el formato
         run: ruff format --check proyectotfg tests
