@@ -20,7 +20,7 @@ jobs:
           poetry install --with dev --no-interaction
 
       - name: Lint (ruff check)
-        run: ruff check proyectotfg tests
+        run: poetry ruff check proyectotfg tests
 
       - name: Comprueba el formato
-        run: ruff format --check proyectotfg tests
+        run: poetry ruff format --check proyectotfg tests
