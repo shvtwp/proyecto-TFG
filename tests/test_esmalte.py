@@ -1,7 +1,7 @@
 import pytest
-from proyectotfg.esmalte import Esmalte
-from proyectotfg.campo import Campo
-from proyectotfg.escudo import Escudo
+from heraldica.esmalte import Esmalte
+from heraldica.campo import Campo
+from heraldica.escudo import Escudo
 
 
 @pytest.mark.parametrize("nombre", ["rojo", "", "  ", "azul"])

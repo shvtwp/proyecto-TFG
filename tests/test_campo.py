@@ -1,5 +1,5 @@
 import pytest
-from proyectotfg.campo import Campo
+from heraldica.campo import Campo
 
 
 def test_campo_sin_esmalte_rechazado():

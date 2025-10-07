@@ -1,5 +1,5 @@
-from proyectotfg.catalogo import listar, Ficha
-from proyectotfg.esmalte import Esmalte
+from heraldica.catalogo import listar, Ficha
+from heraldica.esmalte import Esmalte
 
 
 def test_catalogo_no_vacio_y_usa_esmalte():
