@@ -1,5 +1,5 @@
-from proyecto_tfg.catalogo import listar
-from proyecto_tfg.busqueda import filtrar_por_esmalte
+from heraldica.catalogo import listar
+from heraldica.busqueda import filtrar_por_esmalte
 
 def test_filtra_por_esmalte_valido():
     fichas = listar()
