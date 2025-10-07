@@ -295,3 +295,35 @@ complementarias y no excluyentes.
 estrictamente necesarios, hay algunos que podrían resultar útiles, como \texttt{pytest-cov}, que hace
 de puente entre \texttt{pytest} y \texttt{\href{https://coverage.readthedocs.io/en/7.10.6/}{coverage.py}}
 (herramienta estándar), y permite medir la cobertura de código durante los test.
+
+\subsection{Verificación automática de buenas prácticas}
+El código no solamente debe funcionar, sino ser \textbf{legible}, \textbf{consistente} y \textbf{mantenible},
+según los principios del llamado \emph{Clean Code}~\cite{martin2009cleancode}.
+Aplicar buenas prácticas desde el inicio evita errores triviales y agiliza las revisiones. Para reforzarlo,
+este proyecto incorpora comprobación automática que se ejecuta en cada push o pull request (CI).
+
+\subsubsection{Análisis estático y formateo automático}
+Para mantener la calidad del código, se emplea análisis estático (\emph{linting}) que detecta tempranamente 
+errores y malas prácticas, y formateo automático que garantiza un estilo consistente conforme a 
+\href{https://peps.python.org/pep-0008/}{PEP 8}, mejorando legibilidad y mantenibilidad.
+
+Las herramientas consideradas han sido:
+
+\begin{itemize}
+  \item \textbf{Ruff}: muy rápido; reimplementa reglas habituales de \texttt{pyflakes}/\texttt{pycodestyle}
+  (errores comunes y estilo), ordena imports y aplica modernizaciones sencillas. Integra el formateador, por
+  lo que requiere poca configuración.
+  \item \textbf{Flake8}: linter clásico y estable. Flexible, pero suele requerir combinar
+  varios plugins, lo que aumenta configuración y tiempo de ejecución.
+  \item \textbf{Pylint}: linter con análisis más exhaustivo (convenciones y algunos olores de diseño). Tiende
+  a ser más verboso y lento; puede generar más ruido en proyectos pequeños.
+  \item \textbf{Black}: es el formatter más usado por la comunidad; resultados muy estables y predecibles. Implica
+  utilizar una herramienta adicional además del linter.
+  \item \textbf{autopep8 / yapf}: linters históricos hoy menos extendidas.
+\end{itemize}
+
+\subsubsection{Selección}
+Se selecciona \textbf{Ruff} como herramienta única para lint y formateo, debido a su ejecución rápida y su menor 
+complejidad operativa (es una sola herramienta).
+Se integra en CI con un workflow que se lanza en cada push o pull request y hace fallar la integración si hay 
+errores de estilo o de formato.
