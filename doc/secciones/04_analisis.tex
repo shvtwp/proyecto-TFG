@@ -302,31 +302,24 @@ según los principios del llamado \emph{Clean Code}~\cite{martin2009cleancode}.
 Aplicar buenas prácticas desde el inicio evita errores triviales y agiliza las revisiones. Para reforzarlo,
 este proyecto incorpora comprobación automática que se ejecuta en cada push o pull request (CI).
 
-\subsubsection{Linter}
-Un linter analiza el código para detectar errores frecuentes y problemas de estilo, ayudando a
-mantener un estilo coherente con las convenciones del lenguaje (\href{https://peps.python.org/pep-0008/}{PEP 8},
-entre otras). Se han considerado las siguientes opciones:
+\subsubsection{Análisis estático y formateo automático}
+Para mantener la calidad del código, se emplea análisis estático (\emph{linting}) que detecta tempranamente 
+errores y malas prácticas, y formateo automático que garantiza un estilo consistente conforme a 
+\href{https://peps.python.org/pep-0008/}{PEP 8}, mejorando legibilidad y mantenibilidad.
+
+La herramientas consideradas han sido:
 
 \begin{itemize}
   \item \textbf{Ruff}: muy rápido; reimplementa reglas habituales de \texttt{pyflakes}/\texttt{pycodestyle}
-  (errores comunes y estilo), ordena imports y aplica modernizaciones sencillas.
-  \item \textbf{Flake8}: opción clásica y estable. Flexible, pero suele requerir combinar
+  (errores comunes y estilo), ordena imports y aplica modernizaciones sencillas. Integra el formateador, por
+  lo que requiere poca configuración.
+  \item \textbf{Flake8}: linter clásico y estable. Flexible, pero suele requerir combinar
   varios plugins, lo que aumenta configuración y tiempo de ejecución.
-  \item \textbf{Pylint}: análisis más exhaustivo (convenciones y algunos olores de diseño). Tiende a ser
-  más verboso y lento; puede generar más ruido en proyectos pequeños.
-\end{itemize}
-
-\subsubsection{Autoformatters}
-Un autoformatter reformatea automáticamente el código para aplicar un estilo uniforme
-(sangrías, saltos de línea, longitud de línea, comillas, paréntesis para dividir líneas, etc.).
-Estos formateadores se inspiran en PEP 8 y garantizan consistencia sin intervención manual.
-Opciones evaluadas:
-
-\begin{itemize}
-  \item \textbf{Ruff}: formateador integrado en la misma herramienta; muy rápido y con poca configuración.
-  \item \textbf{Black}: es la más usada por la comunidad; resultados muy estables y predecibles. Implica 
+  \item \textbf{Pylint}: linter con análisis más exhaustivo (convenciones y algunos olores de diseño). Tiende
+  a ser más verboso y lento; puede generar más ruido en proyectos pequeños.
+  \item \textbf{Black}: es el formatter más usado por la comunidad; resultados muy estables y predecibles. Implica
   utilizar una herramienta adicional además del linter.
-  \item \textbf{autopep8 / yapf}: alternativas históricas hoy menos extendidas.
+  \item \textbf{autopep8 / yapf}: linters históricos hoy menos extendidas.
 \end{itemize}
 
 \subsubsection{Selección}
