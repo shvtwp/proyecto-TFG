@@ -1,16 +1,12 @@
 from dataclasses import dataclass
+import importlib.resources as res
+import json
 
-_VALIDOS = {"azur", "gules", "sable", "sinople", "púrpura", "oro", "plata"}
+with res.files("data").joinpath("mapeo_esmaltes.json").open("r", encoding="utf-8") as f:
+    _CFG = json.load(f)
 
-_MAPEO = {
-    "azul": "azur",
-    "rojo": "gules",
-    "negro": "sable",
-    "verde": "sinople",
-    "morado": "púrpura", "violeta": "púrpura", "purpura": "púrpura",
-    "amarillo": "oro", "dorado": "oro",
-    "blanco": "plata", "plateado": "plata",
-}
+_VALIDOS: set[str] = {v.lower() for v in _CFG["validos"]}
+_MAPEO: dict[str, str] = {str(k).lower(): str(v).lower() for k, v in _CFG["mapeo"].items()}
 
 @dataclass(frozen=True)
 class Esmalte:
