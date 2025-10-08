@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from .esmalte import Esmalte
 
+
 @dataclass(frozen=True)
 class Campo:
     esmalte: Esmalte

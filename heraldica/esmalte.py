@@ -6,7 +6,10 @@ with res.files("data").joinpath("mapeo_esmaltes.json").open("r", encoding="utf-8
     _CFG = json.load(f)
 
 _VALIDOS: set[str] = {v.lower() for v in _CFG["validos"]}
-_MAPEO: dict[str, str] = {str(k).lower(): str(v).lower() for k, v in _CFG["mapeo"].items()}
+_MAPEO: dict[str, str] = {
+    str(k).lower(): str(v).lower() for k, v in _CFG["mapeo"].items()
+}
+
 
 @dataclass(frozen=True)
 class Esmalte:

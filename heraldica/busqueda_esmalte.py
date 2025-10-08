@@ -2,6 +2,7 @@ from typing import Iterable, List, Optional
 from .catalogo import Ficha
 from .esmalte import Esmalte
 
+
 def filtrar_por_esmalte(fichas: Iterable[Ficha], campo: Optional[str]) -> List[Ficha]:
     if campo is None or (isinstance(campo, str) and not campo.strip()):
         return list(fichas)
