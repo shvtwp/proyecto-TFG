@@ -1,6 +1,6 @@
-from proyectotfg.esmalte import Esmalte
-from proyectotfg.campo import Campo
-from proyectotfg.escudo import Escudo
+from heraldica.esmalte import Esmalte
+from heraldica.campo import Campo
+from heraldica.escudo import Escudo
 
 
 def test_escudo_valido_con_campo_azur():
