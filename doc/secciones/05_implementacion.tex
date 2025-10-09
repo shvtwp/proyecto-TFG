@@ -70,6 +70,12 @@ proyecto se ha definido el siguiente lenguaje ubicuo:
     \item \textbf{Boca}: Forma exterior del escudo, es decir, su contorno.
     \item \textbf{Partición}: Cada una de las divisiones del campo del escudo. 
     \item \textbf{Esmalte}: Color o metal con el que se pinta un elemento heráldico.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{figuras/esmaltes.png}
+        \caption{Esmaltes heráldicos canónicos \cite{esmaltes_wikipedia}.}
+        \label{fig:esmaltes}
+    \end{figure}
     \item \textbf{Pieza heráldica}: Son elementos de distinto esmalte al del campo que suelen tocar
     los bordes del escudo.
     \item \textbf{Figura o mueble}: Son todo aquello que se encuentra dentro del campo del escudo y
@@ -174,13 +180,13 @@ Siguiendo la metodología TDD, primero escribí las pruebas unitarias que define
 aceptación de esta funcionalidad:
 
 \begin{itemize}
-    \item Dado un esmalte canónico, la consulta devuelve únicamente escudos con ese campo.
+    \item Dado un \hyperref[fig:esmaltes]{esmalte canónico}, la consulta devuelve únicamente escudos con ese campo.
     \item Sin criterio, se devuelve el catálogo completo.
     \item Con un criterio no canónico, la respuesta es una lista vacía.
 \end{itemize}
 
 Después implementé la función de filtrado para poner esos tests en verde. La validación y 
-normalización del criterio se delega en \texttt{Esmalte}, de forma que la lógica de
+la normalización del criterio se delega en \texttt{Esmalte}, de forma que la lógica de
 búsqueda se mantiene simple.
 
 \subsection{Normalización del esmalte}
