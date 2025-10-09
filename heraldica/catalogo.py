@@ -20,6 +20,7 @@ def listar() -> List[Ficha]:
         catalogo = json.load(f)
     return [Ficha(item["nombre"], Esmalte(item["campo"])) for item in catalogo]
 
+
 class Catalogo:
     def __init__(self) -> None:
         self._fichas: List[Ficha] = listar()
@@ -27,10 +28,10 @@ class Catalogo:
     def filtrar_por_esmalte(self, campo: Optional[str]) -> List[Ficha]:
         if campo is None or (isinstance(campo, str) and not campo.strip()):
             return list(self._fichas)
-        
+
         try:
             canon = Esmalte(campo).nombre
         except ValueError:
             return []
-        
+
         return [f for f in self._fichas if getattr(f.campo, "nombre", None) == canon]

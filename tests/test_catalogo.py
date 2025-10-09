@@ -8,6 +8,7 @@ def test_catalogo_no_vacio_y_usa_esmalte():
     assert all(isinstance(f, Ficha) for f in escudos)
     assert all(isinstance(f.campo, Esmalte) for f in escudos)
 
+
 def test_filtra_por_esmalte_valido():
     cat = Catalogo()
     r = cat.filtrar_por_esmalte("azur")
