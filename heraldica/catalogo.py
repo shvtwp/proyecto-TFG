@@ -3,7 +3,7 @@ from typing import List
 from pathlib import Path
 import json
 from .esmalte import Esmalte
-from typing import Optional, Union
+from typing import Optional
 
 
 @dataclass(frozen=True)
