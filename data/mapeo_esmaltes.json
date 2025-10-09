@@ -1,0 +1,16 @@
+{
+  "validos": ["azur", "gules", "sable", "sinople", "púrpura", "oro", "plata"],
+  "mapeo": {
+    "azul": "azur",
+    "rojo": "gules",
+    "negro": "sable",
+    "verde": "sinople",
+    "morado": "púrpura",
+    "violeta": "púrpura",
+    "purpura": "púrpura",
+    "amarillo": "oro",
+    "dorado": "oro",
+    "blanco": "plata",
+    "plateado": "plata"
+  }
+}
