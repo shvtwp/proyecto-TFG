@@ -1,0 +1,28 @@
+{
+  "validos": [
+    "yelmo",
+    "corona",
+    "lambrequin",
+    "tiara",
+    "mitra",
+    "capelo",
+    "cruz procesional",
+    "bordon",
+    "palio",
+    "llaves",
+    "rosario"
+  ],
+  "categorias": {
+    "yelmo": "noble",
+    "corona": "noble",
+    "lambrequin": "noble",
+    "tiara": "papal",
+    "mitra": "episcopal",
+    "capelo": "episcopal",
+    "cruz procesional": "episcopal",
+    "bordon": "episcopal",
+    "palio": "episcopal",
+    "llaves": "papal",
+    "rosario": "papal"
+  }
+}

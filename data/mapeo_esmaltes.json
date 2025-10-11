@@ -12,5 +12,14 @@
     "dorado": "oro",
     "blanco": "plata",
     "plateado": "plata"
+  },
+  "tipos": {
+    "azur": "color",
+    "gules": "color",
+    "sable": "color",
+    "sinople": "color",
+    "púrpura": "color",
+    "oro": "metal",
+    "plata": "metal"
   }
 }
