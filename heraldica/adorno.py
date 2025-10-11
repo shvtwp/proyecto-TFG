@@ -1,21 +1,22 @@
 from dataclasses import dataclass
-import json
 import importlib.resources as res
+import json
 
+# Leemos JSON de adornos
 with res.files("data").joinpath("adornos_exteriores.json").open("r", encoding="utf-8") as f:
-    _CFG = json.load(f)  # {"validos": [...], "categorias": {"mitra":"episcopal", ...}}
+    _CFG = json.load(f)
 
-VALIDOS = set(_CFG["validos"])
-CATEGORIAS = _CFG["categorias"]
+_VALIDOS = set(_CFG["validos"])
+_CATEGORIAS = _CFG["categorias"]
 
 @dataclass(frozen=True)
 class AdornoExterior:
     nombre: str
-    categoria: str
+    categoria: str = None
 
     def __post_init__(self):
         canon = self.nombre.strip().lower()
-        if canon not in VALIDOS:
+        if canon not in _VALIDOS:
             raise ValueError(f"Adorno inválido: {self.nombre}")
         object.__setattr__(self, "nombre", canon)
-        object.__setattr__(self, "categoria", CATEGORIAS[canon])
+        object.__setattr__(self, "categoria", _CATEGORIAS[canon])
