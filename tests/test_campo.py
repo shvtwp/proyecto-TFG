@@ -19,3 +19,12 @@ def test_pieza_heraldica_invalida_color():
 def test_pieza_heraldica_invalida_metal():
     with pytest.raises(ValueError):
         Campo(esmalte=Esmalte("oro"), muebles=[], pieza_heraldica=Esmalte("plata")) 
+
+def test_mueble_valido():
+    campo = Campo(esmalte=Esmalte("azur"),
+                  muebles=[Mueble("leon")])
+    assert campo.muebles[0].nombre == "leon"
+
+def test_mueble_invalido():
+    with pytest.raises(ValueError):
+        Mueble("dragon")
