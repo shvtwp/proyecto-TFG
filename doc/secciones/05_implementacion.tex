@@ -272,3 +272,15 @@ Los nuevos elementos incorporados al modelo son:
 
 Estos elementos se han seleccionado para proporcionar una base sólida que permita 
 realizar búsquedas más detalladas y específicas, sin complicar excesivamente el modelo.
+
+Siguiendo TDD, primero se definieron las pruebas unitarias que validan la correcta creación de estos 
+nuevos elementos, las cuáles consisten en:
+
+\begin{itemize}
+    \item \textbf{Pieza heráldica}: Validar que la pieza se crea correctamente con un esmalte válido y que
+    se aplica la regla de no poner metal sobre metal ni color sobre color.
+    \item \textbf{Adorno exterior}: Validar que únicamente se pueden añadir adornos del conjunto predefinido
+    y que la categoría se asigna correctamente.
+    \item \textbf{Portador}: Validar que el portador se normaliza correctamente y que es un atributo obligatorio.
+    \item \textbf{Mueble}: Validar que únicamente se pueden añadir muebles del conjunto predefinido.
+\end{itemize}
