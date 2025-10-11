@@ -8,22 +8,26 @@ def test_campo_sin_esmalte_rechazado():
     with pytest.raises(TypeError):
         Campo(None)
 
+
 def test_pieza_heraldica_valida():
     campo = Campo(esmalte=Esmalte("azur"), muebles=[], pieza_heraldica=Esmalte("oro"))
     assert campo.pieza_heraldica.nombre == "oro"
 
+
 def test_pieza_heraldica_invalida_color():
     with pytest.raises(ValueError):
-        Campo(esmalte=Esmalte("azur"), muebles=[], pieza_heraldica=Esmalte("sable")) 
+        Campo(esmalte=Esmalte("azur"), muebles=[], pieza_heraldica=Esmalte("sable"))
+
 
 def test_pieza_heraldica_invalida_metal():
     with pytest.raises(ValueError):
-        Campo(esmalte=Esmalte("oro"), muebles=[], pieza_heraldica=Esmalte("plata")) 
+        Campo(esmalte=Esmalte("oro"), muebles=[], pieza_heraldica=Esmalte("plata"))
+
 
 def test_mueble_valido():
-    campo = Campo(esmalte=Esmalte("azur"),
-                  muebles=[Mueble("leon")])
+    campo = Campo(esmalte=Esmalte("azur"), muebles=[Mueble("leon")])
     assert campo.muebles[0].nombre == "leon"
+
 
 def test_mueble_invalido():
     with pytest.raises(ValueError):

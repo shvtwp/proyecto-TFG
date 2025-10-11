@@ -9,12 +9,13 @@ _VALIDOS: set[str] = {v.lower() for v in _CFG["validos"]}
 _MAPEO: dict[str, str] = {
     str(k).lower(): str(v).lower() for k, v in _CFG["mapeo"].items()
 }
-_TIPOS: dict[str, str] = _CFG["tipos"]  
+_TIPOS: dict[str, str] = _CFG["tipos"]
+
 
 @dataclass(frozen=True)
 class Esmalte:
     nombre: str
-    tipo: str  = None
+    tipo: str = None
 
     def __post_init__(self):
         if not isinstance(self.nombre, str) or not self.nombre.strip():

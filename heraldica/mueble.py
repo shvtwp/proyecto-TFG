@@ -5,6 +5,7 @@ import json
 with res.files("data").joinpath("muebles.json").open("r", encoding="utf-8") as f:
     MUEBLES_VALIDOS = json.load(f)
 
+
 @dataclass(frozen=True)
 class Mueble:
     nombre: str

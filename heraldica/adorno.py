@@ -3,11 +3,16 @@ import importlib.resources as res
 import json
 
 # Leemos JSON de adornos
-with res.files("data").joinpath("adornos_exteriores.json").open("r", encoding="utf-8") as f:
+with (
+    res.files("data")
+    .joinpath("adornos_exteriores.json")
+    .open("r", encoding="utf-8") as f
+):
     _CFG = json.load(f)
 
 _VALIDOS = set(_CFG["validos"])
 _CATEGORIAS = _CFG["categorias"]
+
 
 @dataclass(frozen=True)
 class AdornoExterior:
