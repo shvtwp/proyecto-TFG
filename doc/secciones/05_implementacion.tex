@@ -200,7 +200,7 @@ el sistema lo normaliza automáticamente, facilitando la búsqueda.
 \section{Milestone 4: Ampliación del catálogo y mejoras en el filtrado}
 En el modelado inicial realizado en el M2 se limitó el dominio de los escudos a los elementos más 
 básicos: ``campo'' y ``esmalte''. Esta representación mínima permitía trabajar con un prototipo funcional, 
-pero restringía la capacidad de realizar búsquedas más complejas o de analizar atributos adicionales 
+pero restringía la capacidad de hacer búsquedas más complejas o de analizar atributos adicionales 
 de los escudos.
 
 En esta nueva iteración (M4), se amplía el modelo para incluir un subconjunto representativo de 
@@ -226,22 +226,22 @@ Los nuevos elementos incorporados al modelo son:
     \begin{minipage}{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figuras/coronas.png}
-        \caption{Coronas heráldicas seleccionadas \cite{coronas_wikipedia}}
+        \caption{Coronas heráldicas seleccionadas \cite{coronas_wikipedia}.}
     \end{minipage}
     \hfill
     \begin{minipage}{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figuras/mitra.png}
-        \caption{Mitra heráldica seleccionada \cite{mitra_wikipedia}}
+        \caption{Mitra heráldica seleccionada \cite{mitra_wikipedia}.}
     \end{minipage}
     \hfill
     \begin{minipage}{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figuras/yelmo.png}
-        \caption{Yelmo heráldico seleccionado \cite{yelmo_wikipedia}}
+        \caption{Yelmo heráldico seleccionado \cite{yelmo_wikipedia}.}
     \end{minipage}
 
-    \caption{Adornos exteriores representativos en heráldica}
+    \caption{Adornos exteriores representativos en heráldica.}
     \label{fig:adornos_exteriores}
 \end{figure}
 
@@ -259,13 +259,13 @@ Los nuevos elementos incorporados al modelo son:
         \begin{minipage}{0.45\textwidth}
             \centering
             \includegraphics[width=0.6\textwidth]{figuras/leon.png}
-            \caption{León heráldico seleccionado \cite{leon_wikipedia}}
+            \caption{León heráldico seleccionado \cite{leon_wikipedia}.}
         \end{minipage}
         \hfill
         \begin{minipage}{0.45\textwidth}
             \centering
             \includegraphics[width=0.6\textwidth]{figuras/castillo.png}
-            \caption{Castillo heráldico seleccionado \cite{castillo_wikipedia}}
+            \caption{Castillo heráldico seleccionado \cite{castillo_wikipedia}.}
         \end{minipage}
     \end{figure}
 \end{itemize}
@@ -274,7 +274,7 @@ Estos elementos se han seleccionado para proporcionar una base sólida que permi
 realizar búsquedas más detalladas y específicas, sin complicar excesivamente el modelo.
 
 Siguiendo TDD, primero se definieron las pruebas unitarias que validan la correcta creación de estos 
-nuevos elementos, las cuáles consisten en:
+nuevos elementos, las cuales consisten en:
 
 \begin{itemize}
     \item \textbf{Pieza heráldica}: Validar que la pieza se crea correctamente con un esmalte válido y que
@@ -284,3 +284,7 @@ nuevos elementos, las cuáles consisten en:
     \item \textbf{Portador}: Validar que el portador se normaliza correctamente y que es un atributo obligatorio.
     \item \textbf{Mueble}: Validar que únicamente se pueden añadir muebles del conjunto predefinido.
 \end{itemize}
+
+Posteriormente, se implementaron las clases de dominio y las modificaciones necesarias en los archivos 
+de datos JSON. Esta aproximación permite que los tests unitarios pasen correctamente, garantizando la 
+integridad de los escudos y preparando el sistema para futuras ampliaciones.
