@@ -5,7 +5,7 @@ from heraldica.escudo import Escudo
 from heraldica.adorno import AdornoExterior
 
 def test_escudo_valido_con_campo_azur():
-    escudo = Escudo(Campo(Esmalte("azur"), muebles=[]))
+    escudo = Escudo(Campo(Esmalte("azur"), muebles=[]), portador="Desconocido")
     assert escudo.campo.esmalte.nombre == "azur"
 
 def test_portador_normalizado():
