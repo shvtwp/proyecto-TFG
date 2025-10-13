@@ -73,7 +73,7 @@ proyecto se ha definido el siguiente lenguaje ubicuo:
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{figuras/esmaltes-canonicos.png}
-        \caption{Esmaltes heráldicos canónicos \cite{esmaltes_wikipedia}.}
+        \caption{Esmaltes heráldicos canónicos. Imagen de dominio público, Wikimedia Commons.}
         \label{fig:esmaltes}
     \end{figure}
     \item \textbf{Pieza heráldica}: Son elementos de distinto esmalte al del campo que suelen tocar
@@ -196,3 +196,95 @@ heráldicos exactos, se ha añadido un mecanismo de normalización en la clase \
 Este mecanismo mapea términos coloquiales a sus equivalentes heráldicos canónicos. Por ejemplo,
 ``rojo'' se mapea a ``gules'' y ``azul'' a ``azur''. De este modo, si el usuario introduce un término común,
 el sistema lo normaliza automáticamente, facilitando la búsqueda.
+
+\section{Milestone 4: Ampliación del catálogo y mejoras en el filtrado}
+En el modelado inicial realizado en el M2 se limitó el dominio de los escudos a los elementos más 
+básicos: ``campo'' y ``esmalte''. Esta representación mínima permitía trabajar con un prototipo funcional, 
+pero restringía la capacidad de hacer búsquedas más complejas o de analizar atributos adicionales 
+de los escudos.
+
+En esta nueva iteración (M4), se amplía el modelo para incluir un subconjunto representativo de 
+componentes adicionales, con el objetivo de habilitar búsquedas más avanzadas y preparar la estructura 
+para futuras integraciones.
+
+Los nuevos elementos incorporados al modelo son: 
+
+\begin{itemize}
+    \item \textbf{Pieza heráldica}: Se representa como un segundo esmalte, aplicando la regla heráldica
+    de no poner metal sobre metal ni color sobre color. Esto permite buscar por color sin necesidad de
+    saber cuál es el esmalte del campo y cuál el de la pieza. En futuras iteraciones se podría ampliar
+    este concepto para incluir la forma de la pieza.
+    \item \textbf{Adorno exterior}: Se representa como un subconjunto de elementos seleccionados de la
+    heráldica real, como la corona, el yelmo o la mitra, entre otros. Cada adorno puede estar asociado
+    a una categoría interna (papal, episcopal y noble) para además de poder filtrar por adorno, se pueda
+    filtrar por categoría. Se permite que un escudo tenga cero o más adornos. Este conjunto puede ampliarse
+    en futuras iteraciones.
+
+    \begin{figure}[h!]
+    \centering
+
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figuras/coronas.png}
+        \caption{Coronas heráldicas seleccionadas. Imagen de dominio público, Wikimedia Commons.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figuras/mitra.png}
+        \caption{Mitra heráldica seleccionada. Imagen de Xavigivax, Wikimedia Commons, CC BY-SA 4.0.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figuras/yelmo.png}
+        \caption{Yelmo heráldico seleccionado. Imagen de Zigeuner, Wikimedia Commons, CC BY-SA 3.0.}
+    \end{minipage}
+
+    \caption{Adornos exteriores representativos en heráldica.}
+    \label{fig:adornos_exteriores}
+\end{figure}
+
+
+    \item \textbf{Portador}: Se añade el portador como un atributo obligatorio del escudo, representado
+    como un string normalizado (sin minúsculas, tildes ni espacios). Esto permite identificar a quién 
+    pertenece el escudo y facilita búsquedas basadas en el portador.
+    \item \textbf{Mueble}: Se representa como un subconjunto limitado de figuras heráldicas comunes,
+    como el león, el castillo o la estrella. Cada escudo puede tener cero o más muebles, lo que facilita
+    las búsquedas. Este conjunto podrá ampliarse en futuras iteraciones.
+
+    \begin{figure}[h!]
+        \centering
+
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \includegraphics[width=0.6\textwidth]{figuras/leon.png}
+            \caption{León heráldico seleccionado. Imagen de VARGUX, Wikimedia Commons, CC BY-SA 4.0.}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \includegraphics[width=0.6\textwidth]{figuras/castillo.png}
+            \caption{Castillo heráldico seleccionado. Imagen de Xavigivax, Wikimedia Commons, CC BY-SA 3.0.}
+        \end{minipage}
+    \end{figure}
+\end{itemize}
+
+Estos elementos se han seleccionado para proporcionar una base sólida que permita 
+realizar búsquedas más detalladas y específicas, sin complicar excesivamente el modelo.
+
+Siguiendo TDD, primero se definieron las pruebas unitarias que validan la correcta creación de estos 
+nuevos elementos, las cuales consisten en:
+
+\begin{itemize}
+    \item \textbf{Pieza heráldica}: Validar que la pieza se crea correctamente con un esmalte válido y que
+    se aplica la regla de no poner metal sobre metal ni color sobre color.
+    \item \textbf{Adorno exterior}: Validar que únicamente se pueden añadir adornos del conjunto predefinido
+    y que la categoría se asigna correctamente.
+    \item \textbf{Portador}: Validar que el portador se normaliza correctamente y que es un atributo obligatorio.
+    \item \textbf{Mueble}: Validar que únicamente se pueden añadir muebles del conjunto predefinido.
+\end{itemize}
+
+Posteriormente, se implementaron las clases de dominio y las modificaciones necesarias en los archivos 
+de datos JSON. Esta aproximación permite que los tests unitarios pasen correctamente, garantizando la 
+integridad de los escudos y preparando el sistema para futuras ampliaciones.
