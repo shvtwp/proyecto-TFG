@@ -1,9 +1,6 @@
 from heraldica.catalogo import listar, Ficha, Catalogo
 from heraldica.esmalte import Esmalte
-from heraldica.mueble import Mueble
-from heraldica.escudo import Escudo
 from heraldica.campo import Campo
-from heraldica.adorno import AdornoExterior
 
 
 def test_catalogo_no_vacio_y_usa_esmalte():
@@ -37,20 +34,24 @@ def test_mapea_a_canonico():
     r = cat.filtrar_por_esmalte("azul")
     assert len(r) >= 1 and all(f.campo.esmalte.nombre == "azur" for f in r)
 
+
 def test_filtra_por_portador():
     cat = Catalogo()
     r = cat.filtrar_por_portador("desconocido")
     assert all("desconocido" in f.portador for f in r)
+
 
 def test_filtra_por_mueble():
     cat = Catalogo()
     r = cat.filtrar_por_mueble("leon")
     assert all(any(m.nombre == "leon" for m in f.campo.muebles) for f in r)
 
+
 def test_filtra_por_pieza_heraldica():
     cat = Catalogo()
     r = cat.filtrar_por_pieza("oro")
     assert all(f.campo.pieza_heraldica.nombre == "oro" for f in r)
+
 
 def test_filtra_por_adorno():
     cat = Catalogo()
