@@ -43,7 +43,7 @@
     "nombre": "Ejemplo Oro",
     "campo": "oro",
     "muebles": ["castillo"],
-    "pieza_heraldica": "plata",
+    "pieza_heraldica": "azur",
     "portador": "Familia Dorada",
     "adorno_exterior": "llaves"
   },
