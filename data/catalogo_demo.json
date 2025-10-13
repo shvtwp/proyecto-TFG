@@ -1,9 +1,58 @@
 [
-  {"nombre": "Ejemplo Azur",    "campo": "azur"},
-  {"nombre": "Ejemplo Gules",   "campo": "gules"},
-  {"nombre": "Ejemplo Sable",   "campo": "sable"},
-  {"nombre": "Ejemplo Sinople", "campo": "sinople"},
-  {"nombre": "Ejemplo Púrpura", "campo": "púrpura"},
-  {"nombre": "Ejemplo Oro",     "campo": "oro"},
-  {"nombre": "Ejemplo Plata",   "campo": "plata"}
+  {
+    "nombre": "Ejemplo Azur",
+    "campo": "azur",
+    "muebles": ["leon"],
+    "pieza_heraldica": "oro",
+    "portador": "Desconocido",
+    "adorno_exterior": "corona"
+  },
+  {
+    "nombre": "Ejemplo Gules",
+    "campo": "gules",
+    "muebles": ["castillo"],
+    "pieza_heraldica": "plata",
+    "portador": "Familia Roja",
+    "adorno_exterior": "yelmo"
+  },
+  {
+    "nombre": "Ejemplo Sable",
+    "campo": "sable",
+    "muebles": [],
+    "pieza_heraldica": null,
+    "portador": "Caballero Negro",
+    "adorno_exterior": null
+  },
+  {
+    "nombre": "Ejemplo Sinople",
+    "campo": "sinople",
+    "muebles": ["estrella"],
+    "pieza_heraldica": "oro",
+    "portador": "Familia Verde",
+    "adorno_exterior": "mitra"
+  },
+  {
+    "nombre": "Ejemplo Púrpura",
+    "campo": "púrpura",
+    "muebles": [],
+    "pieza_heraldica": null,
+    "portador": "Noble Morado",
+    "adorno_exterior": "capelo"
+  },
+  {
+    "nombre": "Ejemplo Oro",
+    "campo": "oro",
+    "muebles": ["castillo"],
+    "pieza_heraldica": "azur",
+    "portador": "Familia Dorada",
+    "adorno_exterior": "llaves"
+  },
+  {
+    "nombre": "Ejemplo Plata",
+    "campo": "plata",
+    "muebles": [],
+    "pieza_heraldica": null,
+    "portador": "Familia Blanca",
+    "adorno_exterior": null
+  }
 ]

@@ -288,3 +288,30 @@ nuevos elementos, las cuales consisten en:
 Posteriormente, se implementaron las clases de dominio y las modificaciones necesarias en los archivos 
 de datos JSON. Esta aproximación permite que los tests unitarios pasen correctamente, garantizando la 
 integridad de los escudos y preparando el sistema para futuras ampliaciones.
+
+\subsection{Mejoras en el filtrado}
+Con la ampliación del modelo, se han añadido nuevas funcionalidades de filtrado para aprovechar los
+nuevos atributos. Ahora es posible filtrar escudos no solo por el esmalte del campo, sino también por
+``portador'', ``pieza heráldica'', ``mueble'' y ``adorno exterior'', además de la categoría a la que
+pertenece el escudo según su adorno exterior. Esto permite realizar búsquedas más específicas y detalladas,
+facilitando la identificación de escudos.
+
+Siguiendo la metodología TDD, se definieron pruebas unitarias para cada nuevo criterio de filtrado,
+asegurando que cada uno funcione correctamente y que las combinaciones de filtros produzcan los
+resultados esperados. Estas pruebas incluyen:
+\begin{itemize}
+    \item \textbf{Filtrado por ``portador''}: Validar que la búsqueda devuelve escudos cuyo portador coincide
+        con el criterio proporcionado.
+    \item \textbf{Filtrado por ``pieza heráldica''}: Validar que la búsqueda devuelve escudos que contienen
+        la pieza heráldica especificada.
+    \item \textbf{Filtrado por ``mueble''}: Validar que la búsqueda devuelve escudos que contienen el mueble
+        especificado.
+    \item \textbf{Filtrado por ``adorno exterior''}: Validar que la búsqueda devuelve escudos que incluyen
+        el adorno exterior especificado.
+    \item \textbf{Filtrado por ``categoría''}: Validar que la búsqueda devuelve escudos cuya categoría de
+        adorno exterior coincide con el criterio proporcionado.
+\end{itemize}
+
+Para ello primeramente se actualizó el catálogo mínimo con escudos que incluyeran
+estos nuevos atributos, y después se implementó la lógica de filtrado necesaria para que todas las
+pruebas pasaran correctamente.
