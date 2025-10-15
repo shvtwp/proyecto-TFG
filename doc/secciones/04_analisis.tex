@@ -331,8 +331,8 @@ errores de estilo o de formato.
 \section{Base de datos}\label{sec:base-datos}
 Antes de comenzar con el diseño de la base de datos, es necesario definir las herramientas que se emplearán para 
 su creación y gestión. En este caso, no basta con elegir una sola herramienta, sino que deben seleccionarse dos 
-componentes distintos pero complementarios: por un lado, el motor de base de datos, que es el responsable de 
-almacenar y gestionar los datos, y por otro lado, la capa de acceso a datos, que es la interfaz que permite 
+componentes distintos aunque complementarios: por un lado, el motor de base de datos, que es el responsable de 
+almacenar y gestionar los datos y, por otro lado, la capa de acceso a datos, que es la interfaz que permite 
 interactuar con la base de datos desde el código Python, traduciendo las clases y objetos del dominio a tablas y
 registros en la base de datos.
 
@@ -395,10 +395,10 @@ Se han valorado las siguientes opciones:
     compatibilidad total con SQLAlchemy y puede evolucionar sin cambios si se requiere un entorno más complejo.
 
     \item \textbf{Peewee:} Es un ORM ligero y sencillo, apropiado para proyectos pequeños. Ofrece una sintaxis 
-    más directa, pero cuenta con una comunidad más reducida y menor integración con herramientas modernas de 
+    más directa, no obstante cuenta con una comunidad más reducida y menor integración con herramientas modernas de 
     validación y tipado, lo que limitaría su escalabilidad a medio plazo.
 
-    \item \textbf{Django ORM:} Incluye un potente sistema de gestión de base de datos, pero está diseñado para 
+    \item \textbf{Django ORM:} Incluye un potente sistema de gestión de base de datos, sin embargo, está diseñado para 
     funcionar dentro del framework web Django. Adoptarlo implicaría introducir dependencias y una estructura 
     de proyecto completamente diferente, sin aportar ventajas reales en este contexto.
 \end{itemize}
