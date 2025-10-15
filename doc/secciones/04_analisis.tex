@@ -327,3 +327,49 @@ Se selecciona \textbf{Ruff} como herramienta única para lint y formateo, debido
 complejidad operativa (es una sola herramienta).
 Se integra en CI con un workflow que se lanza en cada push o pull request y hace fallar la integración si hay 
 errores de estilo o de formato.
+
+\section{Base de datos}
+Antes de comenzar con el diseño de la base de datos, es necesario definir las herramientas que se emplearán para 
+su creación y gestión. En este caso, no basta con elegir una sola herramienta, sino que deben seleccionarse dos 
+componentes distintos pero complementarios: por un lado, el motor de base de datos, que es el responsable de 
+almacenar y gestionar los datos, y por otro lado, la capa de acceso a datos, que es la interfaz que permite 
+interactuar con la base de datos desde el código Python, traduciendo las clases y objetos del dominio a tablas y
+registros en la base de datos.
+
+Esta separación de las herramientas permite mantener el proyecto modular y flexible, facilitando cambios futuros sin
+que ello afecte a toda la arquitectura del sistema.
+
+\subsection{Motor de base de datos}
+El motor de base de datos es el componente encargado de almacenar físicamente los datos, gestionar las consultas y
+mantener la integridad de la información. En este proyecto se ha considerado necesario utilizar un motor relacional,
+ya que permite representar de manera natural las relaciones entre las entidades del dominio.
+
+\subsubsection{Herramientas consideradas}
+Se han evaluado las siguientes opciones:
+
+\begin{itemize}
+    \item \textbf{SQLite:} Es una base de datos ligera que guarda toda la información en un único archivo local. 
+    No requiere servidor ni configuración adicional, lo que facilita su uso en entornos de desarrollo y pruebas.
+    Soporta el estándar SQL completo y ofrece un rendimiento más que suficiente para el tamaño de datos esperado
+    durante la fase de desarrollo. Además, es totalmente compatible con los principales ORM de Python.
+
+    \item \textbf{PostgreSQL:} Es un sistema de base de datos relacional orientado a entornos de producción.
+    Ofrece gran robustez, soporte para consultas avanzadas y manejo eficiente de múltiples usuarios concurrentes.
+    Sin embargo, requiere la instalación y configuración de un servidor, lo que introduce una complejidad innecesaria
+    para un entorno de desarrollo local.
+
+    \item \textbf{DuckDB:} Motor de base de datos analítico moderno, muy eficiente para consultas sobre grandes volúmenes
+    de datos, pero menos adecuado para operaciones transaccionales o persistencia tradicional de registros, que es
+    el caso de este proyecto.
+\end{itemize}
+
+\subsubsection{Selección}
+Para este proyecto se selecciona \textbf{SQLite} como motor de base de datos.  
+Su simplicidad, portabilidad y compatibilidad con el ecosistema Python la hacen ideal para el desarrollo incremental
+guiado por pruebas que sigue este trabajo. Al almacenar los datos en un único archivo, evita dependencias externas
+y permite crear y destruir la base de datos en cada iteración sin afectar al resto del sistema, lo que facilita las
+pruebas unitarias y el desarrollo local.
+
+Además, en caso de que el proyecto evolucione hacia una aplicación web o de mayor escala, la transición a un motor
+más robusto como PostgreSQL puede realizarse sin grandes cambios en el código gracias al uso de una capa de acceso
+independiente.
