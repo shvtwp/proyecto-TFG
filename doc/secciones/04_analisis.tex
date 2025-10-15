@@ -322,13 +322,13 @@ Las herramientas consideradas han sido:
   \item \textbf{autopep8 / yapf}: linters históricos hoy menos extendidas.
 \end{itemize}
 
-\subsubsection{Selección}
+\subsubsection{Herramienta seleccionada}
 Se selecciona \textbf{Ruff} como herramienta única para lint y formateo, debido a su ejecución rápida y su menor 
 complejidad operativa (es una sola herramienta).
 Se integra en CI con un workflow que se lanza en cada push o pull request y hace fallar la integración si hay 
 errores de estilo o de formato.
 
-\section{Base de datos}
+\section{Base de datos}\label{sec:base-datos}
 Antes de comenzar con el diseño de la base de datos, es necesario definir las herramientas que se emplearán para 
 su creación y gestión. En este caso, no basta con elegir una sola herramienta, sino que deben seleccionarse dos 
 componentes distintos pero complementarios: por un lado, el motor de base de datos, que es el responsable de 
@@ -363,7 +363,7 @@ Se han evaluado las siguientes opciones:
     el caso de este proyecto.
 \end{itemize}
 
-\subsubsection{Selección}
+\subsubsection{Herramienta seleccionada}
 Para este proyecto se selecciona \textbf{SQLite} como motor de base de datos.  
 Su simplicidad, portabilidad y compatibilidad con el ecosistema Python la hacen ideal para el desarrollo incremental
 guiado por pruebas que sigue este trabajo. Al almacenar los datos en un único archivo, evita dependencias externas
@@ -373,3 +373,42 @@ pruebas unitarias y el desarrollo local.
 Además, en caso de que el proyecto evolucione hacia una aplicación web o de mayor escala, la transición a un motor
 más robusto como PostgreSQL puede realizarse sin grandes cambios en el código gracias al uso de una capa de acceso
 independiente.
+
+\subsection{Capa de acceso a datos}
+La capa de acceso a datos es la responsable de conectar el código Python con la base de datos, permitiendo trabajar 
+con las tablas mediante clases y objetos en lugar de escribir consultas SQL manuales. Este enfoque se conoce como 
+\textit{Object-Relational Mapping} (ORM) \cite{fowlerPatterns}, y facilita que el modelo de datos del programa 
+refleje directamente la estructura del dominio, manteniendo la coherencia con las clases ya definidas en el proyecto.
+
+\subsubsection{Herramientas consideradas}
+Se han valorado las siguientes opciones:
+
+\begin{itemize}
+    \item \textbf{SQLAlchemy ORM:} Es la más usada en el ecosistema Python. Permite un control muy 
+    detallado sobre las consultas y las relaciones entre tablas, además de ofrecer una gran flexibilidad para 
+    personalizar el comportamiento del modelo. Sin embargo, su sintaxis es algo más extensa y requiere escribir 
+    más código para operaciones simples, lo que puede ralentizar el desarrollo de un prototipo.
+
+    \item \textbf{SQLModel:} Es una librería moderna basada en SQLAlchemy, pero con una sintaxis más concisa y 
+    tipada, inspirada en las \texttt{dataclasses} de Python. Permite definir modelos con anotaciones de tipo, 
+    haciendo que el código sea más legible y coherente con el estilo ya empleado en este proyecto. Mantiene 
+    compatibilidad total con SQLAlchemy y puede evolucionar sin cambios si se requiere un entorno más complejo.
+
+    \item \textbf{Peewee:} Es un ORM ligero y sencillo, apropiado para proyectos pequeños. Ofrece una sintaxis 
+    más directa, pero cuenta con una comunidad más reducida y menor integración con herramientas modernas de 
+    validación y tipado, lo que limitaría su escalabilidad a medio plazo.
+
+    \item \textbf{Django ORM:} Incluye un potente sistema de gestión de base de datos, pero está diseñado para 
+    funcionar dentro del framework web Django. Adoptarlo implicaría introducir dependencias y una estructura 
+    de proyecto completamente diferente, sin aportar ventajas reales en este contexto.
+\end{itemize}
+
+\subsubsection{Herramienta seleccionada}
+Para este proyecto se ha elegido \textbf{SQLModel} como capa de acceso a datos.  
+Ofrece una sintaxis sencilla y moderna, basada en anotaciones de tipo, que encaja bien con las clases del dominio 
+ya desarrolladas en los hitos anteriores. Esto permite definir las tablas de la base de datos de forma muy similar 
+a las \texttt{dataclasses} que ya se utilizan, reduciendo la necesidad de aprender una sintaxis completamente nueva.
+
+Además, SQLModel está construido sobre \texttt{SQLAlchemy}, por lo que mantiene su solidez y compatibilidad con 
+motores como SQLite o PostgreSQL. Esta combinación facilita el desarrollo y deja abierta la posibilidad de ampliar 
+el sistema en el futuro sin tener que reescribir la lógica actual.
