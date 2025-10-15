@@ -315,3 +315,30 @@ resultados esperados. Estas pruebas incluyen:
 Para ello primeramente se actualizó el catálogo mínimo con escudos que incluyeran
 estos nuevos atributos, y después se implementó la lógica de filtrado necesaria para que todas las
 pruebas pasaran correctamente.
+
+\section{Milestone 5: Creación de base de datos}
+En este hito se sustituye el almacenamiento en JSON por una base de datos relacional que refleja el modelo actual. 
+Este cambio permite persistir los datos de forma estable, mantener las relaciones entre los elementos del escudo y 
+habilitar búsquedas más eficientes. La elección de las herramientas se detalla en el \hyperref[sec:base-datos]{capítulo anterior}.
+
+\subsection{Diseño de la base de datos}
+Un \textbf{Escudo} tiene un \textbf{Campo}, un \textbf{portador} y puede incluir un \textbf{adorno exterior}. 
+El \textbf{Campo} contiene el \textbf{esmalte} principal, una posible \textbf{pieza heráldica} de distinto esmalte 
+y varios \textbf{muebles}.
+
+\paragraph{Tablas}
+\begin{itemize}
+    \item \textbf{campo}(\textit{id}, \textit{esmalte}, \textit{pieza\_heraldica?})
+    \item \textbf{mueble}(\textit{id}, \textit{campo\_id}, \textit{nombre})
+    \item \textbf{escudo}(\textit{id}, \textit{nombre}, \textit{portador}, \textit{adorno\_exterior?}, \textit{campo\_id})
+\end{itemize}
+
+Los \textbf{muebles} se guardan como filas asociadas al campo, mientras que el \textbf{adorno exterior} 
+se almacena como una columna del escudo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figuras/diagramaBD.jpg}
+    \caption{Relaciones entre las entidades del modelo de datos.}
+    \label{fig:diagrama-bd}
+\end{figure}
