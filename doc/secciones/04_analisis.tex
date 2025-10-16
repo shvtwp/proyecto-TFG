@@ -344,12 +344,18 @@ El motor de base de datos es el componente encargado de almacenar físicamente l
 mantener la integridad de la información. En este proyecto se ha considerado necesario utilizar un motor relacional,
 ya que permite representar de manera natural las relaciones entre las entidades del dominio.
 
+En este proyecto no se han considerado bases de datos NoSQL o documentales, debido a que el dominio no presenta las 
+características que justifican su uso. Los datos heráldicos tienen una estructura fija y fuertemente relacional: 
+un escudo está compuesto por un campo, uno o varios muebles y, opcionalmente, un adorno exterior, todos ellos con 
+relaciones y restricciones bien definidas. Este tipo de información se modela de manera más natural y segura en un 
+sistema relacional, donde las dependencias y reglas de integridad pueden expresarse explícitamente.
+
 \subsubsection{Herramientas consideradas}
 Se han evaluado las siguientes opciones:
 
 \begin{itemize}
     \item \textbf{SQLite:} Es una base de datos ligera que guarda toda la información en un único archivo local. 
-    No requiere servidor ni configuración adicional, lo que facilita su uso en entornos de desarrollo y pruebas.
+    No requiere servidor ni configuración adicional, lo que facilita su utilización en entornos de desarrollo y pruebas.
     Soporta el estándar SQL completo y ofrece un rendimiento más que suficiente para el tamaño de datos esperado
     durante la fase de desarrollo. Además, es totalmente compatible con los principales ORM de Python.
 
