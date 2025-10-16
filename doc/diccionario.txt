@@ -109,3 +109,16 @@ linting
 formatter
 linters
 string
+Object
+Relational
+Mapping
+ORM
+SQLAlchemy
+SQLModel
+dataclasses
+Peewee
+tipado
+framework
+id
+DuckDB
+NoSQL
