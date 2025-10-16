@@ -352,3 +352,28 @@ Para garantizar la repetibilidad y evitar dependencias entre ejecuciones, la pru
 en memoria que se destruye automáticamente al finalizar. De este modo, se valida que las operaciones básicas de 
 persistencia (creación, consulta y relación entre tablas) funcionan correctamente antes de continuar con la carga 
 de datos reales.
+
+\subsection{Carga del catálogo y compatibilidad con el modelo existente}
+Una vez generada la base de datos y comprobada su persistencia, se integró la carga automática del catálogo a partir del 
+archivo \texttt{JSON} existente. Esta funcionalidad permite mantener la compatibilidad con la estructura previa del sistema, 
+de modo que el cambio de almacenamiento no afecta a las búsquedas ni a la interfaz actual.
+
+La importación de datos se realiza mediante un script independiente `importar_json_db.py` que lee el catálogo en 
+formato \texttt{JSON} y lo inserta en la base de datos de forma controlada. Este enfoque permite automatizar el proceso y 
+mantener la reproducibilidad del entorno, garantizando que se pueda regenerar la base de datos a partir del mismo archivo de 
+origen.
+
+Durante la importación, los registros se insertan de manera idempotente, de manera que cada ejecución sustituye los datos 
+existentes en lugar de duplicarlos. 
+
+Se verificó en `test_carga_y_busqueda.py` que los datos se cargan correctamente y que las funcionalidades de filtrado 
+siguen operativas. De este modo, el sistema puede seguir buscando por esmalte, portador, mueble, pieza heráldica o adorno 
+exterior sin necesidad de modificar la lógica de negocio.
+
+Hasta aquí, las búsquedas continúan ejecutándose en memoria tras recuperar los datos desde la base de datos, lo que resulta 
+suficiente para un catálogo reducido y garantiza la compatibilidad con el código existente, pero conviene trasladar estas 
+búsquedas directamente a la base de datos con el fin de mejorar el rendimiento y aprovechar el motor relacional para realizar 
+consultas más eficientes sobre volúmenes de datos mayores.
+
+Esta integración constituye el último paso para reemplazar completamente el almacenamiento en JSON por una base de datos 
+relacional sin alterar la funcionalidad del catálogo.
