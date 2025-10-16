@@ -120,11 +120,13 @@ class Catalogo:
                     esmalte=Esmalte(campo_db.esmalte),
                     muebles=[Mueble(m) for m in muebles_por_campo.get(campo_db.id, [])],
                     pieza_heraldica=Esmalte(campo_db.pieza_heraldica)
-                    if campo_db.pieza_heraldica else None,
+                    if campo_db.pieza_heraldica
+                    else None,
                 )
                 adorno = (
                     AdornoExterior(esc_db.adorno_exterior)
-                    if esc_db.adorno_exterior else None
+                    if esc_db.adorno_exterior
+                    else None
                 )
                 fichas.append(
                     Ficha(

@@ -1,4 +1,8 @@
-import os, sys, pathlib, tempfile
+import os
+import sys
+import pathlib
+import tempfile
+
 sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
 from sqlmodel import select
@@ -6,6 +10,7 @@ from heraldica.db.session import crear_bd, get_session
 from heraldica.db.models import Escudo as EscudoDB, Campo as CampoDB, Mueble as MuebleDB
 from heraldica.catalogo import Catalogo
 from scripts.importar_json_db import cargar as cargar_catalogo_desde_json
+
 
 def test_carga_json_y_busquedas_basicas():
     with tempfile.TemporaryDirectory() as d:
@@ -16,7 +21,7 @@ def test_carga_json_y_busquedas_basicas():
 
         with get_session() as s:
             n_escudos = len(s.exec(select(EscudoDB)).all())
-            n_campos  = len(s.exec(select(CampoDB)).all())
+            n_campos = len(s.exec(select(CampoDB)).all())
             n_muebles = len(s.exec(select(MuebleDB)).all())
         assert (n_escudos, n_campos, n_muebles) == (7, 7, 4)
 

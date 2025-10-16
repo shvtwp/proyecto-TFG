@@ -19,7 +19,6 @@ def _get_engine():
 
 
 def crear_bd() -> None:
-
     SQLModel.metadata.create_all(_get_engine())
 
 
