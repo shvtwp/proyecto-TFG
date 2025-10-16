@@ -342,3 +342,13 @@ se almacena como una columna del escudo.
     \caption{Relaciones entre las entidades del modelo de datos.}
     \label{fig:diagrama-bd}
 \end{figure}
+
+\subsection{Creación de la BD y prueba básica}
+Tras definir el esquema se creó la base de datos SQLite y se verificó el guardado y la lectura de un escudo con un 
+\emph{smoke test} mínimo. La prueba inserta un \texttt{Campo} (con esmalte), un mueble asociado y un \texttt{Escudo} que 
+referencia ese campo; a continuación, recupera el escudo por \texttt{portador}. 
+
+Para garantizar la repetibilidad y evitar dependencias entre ejecuciones, la prueba se ejecuta sobre una base de datos 
+en memoria que se destruye automáticamente al finalizar. De este modo, se valida que las operaciones básicas de 
+persistencia (creación, consulta y relación entre tablas) funcionan correctamente antes de continuar con la carga 
+de datos reales.

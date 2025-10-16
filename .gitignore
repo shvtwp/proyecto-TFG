@@ -318,3 +318,5 @@ __pycache__/
 
 # Entorno virtual de Poetry
 .venv/
+
+data/*.db
