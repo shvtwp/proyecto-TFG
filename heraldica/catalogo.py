@@ -8,7 +8,7 @@ from .campo import Campo
 from .mueble import Mueble
 from sqlmodel import select
 from .db.session import get_session, crear_bd
-from .db.models import Escudo as EscudoDB, Campo as CampoDB, Mueble as MuebleDB
+from .db.models import Escudo as EscudoTable, Campo as CampoTable, Mueble as MuebleTable
 
 
 @dataclass(frozen=True)
@@ -101,14 +101,14 @@ class Catalogo:
         fichas: List[Ficha] = []
         with get_session() as s:
             filas = s.exec(
-                select(EscudoDB, CampoDB).join(CampoDB, EscudoDB.campo_id == CampoDB.id)
+                select(EscudoTable, CampoTable).join(CampoTable, EscudoTable.campo_id == CampoTable.id)
             ).all()
 
             campo_ids = [c.id for (_, c) in filas]
             muebles_rows = []
             if campo_ids:
                 muebles_rows = s.exec(
-                    select(MuebleDB).where(MuebleDB.campo_id.in_(campo_ids))
+                    select(MuebleTable).where(MuebleTable.campo_id.in_(campo_ids))
                 ).all()
 
             muebles_por_campo: dict[int, list[str]] = {}
