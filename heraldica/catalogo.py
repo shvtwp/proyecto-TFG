@@ -6,6 +6,9 @@ from .esmalte import Esmalte
 from .adorno import AdornoExterior
 from .campo import Campo
 from .mueble import Mueble
+from sqlmodel import select
+from .db.session import get_session, crear_bd
+from .db.models import Escudo as EscudoTable, Campo as CampoTable, Mueble as MuebleTable
 
 
 @dataclass(frozen=True)
@@ -92,3 +95,50 @@ class Catalogo:
             for f in self._fichas
             if f.adorno_exterior and f.adorno_exterior.nombre == canon
         ]
+
+    def _listar_desde_bd(self) -> List[Ficha]:
+        crear_bd()
+        fichas: List[Ficha] = []
+        with get_session() as s:
+            filas = s.exec(
+                select(EscudoTable, CampoTable).join(
+                    CampoTable, EscudoTable.campo_id == CampoTable.id
+                )
+            ).all()
+
+            campo_ids = [c.id for (_, c) in filas]
+            muebles_rows = []
+            if campo_ids:
+                muebles_rows = s.exec(
+                    select(MuebleTable).where(MuebleTable.campo_id.in_(campo_ids))
+                ).all()
+
+            muebles_por_campo: dict[int, list[str]] = {}
+            for m in muebles_rows:
+                muebles_por_campo.setdefault(m.campo_id, []).append(m.nombre)
+
+            for esc_db, campo_db in filas:
+                campo = Campo(
+                    esmalte=Esmalte(campo_db.esmalte),
+                    muebles=[Mueble(m) for m in muebles_por_campo.get(campo_db.id, [])],
+                    pieza_heraldica=Esmalte(campo_db.pieza_heraldica)
+                    if campo_db.pieza_heraldica
+                    else None,
+                )
+                adorno = (
+                    AdornoExterior(esc_db.adorno_exterior)
+                    if esc_db.adorno_exterior
+                    else None
+                )
+                fichas.append(
+                    Ficha(
+                        nombre=esc_db.nombre,
+                        campo=campo,
+                        portador=esc_db.portador,
+                        adorno_exterior=adorno,
+                    )
+                )
+        return fichas
+
+    def recargar_desde_bd(self) -> None:
+        self._fichas = self._listar_desde_bd()

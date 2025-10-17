@@ -122,3 +122,5 @@ framework
 id
 DuckDB
 NoSQL
+smoke
+BD
