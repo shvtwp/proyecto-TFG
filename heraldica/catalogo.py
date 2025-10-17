@@ -101,7 +101,9 @@ class Catalogo:
         fichas: List[Ficha] = []
         with get_session() as s:
             filas = s.exec(
-                select(EscudoTable, CampoTable).join(CampoTable, EscudoTable.campo_id == CampoTable.id)
+                select(EscudoTable, CampoTable).join(
+                    CampoTable, EscudoTable.campo_id == CampoTable.id
+                )
             ).all()
 
             campo_ids = [c.id for (_, c) in filas]

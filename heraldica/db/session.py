@@ -18,6 +18,7 @@ def _get_database_url() -> str:
         DEFAULT_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
         return f"sqlite:///{DEFAULT_DB_PATH}"
 
+
 def _get_engine():
     global _engine, _engine_url
     url = _get_database_url()
