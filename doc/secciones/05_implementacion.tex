@@ -358,22 +358,28 @@ Una vez generada la base de datos y comprobada su persistencia, se integró la c
 archivo \texttt{JSON} existente. Esta funcionalidad permite mantener la compatibilidad con la estructura previa del sistema, 
 de modo que el cambio de almacenamiento no afecta a las búsquedas ni a la interfaz actual.
 
-La importación de datos se realiza mediante un script independiente `importar_json_db.py` que lee el catálogo en 
-formato \texttt{JSON} y lo inserta en la base de datos de forma controlada. Este enfoque permite automatizar el proceso y 
+La importación de datos se realiza mediante un script independiente \\
+\texttt{importar{}\_json{}\_db.py} que lee el catálogo en formato \texttt{JSON} y lo inserta en la base de datos de forma controlada. Este enfoque permite automatizar el proceso y 
 mantener la reproducibilidad del entorno, garantizando que se pueda regenerar la base de datos a partir del mismo archivo de 
 origen.
 
 Durante la importación, los registros se insertan de manera idempotente, de manera que cada ejecución sustituye los datos 
 existentes en lugar de duplicarlos. 
 
-Se verificó en `test_carga_y_busqueda.py` que los datos se cargan correctamente y que las funcionalidades de filtrado 
+Se verificó en \texttt{test{}\_carga{}\_y{}\_busqueda.py} que los datos se cargan correctamente y que las funcionalidades de filtrado 
 siguen operativas. De este modo, el sistema puede seguir buscando por esmalte, portador, mueble, pieza heráldica o adorno 
-exterior sin necesidad de modificar la lógica de negocio.
-
-Hasta aquí, las búsquedas continúan ejecutándose en memoria tras recuperar los datos desde la base de datos, lo que resulta 
-suficiente para un catálogo reducido y garantiza la compatibilidad con el código existente, pero conviene trasladar estas 
-búsquedas directamente a la base de datos con el fin de mejorar el rendimiento y aprovechar el motor relacional para realizar 
-consultas más eficientes sobre volúmenes de datos mayores.
+exterior en la base de datos sin necesidad de modificar la lógica de negocio.
 
 Esta integración constituye el último paso para reemplazar completamente el almacenamiento en JSON por una base de datos 
 relacional sin alterar la funcionalidad del catálogo.
+
+\subsection{Población de la base de datos: scraping de datos heráldicos}
+Una vez que el sistema fue provisto de una base de datos funcional y funciones para búsqueda en esta, el siguiente paso 
+fue poblar la base de datos con datos reales. 
+
+Para ampliar el catálogo de escudos de manera sostenible, se incorpora un proceso de scraping sobre páginas de Wikipedia.
+El objetivo es extraer, de forma automatizada, un conjunto mínimo de atributos compatibles con el modelo actual
+(\texttt{nombre}, \texttt{campo}, \texttt{muebles}, \texttt{pieza heraldica}, \texttt{portador} y \texttt{adorno exterior}) 
+y volcarlos a un fichero \texttt{JSON} con el mismo esquema usado previamente.  Este fichero se importa a la base de datos 
+mediante el procedimiento existente, garantizando así la compatibilidad con los filtros y la lógica ya implementada. Las
+herramientas seleccionadas para este proceso de scraping se detallan en el \hyperref[sec:scraping]{capítulo anterior}.

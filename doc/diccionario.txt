@@ -124,3 +124,9 @@ DuckDB
 NoSQL
 smoke
 BD
+Scraping
+scraping
+Requests
+BeautifulSoup
+middlewares
+Playwright
