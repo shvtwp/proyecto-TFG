@@ -5,9 +5,7 @@ import tempfile
 
 sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-from sqlmodel import select
-from heraldica.db.session import crear_bd, get_session
-from heraldica.db.models import Escudo as EscudoDB, Campo as CampoDB, Mueble as MuebleDB
+from heraldica.db.session import crear_bd
 from heraldica.catalogo import Catalogo
 from scripts.importar_json_db import cargar as cargar_catalogo_desde_json
 
