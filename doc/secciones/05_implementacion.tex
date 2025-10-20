@@ -377,9 +377,33 @@ relacional sin alterar la funcionalidad del catálogo.
 Una vez que el sistema fue provisto de una base de datos funcional y funciones para búsqueda en esta, el siguiente paso 
 fue poblar la base de datos con datos reales. 
 
-Para ampliar el catálogo de escudos de manera sostenible, se incorpora un proceso de scraping sobre páginas de Wikipedia.
-El objetivo es extraer, de forma automatizada, un conjunto mínimo de atributos compatibles con el modelo actual
-(\texttt{nombre}, \texttt{campo}, \texttt{muebles}, \texttt{pieza heraldica}, \texttt{portador} y \texttt{adorno exterior}) 
-y volcarlos a un fichero \texttt{JSON} con el mismo esquema usado previamente.  Este fichero se importa a la base de datos 
-mediante el procedimiento existente, garantizando así la compatibilidad con los filtros y la lógica ya implementada. Las
-herramientas seleccionadas para este proceso de scraping se detallan en el \hyperref[sec:scraping]{capítulo anterior}.
+Se ha elegido poblarla con escudos heráldicos de municipios andaluces, ya que existe un amplio catálogo disponible en
+Wikipedia y cumple con las necesidades de \hyperref[sec:hu2]{HU2} como investigador de heráldica española.
+
+Para ampliar el catálogo de escudos de manera sostenible, se incorpora un proceso de scraping sobre páginas de Wikipedia
+dedicadas a los armoriales municipales andaluces. El objetivo es extraer, de forma automatizada, un conjunto mínimo de atributos
+compatibles con el modelo actual (\texttt{nombre}, \texttt{campo}, \texttt{muebles}, \texttt{pieza heraldica}, \texttt{portador} 
+y \texttt{adorno exterior}) y volcarlos a un fichero \texttt{JSON} con el mismo esquema usado previamente.  Este fichero se 
+importa a la base de datos mediante el procedimiento existente, garantizando así la compatibilidad con los filtros y la lógica 
+ya implementada. Las herramientas seleccionadas para este proceso de scraping se detallan en el \hyperref[sec:scraping]{capítulo anterior}.
+
+El script \texttt{scraping{}\_escudos.py} analiza el contenido HTML de las páginas, buscando patrones e inspeccionando 
+las tablas para realizar las siguientes tareas:
+
+\begin{itemize}
+    \item Accede a las páginas de Wikipedia de los armoriales de los municipios andaluces.
+    \item Para cada página de escudo, extrae el nombre,  el campo, el esmalte, la pieza heráldica, los muebles y el 
+    portador. También extrae de qué provincia es el escudo.
+    \item Identifica la presencia de adornos exteriores en el escudo.
+    \item Almacena el enlace a la imagen del escudo.
+    \item Normaliza los datos extraídos para que coincidan con el esquema esperado.
+    \item Guarda los datos en un archivo \texttt{JSON} compatible con el sistema existente.
+\end{itemize}
+
+Después de ejecutar el script de scraping, se obtiene un archivo JSON que contiene los escudos extraídos y normalizados. Este archivo se 
+utiliza para poblar la base de datos mediante el script \texttt{importar{}\_json{}\_db.py}, integrando así los nuevos datos en el sistema 
+sin necesidad de modificar la lógica de búsqueda o filtrado ya implementada.
+
+Se han añadido dos nuevos campos al modelo de datos de Escudo: \texttt{provincia} e \texttt{imagen}. El primero permite almacenar la provincia
+a la que pertenece el escudo, facilitando futuras búsquedas o clasificaciones basadas en la ubicación geográfica, y el segundo campo almacena 
+la URL de la imagen del escudo, lo que permite mostrar visualmente el escudo en futuras interfaces de usuario.
