@@ -65,15 +65,19 @@ def _cargar_esmaltes(path: pathlib.Path) -> Tuple[Dict[str, str], re.Pattern]:
         data = json.load(f)
     validos = data.get("validos", [])
     mapeo = data.get("mapeo", {})
+    tipos = data.get("tipos", {})
     universe = sorted(set(list(validos) + list(mapeo.keys())), key=len, reverse=True)
     pat = re.compile("|".join(map(re.escape, universe)), re.IGNORECASE) if universe else re.compile(r"$a")
     def _map_fn(tok: str) -> str:
         t = tok.lower()
         return mapeo.get(t, t if t in validos else t)
-    return (_map_fn, pat)
+    return (_map_fn, pat, tipos)
 
 MUEBLES_CANON = _cargar_muebles(MUEBLES_PATH)
-ESMALTE_MAP_FN, ESMALTE_RE = _cargar_esmaltes(ESMALTES_PATH)
+ESMALTE_MAP_FN, ESMALTE_RE, ESMALTE_TIPOS = _cargar_esmaltes(ESMALTES_PATH)
+
+def _tipo_esmalte(e: Optional[str]) -> Optional[str]:
+    return ESMALTE_TIPOS.get(e) if e else None
 
 def extraer_muebles(txt: str) -> List[str]:
     t = _lower_no_accents(txt)
@@ -96,6 +100,11 @@ def parsear_campos(descripcion: str) -> Tuple[Optional[str], Optional[str], List
             if c != campo:
                 pieza = c
                 break
+    if campo and pieza:
+        tc, tp = _tipo_esmalte(campo), _tipo_esmalte(pieza)
+        if tc and tp and tc == tp: 
+            pieza = None
+
     muebles = extraer_muebles(desc)
     return campo, pieza, muebles
 
