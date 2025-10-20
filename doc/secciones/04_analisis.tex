@@ -418,3 +418,21 @@ a las \texttt{dataclasses} que ya se utilizan, reduciendo la necesidad de aprend
 Además, SQLModel está construido sobre \texttt{SQLAlchemy}, por lo que mantiene su solidez y compatibilidad con 
 motores como SQLite o PostgreSQL. Esta combinación facilita el desarrollo y deja abierta la posibilidad de ampliar 
 el sistema en el futuro sin tener que reescribir la lógica actual.
+
+\subsection{Herramienta de scraping}\label{sec:scraping}
+Para extraer datos de páginas estáticas (Wikipedia) se han considerado tres opciones:
+
+\begin{itemize}
+  \item \textbf{Requests + BeautifulSoup:} Esta combinación usa \texttt{Requests} para realizar las peticiones 
+  HTTP/S a la fuente, obteniendo el HTML, y \texttt{BeautifulSoup} para parsear el HTML y extraer la información 
+  relevante. Es una solución ligera, rápida de implementar y adecuada para páginas estáticas como Wikipedia y
+  proyectos pequeños.
+  \item \textbf{Scrapy:} framework robusto de alto rendimiento con gestión de colas, middlewares y pipelines.
+  Aporta más complejidad y estructura de proyecto de la que se necesita para este trabajo.
+  \item \textbf{Playwright/Selenium:} orientados a páginas dinámicas con JavaScript; sobrecarga innecesaria para 
+  Wikipedia, que sirve HTML estático.
+\end{itemize}
+
+\subsubsection{Herramienta seleccionada}
+Se ha seleccionado \textbf{Requests + BeautifulSoup} por su simplicidad, velocidad de desarrollo y ajuste al alcance 
+del proyecto: permite iterar rápido, añade poca dependencia y cubre las necesidades del scraping planteado.
