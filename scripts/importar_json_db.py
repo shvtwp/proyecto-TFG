@@ -8,7 +8,7 @@ from heraldica.adorno import AdornoExterior
 from heraldica.escudo import normalizar_texto
 from sqlmodel import delete
 
-CATALOGO = pathlib.Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
+CATALOGO = pathlib.Path(__file__).resolve().parents[1] / "data" / "catalogo_scraping.json"
 
 def cargar():
     crear_bd()
@@ -37,7 +37,9 @@ def cargar():
                 nombre=item["nombre"],
                 portador=portador,
                 adorno_exterior=adorno,
-                campo_id=campo.id
+                campo_id=campo.id,
+                provincia=item.get("provincia"),
+                addimagen=item.get("imagen_src")
             )
             s.add(esc); s.commit()
 
