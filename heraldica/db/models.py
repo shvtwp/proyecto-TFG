@@ -23,3 +23,5 @@ class Escudo(SQLModel, table=True):
     adorno_exterior: Optional[str] = None
     campo_id: int = Field(foreign_key="campo.id")
     campo: Optional[Campo] = Relationship()
+    provincia: Optional[str] = None
+    imagen: Optional[str] = None
