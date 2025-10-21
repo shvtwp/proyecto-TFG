@@ -1,5 +1,10 @@
-[
-    "leon",
-    "castillo",
-    "estrella"
-]
+{
+  "cruz": ["\\bcruz(?:es)?\\b"],
+  "estrella": ["\\bestrella(?:s)?\\b"],
+  "castillo": ["\\bcastillo(?:s)?\\b", "\\bcastilla\\b"],
+  "leon": ["\\ble[oó]n(?:es)?\\b"],
+  "aguila": ["\\b[aá]guila(?:s)?\\b"],
+  "arbol": ["\\b[aá]rbol(?:es)?\\b"],
+  "llave": ["\\bllave(?:s)?\\b", "\\bclaves?\\b"],
+  "torre": ["\\btorre(?:s)?\\b"]
+}
