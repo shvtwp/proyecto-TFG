@@ -131,3 +131,6 @@ BeautifulSoup
 middlewares
 Playwright
 armoriales
+FastAPI
+Flask
+Jinja2
