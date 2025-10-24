@@ -478,21 +478,41 @@ se analizaron distintas herramientas y librerías para el desarrollo de la inter
 Una vez obtenidos los resultados, es necesario mostrarlos en una página HTML. Para no generar el código 
 HTML manualmente, se utiliza un motor de plantillas, que permite generar una estructura base y rellenarla
 con los datos de cada escudo.  
+
 Flask incluye de forma nativa \textbf{Jinja2}, un motor sencillo y potente que evita añadir más dependencias y
 permite construir páginas reutilizables, mantener el código limpio y separar claramente la presentación visual 
 de la lógica del programa.
+
 Existen otras alternativas no solo en cuanto a herramientas, sino también de enfoque, como la generación del
 HTML en el cliente mediante frameworks de JavaScript (como React o Vue). Sin embargo, estas opciones añaden
 complejidad innecesaria para un proyecto de este tamaño y alcance, por lo que se opta por una solución más 
 ligera y directa, aprovechando la integración nativa de Jinja2 con Flask.
 
 \subsubsection{Actualización dinámica de contenido}
-Aunque la interfaz es muy simple, resulta más cómodo que el usuario pueda ver los resultados 
-sin tener que recargar toda la página cada vez que realiza una búsqueda.  
-En lugar de usar un framework de JavaScript completo (como React o Vue), que añadiría mucha complejidad 
-innecesaria, se eligió \textbf{HTMX}, una pequeña biblioteca que permite actualizar solo una parte de la página 
-(por ejemplo, la lista de resultados) mediante peticiones asíncronas al servidor. De este modo se mejora la 
-experiencia de uso sin abandonar la estructura ligera del proyecto.
+Suponiendo que \hyperref[sec:hu2]{HU2} necesitará hacer búsquedas frecuentes, actualizar parte del contenido
+dinámicamente sin necesidad de recargar la página entera, es un detalle importante a tener en cuenta para
+mejorar la experiencia de usuario.
+
+Para implementarla, se valoraron las siguientes opciones:
+
+\begin{itemize}
+    \item \textbf{Frameworks completos (React/Vue):} Proporcionan soluciones robustas, pero implican una 
+    complejidad arquitectónica desproporcionada para este proyecto.
+    \item \textbf{JavaScript Vanilla:} Ofrece el máximo control sobre la estructura de la página, sin embargo,
+    su implementación es verbosa y su mantenimiento se vuelve complejo al crecer el proyecto.
+    \item \textbf{jQuery:} Simplifica las peticiones al servidor y la modificación de la estructura visual,
+    no obstante, requiere que se escriba manualmente la lógica para manejar la respuesta y determinar dónde
+    actualizar el contenido.
+    \item \textbf{Micro-librerías (Alpine.js, Stimulus):} capa ligera de interacción en el cliente, aunque 
+    requieren inicialización y convenciones adicionales.
+    \item \textbf{HTMX:} Permite definir en el propio HTML qué partes deben actualizarse y cómo, sin necesidad
+    de escribir código JavaScript adicional. Facilita la implementación de actualizaciones parciales de la
+    estructura de la página con un enfoque declarativo y minimalista.
+\end{itemize}
+
+Para conseguir la fluidez moderna sin la complejidad de un framework completo, elegimos \textbf{HTMX}. Esta herramienta 
+encaja perfectamente con la filosofía de simplicidad y modularidad del proyecto, permitiendo mejorar la 
+experiencia de usuario sin añadir dependencias innecesarias ni complicar la arquitectura del sistema.
 
 \subsubsection{Presentación visual}
 Por último, es importante que la interfaz resultara clara y agradable sin invertir tiempo 
