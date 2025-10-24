@@ -451,10 +451,10 @@ Entre las opciones consideradas se encuentran:
     pensada para desarrollar aplicaciones web de gran tamaño. En este proyecto resultaría excesivo, 
     ya que solo se necesita un servidor que gestione unas pocas rutas y renderice plantillas sencillas.
     \item \textbf{FastAPI} es un framework orientado al desarrollo de servicios \textit{REST}, 
-    diseñado para construir APIs que devuelven datos en formato JSON. Su rendimiento y tipado lo hacen 
+    diseñado para construir API que devuelven datos en formato JSON. Su rendimiento y tipado lo hacen 
     ideal para aplicaciones basadas en microservicios, pero no está centrado en generar páginas HTML ni 
     en servir contenido visual.
-    \item \textbf{Flask} es un \textit{microframework} minimalista, pensado para crear aplicaciones web 
+    \item \textbf{Flask} es un \textit{microframework} minimalista, planteado para crear aplicaciones web 
     pequeñas de forma flexible. Permite definir rutas, procesar peticiones y renderizar plantillas, sin 
     imponer una estructura rígida ni dependencias adicionales.
 \end{itemize}
@@ -474,27 +474,17 @@ más adecuada, ya que ofrece el equilibrio necesario entre simplicidad, flexibil
 Con el objetivo de garantizar una implementación sencilla, reproducible y coherente con la arquitectura modular del sistema, 
 se analizaron distintas herramientas y librerías para el desarrollo de la interfaz web.
 
-
-
-\subsubsection{Gestión de peticiones y controladores}
-Cuando el usuario realiza una búsqueda, la aplicación debe recibir esa solicitud, procesarla y devolver los 
-resultados adecuados. Para ello conviene usar un framework que gestione las rutas y las peticiones web,
-proporcionando una estructura base sin tener que implementarlo todo desde cero. Esto agiliza el desarrollo y
-reduce la probabilidad de errores.
-
-Se evaluaron tres opciones de frameworks: \textit{Django}, \textit{FastAPI} y \textit{Flask}. 
-\textit{Django} fue descartado porque impone una estructura demasiado grande para un proyecto de este tamaño, 
-y \textit{FastAPI} porque está más pensado para crear servicios API que para renderizar páginas, por lo que
-se eligió \textbf{Flask}, ya que es ligero, muy fácil de integrar con el modelo de datos del sistema y 
-suficiente para el tipo de interfaz que se busca desarrollar.
-
-\subsubsection{Generación de vistas}
-Una vez obtenidos los resultados, es necesario mostrarlos en una página HTML. 
-Para no generar el código HTML manualmente, se utiliza un motor de plantillas, 
-que permite generar una estructura base y rellenarla con los datos de cada escudo.  
+\subsubsection{Sistema de plantillas}
+Una vez obtenidos los resultados, es necesario mostrarlos en una página HTML. Para no generar el código 
+HTML manualmente, se utiliza un motor de plantillas, que permite generar una estructura base y rellenarla
+con los datos de cada escudo.  
 Flask incluye de forma nativa \textbf{Jinja2}, un motor sencillo y potente que evita añadir más dependencias y
 permite construir páginas reutilizables, mantener el código limpio y separar claramente la presentación visual 
 de la lógica del programa.
+Existen otras alternativas no solo en cuanto a herramientas, sino también de enfoque, como la generación del
+HTML en el cliente mediante frameworks de JavaScript (como React o Vue). Sin embargo, estas opciones añaden
+complejidad innecesaria para un proyecto de este tamaño y alcance, por lo que se opta por una solución más 
+ligera y directa, aprovechando la integración nativa de Jinja2 con Flask.
 
 \subsubsection{Actualización dinámica de contenido}
 Aunque la interfaz es muy simple, resulta más cómodo que el usuario pueda ver los resultados 
