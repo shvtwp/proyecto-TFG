@@ -437,20 +437,44 @@ Para extraer datos de páginas estáticas (Wikipedia) se han considerado tres op
 Se ha seleccionado \textbf{Requests + BeautifulSoup} por su simplicidad, velocidad de desarrollo y ajuste al alcance 
 del proyecto: permite iterar rápido, añade poca dependencia y cubre las necesidades del scraping planteado.
 
-\subsection{Herramientas para la interfaz de usuario} \label{sec:interfaz-herramientas}
-Con el objetivo de garantizar una implementación sencilla, reproducible y coherente con la arquitectura modular del sistema, 
-se analizaron distintas herramientas y librerías para el desarrollo de la interfaz web. La selección se realizó en función 
-de los siguientes criterios:
+\subsection{Herramientas de backend}
+El backend actúa como intermediario entre la base de datos de blasones y la interfaz web. 
+Su función es recibir las peticiones del usuario, procesarlas y devolver la respuesta correspondiente.  
+Para ello se requiere una herramienta que facilite la gestión de rutas y peticiones sin tener que implementar 
+manualmente todo el protocolo HTTP.
+
+Entre las opciones consideradas se encuentran:
 
 \begin{itemize}
-    \item \textbf{Compatibilidad} con el entorno gestionado por \texttt{Poetry}.
-    \item \textbf{Simplicidad y ligereza}, evitando dependencias innecesarias o procesos complejos.
-    \item \textbf{Mantenibilidad y extensibilidad}, permitiendo futuras ampliaciones sin reestructurar la aplicación.
+    \item \textbf{Django} es un framework de tipo \textit{MVC} (Modelo-Vista-Controlador). 
+    Proporciona una estructura completa que incluye ORM, autenticación y panel de administración, 
+    pensada para desarrollar aplicaciones web de gran tamaño. En este proyecto resultaría excesivo, 
+    ya que solo se necesita un servidor que gestione unas pocas rutas y renderice plantillas sencillas.
+    \item \textbf{FastAPI} es un framework orientado al desarrollo de servicios \textit{REST}, 
+    diseñado para construir APIs que devuelven datos en formato JSON. Su rendimiento y tipado lo hacen 
+    ideal para aplicaciones basadas en microservicios, pero no está centrado en generar páginas HTML ni 
+    en servir contenido visual.
+    \item \textbf{Flask} es un \textit{microframework} minimalista, pensado para crear aplicaciones web 
+    pequeñas de forma flexible. Permite definir rutas, procesar peticiones y renderizar plantillas, sin 
+    imponer una estructura rígida ni dependencias adicionales.
 \end{itemize}
 
-El diseño de una interfaz web implica resolver cuatro aspectos principales: cómo se gestionan las peticiones del 
-usuario, cómo se muestran los resultados, cómo se actualiza la información sin recargar toda la página y cómo se 
-presenta visualmente la aplicación. Cada una de estas partes requiere una herramienta específica.
+Aunque estas tres herramientas permiten desarrollar aplicaciones web en Python, no son directamente 
+comparables entre sí. Cada una responde a un enfoque de desarrollo diferente: \textbf{Django} sigue el 
+patrón \textit{MVC} \cite{reenskaug1979mvc} e incluye todos los componentes de una aplicación completa; \textbf{FastAPI} se 
+orienta a arquitecturas \textit{REST} \cite{fielding2000rest}, donde el backend actúa como proveedor de datos para otros servicios; 
+y \textbf{Flask} se sitúa en un punto intermedio, como un microframework que permite combinar ambos 
+enfoques según las necesidades del proyecto.  
+
+En este caso, el sistema no requiere un modelo complejo ni un servicio API, sino una capa ligera que 
+conecte los datos con la interfaz web y renderice las vistas. Por ello, \textbf{Flask} resulta la opción 
+más adecuada, ya que ofrece el equilibrio necesario entre simplicidad, flexibilidad y funcionalidad.
+
+\subsection{Herramientas para la interfaz de usuario} \label{sec:interfaz-herramientas}
+Con el objetivo de garantizar una implementación sencilla, reproducible y coherente con la arquitectura modular del sistema, 
+se analizaron distintas herramientas y librerías para el desarrollo de la interfaz web.
+
+
 
 \subsubsection{Gestión de peticiones y controladores}
 Cuando el usuario realiza una búsqueda, la aplicación debe recibir esa solicitud, procesarla y devolver los 
