@@ -515,10 +515,29 @@ encaja perfectamente con la filosofía de simplicidad y modularidad del proyecto
 experiencia de usuario sin añadir dependencias innecesarias ni complicar la arquitectura del sistema.
 
 \subsubsection{Presentación visual}
-Por último, es importante que la interfaz resultara clara y agradable sin invertir tiempo 
-en diseñar una hoja de estilos desde cero.  
-Para ello se utiliza \textbf{Pico.css}, una hoja de estilos que se carga directamente desde Internet y aplica un diseño 
-limpio y accesible. De esta forma no es necesario instalar ni configurar librerías adicionales.
+Por último, es importante que la interfaz resultara clara y agradable sin invertir tiempo en diseñar una 
+hoja de estilos desde cero.  
+
+Para ello, se consideraron las siguientes opciones:
+
+\begin{itemize} 
+    \item \textbf{Frameworks CSS completos (Bootstrap, Material Design):} Frameworks como Bootstrap o 
+    implementaciones basadas en Material Design ofrecen un amplio catálogo de componentes listos para 
+    usar. Sin embargo, su uso implica una sobrecarga de archivos (CSS y JavaScript) y un peso de 
+    archivo excesivo para un proyecto con requisitos visuales sencillos. 
+    \item \textbf{Frameworks CSS de utilidades (Tailwind CSS):} Es una solución altamente flexible, pero
+    requiere la utilización intensiva de clases de utilidad en el HTML y la configuración de un proceso de build
+    dedicado para optimizar el CSS final, lo cual añade complejidad. 
+    \item \textbf{Hojas de estilo propias (CSS/SASS):} Diseñar el estilo desde cero con CSS o un 
+    preprocesador como SASS habría garantizado un diseño único, no obstante, habría supuesto una inversión de 
+    tiempo desproporcionada para un proyecto con el enfoque en la lógica del backend. 
+    \item \textbf{Pico.css:} Es una hoja de estilos sin clases que aplica un diseño limpio, accesible y 
+    responsivo a los elementos HTML por defecto, cargándose directamente desde un servidor externo. 
+\end{itemize}
+
+Finalmente, se opta por \textbf{Pico.css} debido a su simplicidad y eficacia. Esta herramienta permite
+conseguir una apariencia moderna y profesional sin necesidad de añadir configuración adicional ni peso
+innecesario al proyecto.
 
 \subsubsection{Herramientas seleccionadas}
 El conjunto de herramientas escogido ofrece un equilibrio entre simplicidad técnica y una buena experiencia de usuario. 
