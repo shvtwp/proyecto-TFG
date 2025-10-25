@@ -328,7 +328,7 @@ complejidad operativa (es una sola herramienta).
 Se integra en CI con un workflow que se lanza en cada push o pull request y hace fallar la integración si hay 
 errores de estilo o de formato.
 
-\section{Base de datos}\label{sec:base-datos}
+\subsection{Base de datos}\label{sec:base-datos}
 Antes de comenzar con el diseño de la base de datos, es necesario definir las herramientas que se emplearán para 
 su creación y gestión. En este caso, no basta con elegir una sola herramienta, sino que deben seleccionarse dos 
 componentes distintos aunque complementarios: por un lado, el motor de base de datos, que es el responsable de 
@@ -339,7 +339,7 @@ registros en la base de datos.
 Esta separación de las herramientas permite mantener el proyecto modular y flexible, facilitando cambios futuros sin
 que ello afecte a toda la arquitectura del sistema.
 
-\subsection{Motor de base de datos}
+\subsubsection{Motor de base de datos}
 El motor de base de datos es el componente encargado de almacenar físicamente los datos, gestionar las consultas y
 mantener la integridad de la información. En este proyecto se ha considerado necesario utilizar un motor relacional,
 ya que permite representar de manera natural las relaciones entre las entidades del dominio.
@@ -350,7 +350,7 @@ un escudo está compuesto por un campo, uno o varios muebles y, opcionalmente, u
 relaciones y restricciones bien definidas. Este tipo de información se modela de manera más natural y segura en un 
 sistema relacional, donde las dependencias y reglas de integridad pueden expresarse explícitamente.
 
-\subsubsection{Herramientas consideradas}
+\paragraph{Herramientas consideradas}
 Se han evaluado las siguientes opciones:
 
 \begin{itemize}
@@ -369,7 +369,7 @@ Se han evaluado las siguientes opciones:
     el caso de este proyecto.
 \end{itemize}
 
-\subsubsection{Herramienta seleccionada}
+\paragraph{Herramienta seleccionada}
 Para este proyecto se selecciona \textbf{SQLite} como motor de base de datos.  
 Su simplicidad, portabilidad y compatibilidad con el ecosistema Python la hacen ideal para el desarrollo incremental
 guiado por pruebas que sigue este trabajo. Al almacenar los datos en un único archivo, evita dependencias externas
@@ -380,13 +380,13 @@ Además, en caso de que el proyecto evolucione hacia una aplicación web o de ma
 más robusto como PostgreSQL puede realizarse sin grandes cambios en el código gracias al uso de una capa de acceso
 independiente.
 
-\subsection{Capa de acceso a datos}
+\subsubsection{Capa de acceso a datos}
 La capa de acceso a datos es la responsable de conectar el código Python con la base de datos, permitiendo trabajar 
 con las tablas mediante clases y objetos en lugar de escribir consultas SQL manuales. Este enfoque se conoce como 
 \textit{Object-Relational Mapping} (ORM) \cite{fowlerPatterns}, y facilita que el modelo de datos del programa 
 refleje directamente la estructura del dominio, manteniendo la coherencia con las clases ya definidas en el proyecto.
 
-\subsubsection{Herramientas consideradas}
+\paragraph{Herramientas consideradas}
 Se han valorado las siguientes opciones:
 
 \begin{itemize}
@@ -409,7 +409,7 @@ Se han valorado las siguientes opciones:
     de proyecto completamente diferente, sin aportar ventajas reales en este contexto.
 \end{itemize}
 
-\subsubsection{Herramienta seleccionada}
+\paragraph{Herramienta seleccionada}
 Para este proyecto se ha elegido \textbf{SQLModel} como capa de acceso a datos.  
 Ofrece una sintaxis sencilla y moderna, basada en anotaciones de tipo, que encaja bien con las clases del dominio 
 ya desarrolladas en los hitos anteriores. Esto permite definir las tablas de la base de datos de forma muy similar 
@@ -436,3 +436,110 @@ Para extraer datos de páginas estáticas (Wikipedia) se han considerado tres op
 \subsubsection{Herramienta seleccionada}
 Se ha seleccionado \textbf{Requests + BeautifulSoup} por su simplicidad, velocidad de desarrollo y ajuste al alcance 
 del proyecto: permite iterar rápido, añade poca dependencia y cubre las necesidades del scraping planteado.
+
+\subsection{Herramientas de backend}
+El backend actúa como intermediario entre la base de datos de blasones y la interfaz web. 
+Su función es recibir las peticiones del usuario, procesarlas y devolver la respuesta correspondiente.  
+Para ello se requiere una herramienta que facilite la gestión de rutas y peticiones sin tener que implementar 
+manualmente todo el protocolo HTTP.
+
+Entre las opciones consideradas se encuentran:
+
+\begin{itemize}
+    \item \textbf{Django} es un framework de tipo \textit{MVC} (Modelo-Vista-Controlador). 
+    Proporciona una estructura completa que incluye ORM, autenticación y panel de administración, 
+    pensada para desarrollar aplicaciones web de gran tamaño. En este proyecto resultaría excesivo, 
+    ya que solo se necesita un servidor que gestione unas pocas rutas y renderice plantillas sencillas.
+    \item \textbf{FastAPI} es un framework orientado al desarrollo de servicios \textit{REST}, 
+    diseñado para construir API que devuelven datos en formato JSON. Su rendimiento y tipado lo hacen 
+    ideal para aplicaciones basadas en microservicios, pero no está centrado en generar páginas HTML ni 
+    en servir contenido visual.
+    \item \textbf{Flask} es un \textit{microframework} minimalista, planteado para crear aplicaciones web 
+    pequeñas de forma flexible. Permite definir rutas, procesar peticiones y renderizar plantillas, sin 
+    imponer una estructura rígida ni dependencias adicionales.
+\end{itemize}
+
+Aunque estas tres herramientas permiten desarrollar aplicaciones web en Python, no son directamente 
+comparables entre sí. Cada una responde a un enfoque de desarrollo diferente: \textbf{Django} sigue el 
+patrón \textit{MVC} \cite{reenskaug1979mvc} e incluye todos los componentes de una aplicación completa; \textbf{FastAPI} se 
+orienta a arquitecturas \textit{REST} \cite{fielding2000rest}, donde el backend actúa como proveedor de datos para otros servicios; 
+y \textbf{Flask} se sitúa en un punto intermedio, como un microframework que permite combinar ambos 
+enfoques según las necesidades del proyecto.  
+
+En este caso, el sistema no requiere un modelo complejo ni un servicio API, sino una capa ligera que 
+conecte los datos con la interfaz web y renderice las vistas. Por ello, \textbf{Flask} resulta la opción 
+más adecuada, ya que ofrece el equilibrio necesario entre simplicidad, flexibilidad y funcionalidad.
+
+\subsection{Herramientas para la interfaz de usuario} \label{sec:interfaz-herramientas}
+Con el objetivo de garantizar una implementación sencilla, reproducible y coherente con la arquitectura modular del sistema, 
+se analizaron distintas herramientas y librerías para el desarrollo de la interfaz web.
+
+\subsubsection{Sistema de plantillas}
+Una vez obtenidos los resultados, es necesario mostrarlos en una página HTML. Para no generar el código 
+HTML manualmente, se utiliza un motor de plantillas, que permite generar una estructura base y rellenarla
+con los datos de cada escudo.  
+
+Flask incluye de forma nativa \textbf{Jinja2}, un motor sencillo y potente que evita añadir más dependencias y
+permite construir páginas reutilizables, mantener el código limpio y separar claramente la presentación visual 
+de la lógica del programa.
+
+Existen otras alternativas no solo en cuanto a herramientas, sino también de enfoque, como la generación del
+HTML en el cliente mediante frameworks de JavaScript (como React o Vue). Sin embargo, estas opciones añaden
+complejidad innecesaria para un proyecto de este tamaño y alcance, por lo que se opta por una solución más 
+ligera y directa, aprovechando la integración nativa de Jinja2 con Flask.
+
+\subsubsection{Actualización dinámica de contenido}
+Suponiendo que \hyperref[sec:hu2]{HU2} necesitará hacer búsquedas frecuentes, actualizar parte del contenido
+dinámicamente sin necesidad de recargar la página entera, es un detalle importante a tener en cuenta para
+mejorar la experiencia de usuario.
+
+Para implementarla, se valoraron las siguientes opciones:
+
+\begin{itemize}
+    \item \textbf{Frameworks completos (React/Vue):} Proporcionan soluciones robustas, pero implican una 
+    complejidad arquitectónica desproporcionada para este proyecto.
+    \item \textbf{JavaScript Vanilla:} Ofrece el máximo control sobre la estructura de la página, sin embargo,
+    su implementación es verbosa y su mantenimiento se vuelve complejo al crecer el proyecto.
+    \item \textbf{jQuery:} Simplifica las peticiones al servidor y la modificación de la estructura visual,
+    no obstante, requiere que se escriba manualmente la lógica para manejar la respuesta y determinar dónde
+    actualizar el contenido.
+    \item \textbf{Micro-librerías (Alpine.js, Stimulus):} capa ligera de interacción en el cliente, aunque 
+    requieren inicialización y convenciones adicionales.
+    \item \textbf{HTMX:} Permite definir en el propio HTML qué partes deben actualizarse y cómo, sin necesidad
+    de escribir código JavaScript adicional. Facilita la implementación de actualizaciones parciales de la
+    estructura de la página con un enfoque declarativo y minimalista.
+\end{itemize}
+
+Para conseguir la fluidez moderna sin la complejidad de un framework completo, elegimos \textbf{HTMX}. Esta herramienta 
+encaja perfectamente con la filosofía de simplicidad y modularidad del proyecto, permitiendo mejorar la 
+experiencia de usuario sin añadir dependencias innecesarias ni complicar la arquitectura del sistema.
+
+\subsubsection{Presentación visual}
+Por último, es importante que la interfaz resultara clara y agradable sin invertir tiempo en diseñar una 
+hoja de estilos desde cero.  
+
+Para ello, se consideraron las siguientes opciones:
+
+\begin{itemize} 
+    \item \textbf{Frameworks CSS completos (Bootstrap, Material Design):} Frameworks como Bootstrap o 
+    implementaciones basadas en Material Design ofrecen un amplio catálogo de componentes listos para 
+    usar. Sin embargo, su uso implica una sobrecarga de archivos (CSS y JavaScript) y un peso de 
+    archivo excesivo para un proyecto con requisitos visuales sencillos. 
+    \item \textbf{Frameworks CSS de utilidades (Tailwind CSS):} Es una solución altamente flexible, pero
+    requiere la utilización intensiva de clases de utilidad en el HTML y la configuración de un proceso de build
+    dedicado para optimizar el CSS final, lo cual añade complejidad. 
+    \item \textbf{Hojas de estilo propias (CSS/SASS):} Diseñar el estilo desde cero con CSS o un 
+    preprocesador como SASS habría garantizado un diseño único, no obstante, habría supuesto una inversión de 
+    tiempo desproporcionada para un proyecto con el enfoque en la lógica del backend. 
+    \item \textbf{Pico.css:} Es una hoja de estilos sin clases que aplica un diseño limpio, accesible y 
+    responsivo a los elementos HTML por defecto, cargándose directamente desde un servidor externo. 
+\end{itemize}
+
+Finalmente, se opta por \textbf{Pico.css} debido a su simplicidad y eficacia. Esta herramienta permite
+conseguir una apariencia moderna y profesional sin necesidad de añadir configuración adicional ni peso
+innecesario al proyecto.
+
+\subsubsection{Herramientas seleccionadas}
+El conjunto de herramientas escogido ofrece un equilibrio entre simplicidad técnica y una buena experiencia de usuario. 
+Permite tener una aplicación funcional, fácilmente reproducible y adaptable a futuras mejoras, como la inclusión de 
+filtros adicionales o módulos de inteligencia artificial para clasificar los escudos.

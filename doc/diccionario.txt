@@ -131,3 +131,17 @@ BeautifulSoup
 middlewares
 Playwright
 armoriales
+FastAPI
+Flask
+Jinja2
+backend
+REST
+microservicios
+microframework
+HTMX
+Vanilla
+Stimulus
+Bootstrap
+Tailwind
+build
+SASS
