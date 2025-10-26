@@ -145,3 +145,5 @@ Bootstrap
 Tailwind
 build
 SASS
+wireframe
+wireframes
