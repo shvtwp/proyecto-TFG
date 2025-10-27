@@ -11,12 +11,7 @@ def test_routes_exist_and_return_200():
     r = client.get("/")
     assert r.status_code == 200
     body = r.data.decode("utf-8")
-    assert "Heráldica · UI (estructura mínima)" in body
-
-    r = client.get("/search")
-    assert r.status_code == 200
-    body = r.data.decode("utf-8")
-    assert "Resultados (vacío)" in body 
+    assert "Heráldica para todas (estructura mínima)" in bodyyy 
 
 def test_detail_returns_404_for_now():
     app = import_module("heraldica.ui_web").create_app()

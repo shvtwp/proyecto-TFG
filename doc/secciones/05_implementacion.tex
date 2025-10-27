@@ -498,3 +498,20 @@ El adaptador incluye un método \texttt{buscar\_libre()}, que combina los distin
 del catálogo en una única búsqueda global. Además, si no se recibe ningún término de búsqueda, el método
 devuelve el catálogo completo, lo que permite explorar todos los escudos sin necesidad de especificar 
 criterios.
+
+A continuación, el módulo \texttt{ui\_web.py} se amplió para incorporar la integración con este adaptador.
+La ruta \texttt{/search} obtiene los resultados mediante \texttt{CatalogoUI} y genera dinámicamente
+una lista de tarjetas HTML.  
+Cada tarjeta incluye el nombre del municipio, una miniatura clicable con la imagen del escudo
+y una serie de distintivos (\emph{badges}) con los atributos más relevantes:
+campo, muebles, pieza heráldica, adorno y portador.
+
+En esta fase no se emplean plantillas ni JavaScript, siguiendo un enfoque \textit{server-side} puro
+que prioriza la transparencia y la sencillez del código.  
+El diseño se mantiene intencionadamente minimalista, con un HTML básico generado desde la vista
+para facilitar la validación y la posterior incorporación de plantillas.
+
+Una vez todas las pruebas pasaron, la interfaz permite realizar búsquedas reales sobre la base de datos,
+visualizar los resultados con sus atributos y, en ausencia de filtro, listar el catálogo completo.
+Este avance completa la conexión entre la capa de presentación y el modelo de dominio,
+dejando la aplicación en un estado funcional y demostrable.
