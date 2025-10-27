@@ -455,3 +455,21 @@ que la experiencia de usuario puede variar significativamente entre ambos format
 optimiza para pantallas pequeñas, con un diseño más compacto y accesible, usando una sola columna para
 mostrar los resultados. En cambio, la versión de escritorio aprovecha el espacio adicional para presentar los
 resultados en una cuadrícula de dos columnas, mejorando la visibilidad y la navegación.
+
+\subsection{Implementación de la interfaz}
+El primer paso en el desarrollo de la interfaz de usuario consistió en establecer su estructura básica 
+empleando el framework \texttt{Flask}.  
+El primer objetivo es fijar el esqueleto que permitirá integrar la capa de datos y la presentación.
+
+Siguiendo una metodología \textit{Test-Driven Development} (TDD), se escribieron primero tres tests que 
+verifican los siguientes aspectos mínimos:
+
+\begin{itemize}
+    \item Que el módulo de la interfaz (\texttt{heraldica/ui\_web.py}) incluye una función encargada de 
+    crear la aplicación Flask.  
+    \item Que las rutas básicas (\texttt{/} y \texttt{/search}) responden correctamente 
+    con código HTTP~200 y devuelven contenido HTML identificable.
+    \item Que la ruta de detalle (\texttt{/escudo/<id>}) devuelve, de forma controlada, un código~404 
+    mientras no exista conexión con la base de datos.
+\end{itemize}
+
