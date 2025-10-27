@@ -148,3 +148,8 @@ SASS
 wireframe
 wireframes
 search
+server
+side
+clicable
+CatalogoUI
+badges
