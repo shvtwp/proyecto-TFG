@@ -69,7 +69,11 @@ def create_app() -> Flask:
 
         # Cambiar el título según si hay búsqueda o no
         titulo = f'Resultados para "{q}"' if q else "Catálogo completo"
-        items_html = "<ul style='padding-left:0;'>" + "".join(items_parts) + "</ul>" if items_parts else "<p>Resultados (vacío)</p>"
+        items_html = (
+            "<ul style='padding-left:0;'>" + "".join(items_parts) + "</ul>"
+            if items_parts
+            else "<p>Resultados (vacío)</p>"
+        )
 
         html = (
             "<!doctype html><meta charset='utf-8'>"
@@ -79,11 +83,11 @@ def create_app() -> Flask:
         )
         return html
 
-
     @app.get("/escudo/<rid>")
     def escudo(rid: str):
         abort(404)
 
     return app
+
 
 app = create_app()

@@ -5,12 +5,14 @@ from heraldica.ui_catalogo import CatalogoUI
 from heraldica.db.session import crear_bd
 from scripts.importar_json_db import cargar as cargar_catalogo_desde_json
 
+
 def _setup_tmp_db():
     tmpdir = tempfile.TemporaryDirectory()
     os.environ["DATABASE_URL"] = f"sqlite:///{tmpdir.name}/test.db"
     crear_bd()
     cargar_catalogo_desde_json()
     return tmpdir
+
 
 def test_ui_repo_filtrado_basico_por_esmalte():
     td = _setup_tmp_db()
@@ -22,6 +24,7 @@ def test_ui_repo_filtrado_basico_por_esmalte():
     finally:
         td.cleanup()
 
+
 def test_ui_repo_por_mueble_y_adorno():
     td = _setup_tmp_db()
     try:
@@ -32,6 +35,7 @@ def test_ui_repo_por_mueble_y_adorno():
         assert isinstance(res_a, list)
     finally:
         td.cleanup()
+
 
 def test_ui_repo_pieza_y_portador():
     td = _setup_tmp_db()
