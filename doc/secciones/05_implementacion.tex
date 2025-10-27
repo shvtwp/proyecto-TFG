@@ -420,3 +420,38 @@ Tras esa simple comparación, se opta por una \textbf{interfaz web mínima}, al 
 usabilidad y capacidad de demostración, además de facilitar futuras ampliaciones del sistema.
 
 Las herramientas seleccionadas para implementar esta interfaz web se detallan en el \hyperref[sec:interfaz-herramientas]{capítulo anterior}.
+
+\subsection{Diseño de interfaz}
+La interfaz web se diseña para ser sencilla y funcional, permitiendo a los usuarios realizar búsquedas y 
+visualizar los resultados sin salir de la misma página. La estructura básica de la interfaz incluye:
+
+\begin{itemize}
+    \item Un encabezado con el título de la aplicación.
+    \item Un formulario de búsqueda que permite a los usuarios introducir criterios como esmalte, portador, mueble, 
+    pieza heráldica y adorno exterior.
+    \item Un área de resultados donde se muestran los escudos que coinciden con los criterios de búsqueda.
+\end{itemize}
+
+Para representar visualmente cómo se verá la interfaz, se elaboraron unos \textit{wireframes}, cuya finalidad
+es definir la estructura y la funcionalidad de forma rápida y orientativa. Estos bocetos se elaboraron utilizando 
+la herramienta \href{https://www.figma.com/}{Figma}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figuras/wireframeMovil.jpg}
+    \caption{Wireframe de la interfaz móvil.}
+    \label{fig:wireframe-movil}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figuras/wireframePortatil.jpg}
+    \caption{Wireframe de la interfaz de escritorio.}
+    \label{fig:wireframe-portatil}
+\end{figure}
+
+Se han diseñado dos versiones del wireframe: una para dispositivos móviles y otra para escritorio, debido a
+que la experiencia de usuario puede variar significativamente entre ambos formatos. La versión móvil se
+optimiza para pantallas pequeñas, con un diseño más compacto y accesible, usando una sola columna para
+mostrar los resultados. En cambio, la versión de escritorio aprovecha el espacio adicional para presentar los
+resultados en una cuadrícula de dos columnas, mejorando la visibilidad y la navegación.
