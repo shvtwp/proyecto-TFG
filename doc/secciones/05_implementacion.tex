@@ -473,3 +473,12 @@ verifican los siguientes aspectos mínimos:
     mientras no exista conexión con la base de datos.
 \end{itemize}
 
+Una vez fallaron las pruebas iniciales, se implementó el código mínimo necesario para hacerlas pasar: 
+un único archivo \texttt{ui\_web.py} con la aplicación Flask, tres rutas y respuestas HTML estáticas sin 
+plantillas ni dependencias adicionales, manteniendo el código al mínimo indispensable.
+
+El resultado es una interfaz web mínima aunque funcional que puede ejecutarse con:
+
+\begin{verbatim}
+poetry run flask --app heraldica/ui_web.py --debug run
+\end{verbatim}
