@@ -482,3 +482,19 @@ El resultado es una interfaz web mínima aunque funcional que puede ejecutarse c
 \begin{verbatim}
 poetry run flask --app heraldica/ui_web.py --debug run
 \end{verbatim}
+
+Posteriormente, con la estructura básica en marcha, se procedió a integrar la base de datos y la lógica 
+de negocio.
+
+\subsubsection{Integración con la base de datos y capa de dominio}
+Para conectar la interfaz con los datos reales del catálogo se añadió un nuevo módulo,
+\texttt{heraldica/ui\_catalogo.py}, que actúa como adaptador entre la capa de dominio y la interfaz web.
+Su función es delegar en la clase \texttt{Catalogo} las operaciones de búsqueda y filtrado, pero 
+devolviendo los resultados en una estructura más simple y apta para renderizado.
+De esta forma, cada entidad del dominio se convierte en un diccionario de Python con valores de texto 
+plano.
+
+El adaptador incluye un método \texttt{buscar\_libre()}, que combina los distintos criterios de filtrado
+del catálogo en una única búsqueda global. Además, si no se recibe ningún término de búsqueda, el método
+devuelve el catálogo completo, lo que permite explorar todos los escudos sin necesidad de especificar 
+criterios.
