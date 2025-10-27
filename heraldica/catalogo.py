@@ -17,6 +17,8 @@ class Ficha:
     campo: Campo
     portador: str
     adorno_exterior: Optional[AdornoExterior] = None
+    provincia: str = ""
+    imagen_src: str = ""
 
 
 _DATA = Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
@@ -46,6 +48,8 @@ def listar() -> List[Ficha]:
                 campo=campo,
                 portador=item["portador"].strip().lower(),
                 adorno_exterior=adorno,
+                provincia=item.get("provincia", ""),
+                imagen_src=item.get("imagen_src", ""),
             )
         )
     return fichas
@@ -136,6 +140,8 @@ class Catalogo:
                         campo=campo,
                         portador=esc_db.portador,
                         adorno_exterior=adorno,
+                        provincia=getattr(esc_db, "provincia", ""),
+                        imagen_src=getattr(esc_db, "imagen_src", ""),
                     )
                 )
         return fichas
