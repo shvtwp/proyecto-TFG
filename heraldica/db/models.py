@@ -24,4 +24,4 @@ class Escudo(SQLModel, table=True):
     campo_id: int = Field(foreign_key="campo.id")
     campo: Optional[Campo] = Relationship()
     provincia: Optional[str] = None
-    imagen: Optional[str] = None
+    imagen_src: Optional[str] = None
