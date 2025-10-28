@@ -7,68 +7,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <style>
-        .escudo-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
         }
         
-        @media (min-width: 768px) {
-            .escudo-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        .escudo-card {
+        main.container {
+            height: 100vh;
             display: flex;
-            gap: 1rem;
+            flex-direction: column;
             padding: 1rem;
-            border: 1px solid var(--pico-muted-border-color);
-            border-radius: var(--pico-border-radius);
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .escudo-img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
+        header {
             flex-shrink: 0;
-            background: var(--pico-background-color);
-            border-radius: var(--pico-border-radius);
-        }
-        
-        .escudo-placeholder {
-            width: 80px;
-            height: 80px;
-            flex-shrink: 0;
-            background: var(--pico-muted-color);
-            border-radius: var(--pico-border-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--pico-muted-border-color);
-            font-size: 0.75rem;
-        }
-        
-        .escudo-info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .escudo-nombre {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.1rem;
-        }
-        
-        .escudo-detalles {
-            font-size: 0.875rem;
-            color: var(--pico-muted-color);
+            margin-bottom: 1rem;
         }
         
         .filtros-form {
+            flex-shrink: 0;
             background: var(--pico-card-background-color);
             padding: 1.5rem;
             border-radius: var(--pico-border-radius);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         
         .filtros-grid {
@@ -82,6 +47,85 @@
                 grid-template-columns: 2fr 1fr 1fr 1fr auto;
                 align-items: end;
             }
+        }
+        
+        #resultados {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+        
+        .escudo-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .escudo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .escudo-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid var(--pico-muted-border-color);
+            border-radius: var(--pico-border-radius);
+            background: var(--pico-card-background-color);
+        }
+        
+        .escudo-img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            flex-shrink: 0;
+            background: white;
+            border-radius: var(--pico-border-radius);
+            border: 1px solid var(--pico-muted-border-color);
+        }
+        
+        .escudo-placeholder {
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            background: var(--pico-muted-color);
+            border-radius: var(--pico-border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pico-muted-border-color);
+            font-size: 0.875rem;
+        }
+        
+        .escudo-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .escudo-nombre {
+            margin: 0 0 0.75rem 0;
+            font-size: 1.25rem;
+        }
+        
+        .escudo-detalles {
+            font-size: 0.9rem;
+            color: var(--pico-muted-color);
+        }
+        
+        .escudo-detalles p {
+            margin: 0.25rem 0;
+        }
+        
+        footer {
+            flex-shrink: 0;
+            text-align: center;
+            padding: 1rem 0 0 0;
+            margin-top: 1rem;
+            border-top: 1px solid var(--pico-muted-border-color);
+            font-size: 0.875rem;
+            color: var(--pico-muted-color);
         }
     </style>
 </head>
