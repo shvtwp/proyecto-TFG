@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Optional, Callable
+from typing import List, Optional, Callable, Dict, Any
 from pathlib import Path
 import json
 from .esmalte import Esmalte
@@ -18,6 +18,27 @@ class Ficha:
     adorno_exterior: Optional[AdornoExterior] = None
     provincia: str = ""
     imagen_src: str = ""
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert Ficha to dictionary representation for UI."""
+        return {
+            "nombre": self.nombre if self.nombre else "",
+            "campo": self.campo.esmalte.nombre
+            if self.campo and self.campo.esmalte
+            else "",
+            "muebles": [m.nombre for m in self.campo.muebles]
+            if self.campo and self.campo.muebles
+            else [],
+            "pieza_heraldica": self.campo.pieza_heraldica.nombre
+            if self.campo and self.campo.pieza_heraldica
+            else "",
+            "portador": self.portador if self.portador else "",
+            "adorno_exterior": self.adorno_exterior.nombre
+            if self.adorno_exterior
+            else "",
+            "provincia": self.provincia if self.provincia else "",
+            "imagen_src": self.imagen_src if self.imagen_src else "",
+        }
 
 
 _DATA = Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
@@ -95,6 +116,7 @@ class Catalogo:
         if session_factory is not None:
             self._session_factory = session_factory
         self._fichas: List[Ficha] = listar()
+        self._cargar_opciones_filtros()
 
     @classmethod
     def set_session_factory(cls, session_factory: Callable[[], Session]) -> None:
@@ -148,7 +170,126 @@ class Catalogo:
             if f.adorno_exterior and f.adorno_exterior.nombre == canon
         ]
 
-    def _listar_desde_bd(self) -> List[Ficha]:
+    def _cargar_opciones_filtros(self):
+        """Load filter options from JSON files."""
+        data_dir = Path(__file__).resolve().parents[1] / "data"
+
+        esmaltes_path = data_dir / "mapeo_esmaltes.json"
+        with esmaltes_path.open(encoding="utf-8") as f:
+            esmaltes_data = json.load(f)
+            self.esmaltes = esmaltes_data.get("validos", [])
+
+        muebles_path = data_dir / "muebles.json"
+        with muebles_path.open(encoding="utf-8") as f:
+            muebles_data = json.load(f)
+            self.muebles = list(muebles_data.keys())
+
+        adornos_path = data_dir / "adornos_exteriores.json"
+        with adornos_path.open(encoding="utf-8") as f:
+            adornos_data = json.load(f)
+            self.adornos = adornos_data.get("validos", [])
+
+    def obtener_esmaltes(self) -> List[str]:
+        """Get list of valid esmaltes for filtering."""
+        return self.esmaltes
+
+    def obtener_muebles(self) -> List[str]:
+        """Get list of valid muebles for filtering."""
+        return self.muebles
+
+    def obtener_adornos(self) -> List[str]:
+        """Get list of valid adornos for filtering."""
+        return self.adornos
+
+    def obtener_todos(self) -> List[Dict[str, Any]]:
+        """Get all fichas as dictionaries."""
+        return [f.to_dict() for f in self._fichas]
+
+    def buscar_combinada(
+        self, texto: str = "", esmalte: str = "", mueble: str = "", adorno: str = ""
+    ) -> List[Dict[str, Any]]:
+        """Perform combined search with multiple filters.
+
+        Args:
+            texto: Free text search
+            esmalte: Filter by esmalte
+            mueble: Filter by mueble
+            adorno: Filter by adorno exterior
+
+        Returns:
+            List of fichas as dictionaries matching all filters
+        """
+        resultados = list(self._fichas)
+
+        if texto and texto.strip():
+            try:
+                esmalte_normalizado = Esmalte(texto).nombre
+
+                por_esmalte = [
+                    f
+                    for f in resultados
+                    if getattr(f.campo.esmalte, "nombre", "").lower()
+                    == esmalte_normalizado.lower()
+                ]
+            except ValueError:
+                por_esmalte = []
+
+            texto_lower = texto.strip().lower()
+            por_texto = [
+                f
+                for f in resultados
+                if texto_lower in f.nombre.lower()
+                or texto_lower in f.portador.lower()
+                or (f.provincia and texto_lower in f.provincia.lower())
+                or getattr(f.campo.esmalte, "nombre", "").lower() == texto_lower
+                or any(texto_lower in m.nombre.lower() for m in f.campo.muebles)
+                or (
+                    f.campo.pieza_heraldica
+                    and texto_lower
+                    in getattr(f.campo.pieza_heraldica, "nombre", "").lower()
+                )
+                or (
+                    f.adorno_exterior
+                    and texto_lower in f.adorno_exterior.nombre.lower()
+                )
+            ]
+
+            vistos = set()
+            resultados_finales = []
+            for f in por_esmalte + por_texto:
+                if f.nombre not in vistos:
+                    vistos.add(f.nombre)
+                    resultados_finales.append(f)
+            resultados = resultados_finales
+
+        if esmalte and esmalte.strip():
+            esmalte_canon = esmalte.strip().lower()
+            resultados = [
+                f
+                for f in resultados
+                if getattr(f.campo.esmalte, "nombre", "").lower() == esmalte_canon
+            ]
+
+        if mueble and mueble.strip():
+            mueble_canon = mueble.strip().lower()
+            resultados = [
+                f
+                for f in resultados
+                if any(m.nombre.lower() == mueble_canon for m in f.campo.muebles)
+            ]
+
+        if adorno and adorno.strip():
+            adorno_canon = adorno.strip().lower()
+            resultados = [
+                f
+                for f in resultados
+                if f.adorno_exterior
+                and f.adorno_exterior.nombre.lower() == adorno_canon
+            ]
+
+        return [f.to_dict() for f in resultados]
+
+    def listar_desde_bd(self) -> List[Ficha]:
         """Load catalog entries from database using injected session factory."""
         if self._session_factory is None:
             # Fallback to default session if not injected
@@ -195,8 +336,5 @@ class Catalogo:
                         imagen_src=getattr(esc_db, "imagen_src", ""),
                     )
                 )
+        self._fichas = fichas
         return fichas
-
-    def recargar_desde_bd(self) -> None:
-        """Reload catalog from database. Delegates to _listar_desde_bd()."""
-        self._fichas = self._listar_desde_bd()

@@ -18,7 +18,7 @@ def test_carga_json_y_busquedas_basicas():
         cargar_catalogo_desde_json()
 
         cat = Catalogo()
-        cat.recargar_desde_bd()
+        cat.listar_desde_bd()
 
         res_esmalte = cat.filtrar_por_esmalte("azur")
         assert any(f.nombre.lower().startswith("la carlota") for f in res_esmalte)
