@@ -1,0 +1,48 @@
+{% if resultados %}
+<h2>{{ total }} escudo{% if total != 1 %}s{% endif %} encontrado{% if total != 1 %}s{% endif %}</h2>
+
+<div class="escudo-grid">
+    {% for escudo in resultados %}
+    <article class="escudo-card">
+        {% if escudo.imagen_src %}
+        <img src="{{ escudo.imagen_src }}" alt="Escudo de {{ escudo.nombre }}" class="escudo-img">
+        {% else %}
+        <div class="escudo-placeholder">
+            ESCUDO
+        </div>
+        {% endif %}
+        
+        <div class="escudo-info">
+            <h3 class="escudo-nombre">{{ escudo.nombre }}</h3>
+            <div class="escudo-detalles">
+                {% if escudo.campo %}
+                <p><strong>Campo:</strong> {{ escudo.campo }}</p>
+                {% endif %}
+                
+                {% if escudo.muebles %}
+                <p><strong>Muebles:</strong> {{ escudo.muebles|join(', ') }}</p>
+                {% endif %}
+                
+                {% if escudo.pieza_heraldica %}
+                <p><strong>Pieza:</strong> {{ escudo.pieza_heraldica }}</p>
+                {% endif %}
+                
+                {% if escudo.adorno_exterior %}
+                <p><strong>Adorno:</strong> {{ escudo.adorno_exterior }}</p>
+                {% endif %}
+                
+                {% if escudo.portador %}
+                <p><strong>Portador:</strong> {{ escudo.portador }}</p>
+                {% endif %}
+                
+                {% if escudo.provincia %}
+                <p><strong>Provincia:</strong> {{ escudo.provincia }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<p>No se encontraron resultados. Intenta con otros criterios de búsqueda.</p>
+{% endif %}
