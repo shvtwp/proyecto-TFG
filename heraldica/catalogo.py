@@ -30,7 +30,17 @@ def _crear_campo_y_adorno(
     pieza_nombre: Optional[str],
     adorno_nombre: Optional[str]
 ):
-    """Crea objetos Campo y AdornoExterior a partir de nombres."""
+    """Crea objetos Campo y AdornoExterior a partir de nombres.
+    
+    Args:
+        esmalte_nombre: Nombre del esmalte para el campo
+        muebles_nombres: Lista de nombres de muebles
+        pieza_nombre: Nombre de la pieza heráldica (opcional)
+        adorno_nombre: Nombre del adorno exterior (opcional)
+    
+    Returns:
+        Tupla con el objeto Campo y el objeto AdornoExterior (o None)
+    """
     campo = Campo(
         esmalte=Esmalte(esmalte_nombre),
         muebles=[Mueble(m) for m in muebles_nombres],

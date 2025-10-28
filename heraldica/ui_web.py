@@ -49,7 +49,7 @@ def create_app() -> Flask:
     @app.get("/search")
     def search():
         repo: CatalogoUI = app.config["repo"]
-        resultados, *_ = _obtener_resultados(repo)
+        resultados, query, filtro_esmalte, filtro_mueble, filtro_adorno = _obtener_resultados(repo)
 
         return render_template(
             "resultados.html", resultados=resultados, total=len(resultados)
