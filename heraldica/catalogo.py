@@ -23,11 +23,19 @@ class Ficha:
         """Convert Ficha to dictionary representation for UI."""
         return {
             "nombre": self.nombre if self.nombre else "",
-            "campo": self.campo.esmalte.nombre if self.campo and self.campo.esmalte else "",
-            "muebles": [m.nombre for m in self.campo.muebles] if self.campo and self.campo.muebles else [],
-            "pieza_heraldica": self.campo.pieza_heraldica.nombre if self.campo and self.campo.pieza_heraldica else "",
+            "campo": self.campo.esmalte.nombre
+            if self.campo and self.campo.esmalte
+            else "",
+            "muebles": [m.nombre for m in self.campo.muebles]
+            if self.campo and self.campo.muebles
+            else [],
+            "pieza_heraldica": self.campo.pieza_heraldica.nombre
+            if self.campo and self.campo.pieza_heraldica
+            else "",
             "portador": self.portador if self.portador else "",
-            "adorno_exterior": self.adorno_exterior.nombre if self.adorno_exterior else "",
+            "adorno_exterior": self.adorno_exterior.nombre
+            if self.adorno_exterior
+            else "",
             "provincia": self.provincia if self.provincia else "",
             "imagen_src": self.imagen_src if self.imagen_src else "",
         }
@@ -201,13 +209,13 @@ class Catalogo:
         self, texto: str = "", esmalte: str = "", mueble: str = "", adorno: str = ""
     ) -> List[Dict[str, Any]]:
         """Perform combined search with multiple filters.
-        
+
         Args:
             texto: Free text search
             esmalte: Filter by esmalte
             mueble: Filter by mueble
             adorno: Filter by adorno exterior
-            
+
         Returns:
             List of fichas as dictionaries matching all filters
         """
