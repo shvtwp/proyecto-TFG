@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Callable
 from heraldica.catalogo import Catalogo
 import json
 from pathlib import Path
@@ -87,8 +87,10 @@ def _to_dict(obj: Any) -> Dict[str, Any]:
 
 
 class CatalogoUI:
-    def __init__(self) -> None:
-        self._cat = Catalogo()
+    def __init__(self, session_factory: Optional[Callable[[], Any]] = None) -> None:
+        """Initialize UI wrapper with dependency injection support."""
+        # Get singleton instance of Catalogo
+        self._cat = Catalogo(session_factory=session_factory)
         self._cat.recargar_desde_bd()
         self._cargar_opciones_filtros()
 

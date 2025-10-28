@@ -1,13 +1,12 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Callable
 from pathlib import Path
 import json
 from .esmalte import Esmalte
 from .adorno import AdornoExterior
 from .campo import Campo
 from .mueble import Mueble
-from sqlmodel import select
-from .db.session import get_session, crear_bd
+from sqlmodel import select, Session
 from .db.models import Escudo as EscudoTable, Campo as CampoTable, Mueble as MuebleTable
 
 
@@ -76,8 +75,37 @@ def listar() -> List[Ficha]:
 
 
 class Catalogo:
-    def __init__(self) -> None:
+    _instance: Optional["Catalogo"] = None
+    _session_factory: Optional[Callable[[], Session]] = None
+
+    def __new__(cls, session_factory: Optional[Callable[[], Session]] = None):
+        """Singleton implementation with optional session factory injection."""
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._initialized = False
+        if session_factory is not None:
+            cls._session_factory = session_factory
+        return cls._instance
+
+    def __init__(self, session_factory: Optional[Callable[[], Session]] = None) -> None:
+        """Initialize the catalog. Only runs once due to singleton pattern."""
+        if self._initialized:
+            return
+        self._initialized = True
+        if session_factory is not None:
+            self._session_factory = session_factory
         self._fichas: List[Ficha] = listar()
+
+    @classmethod
+    def set_session_factory(cls, session_factory: Callable[[], Session]) -> None:
+        """Set the session factory for database operations."""
+        cls._session_factory = session_factory
+
+    @classmethod
+    def reset_instance(cls) -> None:
+        """Reset the singleton instance (useful for testing)."""
+        cls._instance = None
+        cls._session_factory = None
 
     def filtrar_por_esmalte(self, campo: Optional[str]) -> List[Ficha]:
         if campo is None or (isinstance(campo, str) and not campo.strip()):
@@ -121,9 +149,17 @@ class Catalogo:
         ]
 
     def _listar_desde_bd(self) -> List[Ficha]:
-        crear_bd()
+        """Load catalog entries from database using injected session factory."""
+        if self._session_factory is None:
+            # Fallback to default session if not injected
+            from .db.session import get_session, crear_bd
+            crear_bd()
+            session_factory = get_session
+        else:
+            session_factory = self._session_factory
+
         fichas: List[Ficha] = []
-        with get_session() as s:
+        with session_factory() as s:
             filas = s.exec(
                 select(EscudoTable, CampoTable).join(
                     CampoTable, EscudoTable.campo_id == CampoTable.id
@@ -161,4 +197,5 @@ class Catalogo:
         return fichas
 
     def recargar_desde_bd(self) -> None:
+        """Reload catalog from database. Delegates to _listar_desde_bd()."""
         self._fichas = self._listar_desde_bd()
