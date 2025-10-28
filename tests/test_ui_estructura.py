@@ -16,6 +16,7 @@ def test_routes_exist_and_return_200():
     assert "<html" in body.lower()
     assert "<body" in body.lower()
 
+
 def test_detail_returns_404_for_now():
     app = import_module("heraldica.ui_web").create_app()
     client = app.test_client()
