@@ -24,30 +24,52 @@ class Ficha:
 _DATA = Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
 
 
+def _construir_ficha(
+    nombre: str,
+    campo_esmalte: str,
+    muebles: List[str],
+    pieza_heraldica: Optional[str],
+    portador: str,
+    adorno_exterior: Optional[str],
+    provincia: str = "",
+    imagen_src: str = "",
+) -> Ficha:
+    """
+    Construye una Ficha a partir de datos primitivos.
+    
+    Esta función centraliza la lógica de construcción de Ficha para evitar duplicación
+    entre la carga desde JSON y la carga desde la base de datos.
+    """
+    campo = Campo(
+        esmalte=Esmalte(campo_esmalte),
+        muebles=[Mueble(m) for m in muebles],
+        pieza_heraldica=Esmalte(pieza_heraldica) if pieza_heraldica else None,
+    )
+    adorno = AdornoExterior(adorno_exterior) if adorno_exterior else None
+    return Ficha(
+        nombre=nombre,
+        campo=campo,
+        portador=portador.strip().lower(),
+        adorno_exterior=adorno,
+        provincia=provincia,
+        imagen_src=imagen_src,
+    )
+
+
 def listar() -> List[Ficha]:
     with _DATA.open(encoding="utf-8") as f:
         catalogo = json.load(f)
 
     fichas = []
     for item in catalogo:
-        campo = Campo(
-            esmalte=Esmalte(item["campo"]),
-            muebles=[Mueble(m) for m in item.get("muebles", [])],
-            pieza_heraldica=Esmalte(item["pieza_heraldica"])
-            if item.get("pieza_heraldica")
-            else None,
-        )
-        adorno = (
-            AdornoExterior(item["adorno_exterior"])
-            if item.get("adorno_exterior")
-            else None
-        )
         fichas.append(
-            Ficha(
+            _construir_ficha(
                 nombre=item["nombre"],
-                campo=campo,
-                portador=item["portador"].strip().lower(),
-                adorno_exterior=adorno,
+                campo_esmalte=item["campo"],
+                muebles=item.get("muebles", []),
+                pieza_heraldica=item.get("pieza_heraldica"),
+                portador=item["portador"],
+                adorno_exterior=item.get("adorno_exterior"),
                 provincia=item.get("provincia", ""),
                 imagen_src=item.get("imagen_src", ""),
             )
@@ -122,24 +144,14 @@ class Catalogo:
                 muebles_por_campo.setdefault(m.campo_id, []).append(m.nombre)
 
             for esc_db, campo_db in filas:
-                campo = Campo(
-                    esmalte=Esmalte(campo_db.esmalte),
-                    muebles=[Mueble(m) for m in muebles_por_campo.get(campo_db.id, [])],
-                    pieza_heraldica=Esmalte(campo_db.pieza_heraldica)
-                    if campo_db.pieza_heraldica
-                    else None,
-                )
-                adorno = (
-                    AdornoExterior(esc_db.adorno_exterior)
-                    if esc_db.adorno_exterior
-                    else None
-                )
                 fichas.append(
-                    Ficha(
+                    _construir_ficha(
                         nombre=esc_db.nombre,
-                        campo=campo,
+                        campo_esmalte=campo_db.esmalte,
+                        muebles=muebles_por_campo.get(campo_db.id, []),
+                        pieza_heraldica=campo_db.pieza_heraldica,
                         portador=esc_db.portador,
-                        adorno_exterior=adorno,
+                        adorno_exterior=esc_db.adorno_exterior,
                         provincia=getattr(esc_db, "provincia", ""),
                         imagen_src=getattr(esc_db, "imagen_src", ""),
                     )

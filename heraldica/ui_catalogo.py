@@ -94,20 +94,24 @@ class CatalogoUI:
         self._cat = Catalogo()
         self._cat.recargar_desde_bd()
 
+    def _aplicar_filtro(self, metodo_filtro, *args):
+        """Aplica un método de filtro del catálogo y convierte los resultados a diccionarios."""
+        return [_to_dict(x) for x in metodo_filtro(*args)]
+
     def filtrar_por_esmalte(self, esmalte: str):
-        return [_to_dict(x) for x in self._cat.filtrar_por_esmalte(esmalte)]
+        return self._aplicar_filtro(self._cat.filtrar_por_esmalte, esmalte)
 
     def filtrar_por_mueble(self, mueble: str):
-        return [_to_dict(x) for x in self._cat.filtrar_por_mueble(mueble)]
+        return self._aplicar_filtro(self._cat.filtrar_por_mueble, mueble)
 
     def filtrar_por_pieza(self, pieza: str):
-        return [_to_dict(x) for x in self._cat.filtrar_por_pieza(pieza)]
+        return self._aplicar_filtro(self._cat.filtrar_por_pieza, pieza)
 
     def filtrar_por_adorno(self, adorno: str):
-        return [_to_dict(x) for x in self._cat.filtrar_por_adorno(adorno)]
+        return self._aplicar_filtro(self._cat.filtrar_por_adorno, adorno)
 
     def filtrar_por_portador(self, portador: str):
-        return [_to_dict(x) for x in self._cat.filtrar_por_portador(portador)]
+        return self._aplicar_filtro(self._cat.filtrar_por_portador, portador)
 
     def obtener_todos(self):
         """Devuelve todos los escudos del catálogo"""
