@@ -154,3 +154,13 @@ clicable
 CatalogoUI
 badges
 json
+responsive
+grid
+Grid
+scroll
+hx
+get
+GET
+target
+indicator
+loading
