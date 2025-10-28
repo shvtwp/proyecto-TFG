@@ -153,6 +153,7 @@ class Catalogo:
         if self._session_factory is None:
             # Fallback to default session if not injected
             from .db.session import get_session, crear_bd
+
             crear_bd()
             session_factory = get_session
         else:
