@@ -24,23 +24,33 @@ class Ficha:
 _DATA = Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
 
 
+def _crear_campo_y_adorno(
+    esmalte_nombre: str,
+    muebles_nombres: List[str],
+    pieza_nombre: Optional[str],
+    adorno_nombre: Optional[str]
+):
+    """Crea objetos Campo y AdornoExterior a partir de nombres."""
+    campo = Campo(
+        esmalte=Esmalte(esmalte_nombre),
+        muebles=[Mueble(m) for m in muebles_nombres],
+        pieza_heraldica=Esmalte(pieza_nombre) if pieza_nombre else None,
+    )
+    adorno = AdornoExterior(adorno_nombre) if adorno_nombre else None
+    return campo, adorno
+
+
 def listar() -> List[Ficha]:
     with _DATA.open(encoding="utf-8") as f:
         catalogo = json.load(f)
 
     fichas = []
     for item in catalogo:
-        campo = Campo(
-            esmalte=Esmalte(item["campo"]),
-            muebles=[Mueble(m) for m in item.get("muebles", [])],
-            pieza_heraldica=Esmalte(item["pieza_heraldica"])
-            if item.get("pieza_heraldica")
-            else None,
-        )
-        adorno = (
-            AdornoExterior(item["adorno_exterior"])
-            if item.get("adorno_exterior")
-            else None
+        campo, adorno = _crear_campo_y_adorno(
+            esmalte_nombre=item["campo"],
+            muebles_nombres=item.get("muebles", []),
+            pieza_nombre=item.get("pieza_heraldica"),
+            adorno_nombre=item.get("adorno_exterior")
         )
         fichas.append(
             Ficha(
@@ -122,17 +132,11 @@ class Catalogo:
                 muebles_por_campo.setdefault(m.campo_id, []).append(m.nombre)
 
             for esc_db, campo_db in filas:
-                campo = Campo(
-                    esmalte=Esmalte(campo_db.esmalte),
-                    muebles=[Mueble(m) for m in muebles_por_campo.get(campo_db.id, [])],
-                    pieza_heraldica=Esmalte(campo_db.pieza_heraldica)
-                    if campo_db.pieza_heraldica
-                    else None,
-                )
-                adorno = (
-                    AdornoExterior(esc_db.adorno_exterior)
-                    if esc_db.adorno_exterior
-                    else None
+                campo, adorno = _crear_campo_y_adorno(
+                    esmalte_nombre=campo_db.esmalte,
+                    muebles_nombres=muebles_por_campo.get(campo_db.id, []),
+                    pieza_nombre=campo_db.pieza_heraldica,
+                    adorno_nombre=esc_db.adorno_exterior
                 )
                 fichas.append(
                     Ficha(
