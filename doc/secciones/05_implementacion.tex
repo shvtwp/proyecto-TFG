@@ -455,3 +455,70 @@ que la experiencia de usuario puede variar significativamente entre ambos format
 optimiza para pantallas pequeñas, con un diseño más compacto y accesible, usando una sola columna para
 mostrar los resultados. En cambio, la versión de escritorio aprovecha el espacio adicional para presentar los
 resultados en una cuadrícula de dos columnas, mejorando la visibilidad y la navegación.
+
+\subsection{Implementación de la interfaz}
+El primer paso en el desarrollo de la interfaz de usuario consistió en establecer su estructura básica 
+empleando el framework \texttt{Flask}.  
+El primer objetivo es fijar el esqueleto que permitirá integrar la capa de datos y la presentación.
+
+Siguiendo una metodología \textit{Test-Driven Development} (TDD), se escribieron primero tres tests que 
+verifican los siguientes aspectos mínimos:
+
+\begin{itemize}
+    \item Que el módulo de la interfaz (\texttt{heraldica/ui\_web.py}) incluye una función encargada de 
+    crear la aplicación Flask.  
+    \item Que las rutas básicas (\texttt{/} y \texttt{/search}) responden correctamente 
+    con código HTTP~200 y devuelven contenido HTML identificable.
+    \item Que la ruta de detalle (\texttt{/escudo/<id>}) devuelve, de forma controlada, un código~404 
+    mientras no exista conexión con la base de datos.
+\end{itemize}
+
+Una vez fallaron las pruebas iniciales, se implementó el código mínimo necesario para hacerlas pasar: 
+un único archivo \texttt{ui\_web.py} con la aplicación Flask, tres rutas y respuestas HTML estáticas sin 
+plantillas ni dependencias adicionales, manteniendo el código al mínimo indispensable.
+
+El resultado es una interfaz web mínima aunque funcional que puede ejecutarse con:
+
+\begin{verbatim}
+poetry run flask --app heraldica/ui_web.py --debug run
+\end{verbatim}
+
+Posteriormente, con la estructura básica en marcha, se procedió a integrar la base de datos y la lógica 
+de negocio.
+
+\subsubsection{Integración con la base de datos y capa de dominio}
+Para conectar la interfaz con los datos reales del catálogo se añadió un nuevo módulo,
+\texttt{heraldica/ui\_catalogo.py}, que actúa como adaptador entre la capa de dominio y la interfaz web.
+Su función es delegar en la clase \texttt{Catalogo} las operaciones de búsqueda y filtrado, pero 
+devolviendo los resultados en una estructura más simple y apta para renderizado.
+De esta forma, cada entidad del dominio se convierte en un diccionario de Python con valores de texto 
+plano.
+
+El adaptador incluye un método llamado \texttt{buscar libre}, que combina los distintos criterios de filtrado
+del catálogo en una única búsqueda global. Además, si no se recibe ningún término de búsqueda, el método
+devuelve el catálogo completo, lo que permite explorar todos los escudos sin necesidad de especificar 
+criterios.
+
+A continuación, el módulo \texttt{ui\_web.py} se amplió para incorporar la integración con este adaptador.
+La ruta \texttt{/search} obtiene los resultados mediante \texttt{CatalogoUI} y genera dinámicamente
+una lista de tarjetas HTML.  
+Cada tarjeta incluye el nombre del municipio, una miniatura clicable con la imagen del escudo
+y una serie de distintivos (\emph{badges}) con los atributos más relevantes:
+campo, muebles, pieza heráldica, adorno y portador.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuras/basicUI.png}
+    \caption{Interfaz web inicialmostrando resultados de búsqueda.}
+    \label{fig:interfaz-basica}
+\end{figure}
+
+En esta fase no se emplean plantillas ni JavaScript, siguiendo un enfoque \textit{server-side} puro
+que prioriza la transparencia y la sencillez del código.  
+El diseño se mantiene intencionadamente minimalista, con un HTML básico generado desde la vista
+para facilitar la validación y la posterior incorporación de plantillas.
+
+Una vez todas las pruebas pasaron, la interfaz permite realizar búsquedas reales sobre la base de datos,
+visualizar los resultados con sus atributos y, en ausencia de filtro, listar el catálogo completo.
+Este avance completa la conexión entre la capa de presentación y el modelo de dominio,
+dejando la aplicación en un estado funcional y demostrable.

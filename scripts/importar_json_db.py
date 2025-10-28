@@ -39,7 +39,7 @@ def cargar():
                 adorno_exterior=adorno,
                 campo_id=campo.id,
                 provincia=item.get("provincia"),
-                addimagen=item.get("imagen_src")
+                imagen_src=item.get("imagen_src")
             )
             s.add(esc); s.commit()
 
