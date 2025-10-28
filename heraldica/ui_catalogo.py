@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List
 from heraldica.catalogo import Catalogo
 
 
@@ -94,7 +94,7 @@ class CatalogoUI:
         self._cat = Catalogo()
         self._cat.recargar_desde_bd()
 
-    def _aplicar_filtro(self, metodo_filtro, *args):
+    def _aplicar_filtro(self, metodo_filtro: Callable, *args: Any) -> List[Dict[str, Any]]:
         """Aplica un método de filtro del catálogo y convierte los resultados a diccionarios."""
         return [_to_dict(x) for x in metodo_filtro(*args)]
 

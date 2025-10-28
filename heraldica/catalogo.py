@@ -39,6 +39,19 @@ def _construir_ficha(
     
     Esta función centraliza la lógica de construcción de Ficha para evitar duplicación
     entre la carga desde JSON y la carga desde la base de datos.
+    
+    Args:
+        nombre: Nombre del escudo
+        campo_esmalte: Nombre del esmalte del campo
+        muebles: Lista de nombres de muebles
+        pieza_heraldica: Nombre del esmalte de la pieza heráldica (opcional)
+        portador: Nombre del portador del escudo
+        adorno_exterior: Nombre del adorno exterior (opcional)
+        provincia: Nombre de la provincia (opcional)
+        imagen_src: URL de la imagen del escudo (opcional)
+    
+    Returns:
+        Ficha construida con los datos proporcionados
     """
     campo = Campo(
         esmalte=Esmalte(campo_esmalte),
