@@ -559,3 +559,73 @@ significativamente la utilidad del sistema para los usuarios.
     \caption{URL y resultados de la búsqueda combinada.}
     \label{fig:busqueda-combinada}
 \end{figure}
+
+\subsubsection{Implementación de plantillas y diseño visual}
+Una vez validada la funcionalidad de búsqueda combinada, se procedió a mejorar la presentación 
+visual de la interfaz, sustituyendo la generación manual de HTML por un sistema de plantillas 
+estructurado y aplicando un diseño moderno y responsive.
+
+Hasta este punto, la interfaz generaba todo el HTML dinámicamente desde el código Python, 
+concatenando cadenas de texto para construir los resultados. Este enfoque, aunque funcional, presenta 
+varios inconvenientes: mezcla lógica de presentación con lógica de negocio, dificulta el mantenimiento 
+del código HTML, y complica la incorporación de estilos y comportamientos interactivos.
+
+Para resolver estas limitaciones, se adoptó el motor de plantillas \textbf{Jinja2}, que viene integrado 
+de forma nativa con Flask. Este sistema permite separar completamente la estructura HTML de la lógica 
+Python, facilitando la lectura, el mantenimiento y la evolución del código.
+
+\paragraph{Estructura de plantillas}
+Se diseñó una jerarquía de plantillas basada en herencia para evitar duplicación de código:
+
+\begin{itemize}
+    \item \textbf{base.html}: plantilla base que define la estructura común de todas las páginas 
+    (cabecera, estilos, scripts, pie de página). Incluye la carga de Pico.css para los estilos 
+    y HTMX para la interactividad dinámica.
+    \item \textbf{index.html}: extiende \texttt{base.html} y define el contenido principal de 
+    la aplicación: el formulario de búsqueda con sus filtros y el contenedor donde se mostrarán 
+    los resultados.
+    \item \textbf{resultados.html}: plantilla reutilizable que genera únicamente el grid de 
+    tarjetas con los escudos encontrados.
+\end{itemize}
+
+\paragraph{Diseño visual con Pico.css}
+Para conseguir una apariencia profesional sin invertir tiempo en diseñar CSS desde cero, se 
+integró \textbf{Pico.css}, una hoja de estilos minimalista sin clases que aplica automáticamente 
+un diseño limpio y accesible a los elementos HTML semánticos.
+
+Además de los estilos base proporcionados por Pico.css, se añadieron estilos personalizados para:
+
+\begin{itemize}
+    \item \textbf{Grid responsive}: configuración de una cuadrícula que muestra una columna en 
+    dispositivos móviles y dos columnas en pantallas de escritorio, adaptándose automáticamente 
+    al tamaño de la ventana.
+    \item \textbf{Fichas de escudos}: cada escudo se presenta en una ficha que incluye una 
+    imagen de 150×150 píxeles y sus atributos principales.
+    \item \textbf{Área de scroll independiente}: la zona de resultados tiene scroll propio, 
+    manteniendo fijo el formulario de búsqueda en la parte superior y el pie de página en la 
+    inferior, mejorando la usabilidad al explorar catálogos extensos.
+\end{itemize}
+
+\paragraph{Interactividad con HTMX}
+La integración de HTMX se realizó añadiendo tres atributos al formulario de búsqueda:
+
+\begin{itemize}
+    \item \texttt{hx-get="/search"}: indica que al enviar el formulario se debe realizar una 
+    petición GET a la ruta \texttt{/search}.
+    \item \texttt{hx-target="\#resultados"}: especifica que la respuesta debe insertarse en el 
+    elemento con ID \texttt{resultados}, actualizando únicamente esa sección de la página.
+    \item \texttt{hx-indicator="\#loading"}: muestra un indicador de carga mientras se procesa 
+    la petición, proporcionando feedback visual al usuario.
+\end{itemize}
+
+Con esta configuración, al efectuar una búsqueda, HTMX intercepta el envío del formulario, 
+realiza la petición de forma asíncrona y actualiza solo la zona de resultados sin recargar 
+toda la página. Esto proporciona una experiencia fluida y moderna, similar a las aplicaciones 
+de página única (SPA), pero manteniendo la simplicidad de renderizado en el servidor.
+
+La ruta \texttt{/search} se adaptó para devolver únicamente el fragmento HTML de los resultados 
+(\texttt{resultados.html}) en lugar de la página completa, acelerando así la respuesta.
+
+El resultado es una interfaz web funcional, visualmente atractiva y con una experiencia de 
+usuario moderna, que permite hacer búsquedas complejas de manera rápida e intuitiva, 
+manteniendo la sencillez arquitectónica del sistema.
