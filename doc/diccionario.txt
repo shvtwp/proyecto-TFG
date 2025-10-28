@@ -153,3 +153,4 @@ side
 clicable
 CatalogoUI
 badges
+json
