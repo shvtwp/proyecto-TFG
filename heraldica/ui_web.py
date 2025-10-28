@@ -1,8 +1,8 @@
 from flask import Flask, request, abort, render_template
-from heraldica.ui_catalogo import CatalogoUI
+from heraldica.catalogo import Catalogo
 
 
-def _obtener_resultados(repo: CatalogoUI):
+def _obtener_resultados(repo: Catalogo):
     """Extrae parámetros de búsqueda y devuelve resultados filtrados."""
     query = request.args.get("q", "").strip()
     filtro_esmalte = request.args.get("esmalte", "").strip()
@@ -24,11 +24,13 @@ def _obtener_resultados(repo: CatalogoUI):
 
 def create_app() -> Flask:
     app = Flask(__name__)
-    app.config["repo"] = CatalogoUI()
+    repo = Catalogo()
+    repo.recargar_desde_bd()
+    app.config["repo"] = repo
 
     @app.get("/")
     def home():
-        repo: CatalogoUI = app.config["repo"]
+        repo: Catalogo = app.config["repo"]
         resultados, query, filtro_esmalte, filtro_mueble, filtro_adorno = (
             _obtener_resultados(repo)
         )
@@ -50,7 +52,7 @@ def create_app() -> Flask:
 
     @app.get("/search")
     def search():
-        repo: CatalogoUI = app.config["repo"]
+        repo: Catalogo = app.config["repo"]
         resultados, query, filtro_esmalte, filtro_mueble, filtro_adorno = (
             _obtener_resultados(repo)
         )
