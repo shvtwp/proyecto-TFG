@@ -163,13 +163,17 @@ class CatalogoUI:
         resultados = list(self._cat._fichas)
 
         if texto and texto.strip():
-
             try:
                 from heraldica.esmalte import Esmalte
+
                 esmalte_normalizado = Esmalte(texto).nombre
-                
-                por_esmalte = [f for f in resultados 
-                            if getattr(f.campo.esmalte, "nombre", "").lower() == esmalte_normalizado.lower()]
+
+                por_esmalte = [
+                    f
+                    for f in resultados
+                    if getattr(f.campo.esmalte, "nombre", "").lower()
+                    == esmalte_normalizado.lower()
+                ]
             except ValueError:
                 por_esmalte = []
 
@@ -182,8 +186,15 @@ class CatalogoUI:
                 or (f.provincia and texto_lower in f.provincia.lower())
                 or getattr(f.campo.esmalte, "nombre", "").lower() == texto_lower
                 or any(texto_lower in m.nombre.lower() for m in f.campo.muebles)
-                or (f.campo.pieza_heraldica and texto_lower in getattr(f.campo.pieza_heraldica, "nombre", "").lower())
-                or (f.adorno_exterior and texto_lower in f.adorno_exterior.nombre.lower())
+                or (
+                    f.campo.pieza_heraldica
+                    and texto_lower
+                    in getattr(f.campo.pieza_heraldica, "nombre", "").lower()
+                )
+                or (
+                    f.adorno_exterior
+                    and texto_lower in f.adorno_exterior.nombre.lower()
+                )
             ]
 
             vistos = set()
