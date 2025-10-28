@@ -619,7 +619,7 @@ La integración de HTMX se realizó añadiendo tres atributos al formulario de b
 \end{itemize}
 
 Con esta configuración, al efectuar una búsqueda, HTMX intercepta el envío del formulario, 
-realiza la petición de forma asíncrona y actualiza solo la zona de resultados sin recargar 
+efectúa la petición de forma asíncrona y actualiza solo la zona de resultados sin recargar 
 toda la página. Esto proporciona una experiencia fluida y moderna, similar a las aplicaciones 
 de página única (SPA), pero manteniendo la simplicidad de renderizado en el servidor.
 
@@ -629,3 +629,36 @@ La ruta \texttt{/search} se adaptó para devolver únicamente el fragmento HTML 
 El resultado es una interfaz web funcional, visualmente atractiva y con una experiencia de 
 usuario moderna, que permite hacer búsquedas complejas de manera rápida e intuitiva, 
 manteniendo la sencillez arquitectónica del sistema.
+
+\subsubsection{Capturas de funcionamiento}
+
+A continuación, se muestran capturas de pantalla que ilustran el funcionamiento de la interfaz 
+con diferentes combinaciones de filtros de búsqueda:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuras/busquedaValle.png}
+    \caption{Resultados de búsqueda libre por texto: ``valle'' (vista escritorio).}
+    \label{fig:busqueda-valle}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuras/busquedaValleSinople.png}
+    \caption{Resultados de búsqueda combinada: texto ``valle'' + esmalte ``sinople'' (vista escritorio).}
+    \label{fig:busqueda-valle-sinople}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuras/busquedaValleAzurLlave.png}
+    \caption{Resultados de búsqueda combinada: texto ``valle'' + esmalte ``azur'' + mueble ``llave'' (vista escritorio).}
+    \label{fig:busqueda-valle-azur-llave}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{figuras/busquedaBornosMovil.png}
+    \caption{Resultados de búsqueda por texto: ``bornos'' (vista móvil).}
+    \label{fig:busqueda-bornos-movil}
+\end{figure}
