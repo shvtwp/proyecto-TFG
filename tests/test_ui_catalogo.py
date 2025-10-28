@@ -19,7 +19,7 @@ def test_ui_repo_filtrado_basico_por_esmalte():
     try:
         Catalogo.reset_instance()
         repo = Catalogo()
-        repo.recargar_desde_bd()
+        repo.listar_desde_bd()
         res = [f.to_dict() for f in repo.filtrar_por_esmalte("azur")]
         assert isinstance(res, list)
         assert any(r["nombre"].lower().startswith("la carlota") for r in res)
@@ -33,7 +33,7 @@ def test_ui_repo_por_mueble_y_adorno():
     try:
         Catalogo.reset_instance()
         repo = Catalogo()
-        repo.recargar_desde_bd()
+        repo.listar_desde_bd()
         res_m = [f.to_dict() for f in repo.filtrar_por_mueble("castillo")]
         assert len(res_m) >= 1
         res_a = [f.to_dict() for f in repo.filtrar_por_adorno("corona")]
@@ -48,7 +48,7 @@ def test_ui_repo_pieza_y_portador():
     try:
         Catalogo.reset_instance()
         repo = Catalogo()
-        repo.recargar_desde_bd()
+        repo.listar_desde_bd()
         res_p = [f.to_dict() for f in repo.filtrar_por_pieza("oro")]
         assert len(res_p) >= 1
         res_port = [f.to_dict() for f in repo.filtrar_por_portador("bornos")]

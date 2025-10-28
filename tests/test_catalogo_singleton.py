@@ -43,7 +43,7 @@ def test_catalogo_session_factory_injection():
         cat = Catalogo(session_factory=get_session)
 
         # Verify it can load from database
-        cat.recargar_desde_bd()
+        cat.listar_desde_bd()
 
         # Should have loaded data from DB
         assert len(cat._fichas) > 0, "Should load data from database"

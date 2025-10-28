@@ -289,7 +289,7 @@ class Catalogo:
 
         return [f.to_dict() for f in resultados]
 
-    def _listar_desde_bd(self) -> List[Ficha]:
+    def listar_desde_bd(self) -> List[Ficha]:
         """Load catalog entries from database using injected session factory."""
         if self._session_factory is None:
             # Fallback to default session if not injected
@@ -336,8 +336,5 @@ class Catalogo:
                         imagen_src=getattr(esc_db, "imagen_src", ""),
                     )
                 )
+        self._fichas = fichas
         return fichas
-
-    def recargar_desde_bd(self) -> None:
-        """Reload catalog from database. Delegates to _listar_desde_bd()."""
-        self._fichas = self._listar_desde_bd()

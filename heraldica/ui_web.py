@@ -25,7 +25,7 @@ def _obtener_resultados(repo: Catalogo):
 def create_app() -> Flask:
     app = Flask(__name__)
     repo = Catalogo()
-    repo.recargar_desde_bd()
+    repo.listar_desde_bd()
     app.config["repo"] = repo
 
     @app.get("/")
