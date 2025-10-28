@@ -28,16 +28,16 @@ def _crear_campo_y_adorno(
     esmalte_nombre: str,
     muebles_nombres: List[str],
     pieza_nombre: Optional[str],
-    adorno_nombre: Optional[str]
+    adorno_nombre: Optional[str],
 ):
     """Crea objetos Campo y AdornoExterior a partir de nombres.
-    
+
     Args:
         esmalte_nombre: Nombre del esmalte para el campo
         muebles_nombres: Lista de nombres de muebles
         pieza_nombre: Nombre de la pieza heráldica (opcional)
         adorno_nombre: Nombre del adorno exterior (opcional)
-    
+
     Returns:
         Tupla con el objeto Campo y el objeto AdornoExterior (o None)
     """
@@ -60,7 +60,7 @@ def listar() -> List[Ficha]:
             esmalte_nombre=item["campo"],
             muebles_nombres=item.get("muebles", []),
             pieza_nombre=item.get("pieza_heraldica"),
-            adorno_nombre=item.get("adorno_exterior")
+            adorno_nombre=item.get("adorno_exterior"),
         )
         fichas.append(
             Ficha(
@@ -146,7 +146,7 @@ class Catalogo:
                     esmalte_nombre=campo_db.esmalte,
                     muebles_nombres=muebles_por_campo.get(campo_db.id, []),
                     pieza_nombre=campo_db.pieza_heraldica,
-                    adorno_nombre=esc_db.adorno_exterior
+                    adorno_nombre=esc_db.adorno_exterior,
                 )
                 fichas.append(
                     Ficha(
