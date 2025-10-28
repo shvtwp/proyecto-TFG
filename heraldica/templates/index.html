@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="filtros-form">
+    <form hx-get="/search" hx-target="#resultados" hx-indicator="#loading">
+        <div class="filtros-grid">
+            <input type="search" name="q" placeholder="Buscar por nombre, portador, provincia..." 
+                   value="{{ query or '' }}">
+            
+            <select name="esmalte">
+                <option value="">Esmalte (Todos)</option>
+                {% for e in esmaltes %}
+                <option value="{{ e }}" {% if filtros.esmalte == e %}selected{% endif %}>{{ e }}</option>
+                {% endfor %}
+            </select>
+            
+            <select name="mueble">
+                <option value="">Mueble (Todos)</option>
+                {% for m in muebles %}
+                <option value="{{ m }}" {% if filtros.mueble == m %}selected{% endif %}>{{ m }}</option>
+                {% endfor %}
+            </select>
+            
+            <select name="adorno">
+                <option value="">Adorno (Todos)</option>
+                {% for a in adornos %}
+                <option value="{{ a }}" {% if filtros.adorno == a %}selected{% endif %}>{{ a }}</option>
+                {% endfor %}
+            </select>
+            
+            <button type="submit">Buscar</button>
+        </div>
+    </form>
+</div>
+
+<div id="loading" class="htmx-indicator" style="text-align: center;">
+    <p aria-busy="true">Buscando...</p>
+</div>
+
+<div id="resultados">
+    {% include "resultados.html" %}
+</div>
+{% endblock %}

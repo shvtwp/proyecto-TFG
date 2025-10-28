@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Heráldica para todas{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        .escudo-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .escudo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .escudo-card {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--pico-muted-border-color);
+            border-radius: var(--pico-border-radius);
+        }
+        
+        .escudo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            flex-shrink: 0;
+            background: var(--pico-background-color);
+            border-radius: var(--pico-border-radius);
+        }
+        
+        .escudo-placeholder {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            background: var(--pico-muted-color);
+            border-radius: var(--pico-border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pico-muted-border-color);
+            font-size: 0.75rem;
+        }
+        
+        .escudo-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .escudo-nombre {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .escudo-detalles {
+            font-size: 0.875rem;
+            color: var(--pico-muted-color);
+        }
+        
+        .filtros-form {
+            background: var(--pico-card-background-color);
+            padding: 1.5rem;
+            border-radius: var(--pico-border-radius);
+            margin-bottom: 2rem;
+        }
+        
+        .filtros-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .filtros-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr auto;
+                align-items: end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Heráldica para todas</h1>
+        </header>
+        
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
