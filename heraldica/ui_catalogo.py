@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import Any, Dict, List
 from heraldica.catalogo import Catalogo
+import json
+from pathlib import Path
 
 
 def _to_str(x: Any) -> str:
@@ -25,10 +27,6 @@ def _to_list_str(xs: Any) -> List[str]:
 
 
 def _campo_to_str(campo_obj: Any) -> str:
-    """
-    Campo -> texto. Si Campo.esmalte existe y tiene nombre, devolver ese nombre (ej. 'gules').
-    Acepta también strings o dicts.
-    """
     if campo_obj is None:
         return ""
     if isinstance(campo_obj, dict):
@@ -71,7 +69,6 @@ def _to_dict(obj: Any) -> Dict[str, Any]:
         raw = obj.to_dict()
         return _normalize_dict(raw)
 
-    # Acceder correctamente a la estructura de Ficha
     campo_obj = getattr(obj, "campo", None)
 
     d = {
@@ -93,6 +90,34 @@ class CatalogoUI:
     def __init__(self) -> None:
         self._cat = Catalogo()
         self._cat.recargar_desde_bd()
+        self._cargar_opciones_filtros()
+
+    def _cargar_opciones_filtros(self):
+        data_dir = Path(__file__).resolve().parents[1] / "data"
+
+        esmaltes_path = data_dir / "mapeo_esmaltes.json"
+        with esmaltes_path.open(encoding="utf-8") as f:
+            esmaltes_data = json.load(f)
+            self.esmaltes = esmaltes_data.get("validos", [])
+
+        muebles_path = data_dir / "muebles.json"
+        with muebles_path.open(encoding="utf-8") as f:
+            muebles_data = json.load(f)
+            self.muebles = list(muebles_data.keys())
+
+        adornos_path = data_dir / "adornos_exteriores.json"
+        with adornos_path.open(encoding="utf-8") as f:
+            adornos_data = json.load(f)
+            self.adornos = adornos_data.get("validos", [])
+
+    def obtener_esmaltes(self):
+        return self.esmaltes
+
+    def obtener_muebles(self):
+        return self.muebles
+
+    def obtener_adornos(self):
+        return self.adornos
 
     def filtrar_por_esmalte(self, esmalte: str):
         return [_to_dict(x) for x in self._cat.filtrar_por_esmalte(esmalte)]
@@ -110,7 +135,6 @@ class CatalogoUI:
         return [_to_dict(x) for x in self._cat.filtrar_por_portador(portador)]
 
     def obtener_todos(self):
-        """Devuelve todos los escudos del catálogo"""
         return [_to_dict(x) for x in self._cat._fichas]
 
     def buscar_libre(self, q: str):
@@ -132,3 +156,45 @@ class CatalogoUI:
                     seen.add(k)
                     out.append(r)
         return out
+
+    def buscar_combinada(
+        self, texto: str = "", esmalte: str = "", mueble: str = "", adorno: str = ""
+    ) -> List[Dict[str, Any]]:
+        resultados = list(self._cat._fichas)
+
+        if texto and texto.strip():
+            texto_lower = texto.strip().lower()
+            resultados = [
+                f
+                for f in resultados
+                if texto_lower in f.nombre.lower()
+                or texto_lower in f.portador.lower()
+                or (f.provincia and texto_lower in f.provincia.lower())
+            ]
+
+        if esmalte and esmalte.strip():
+            esmalte_canon = esmalte.strip().lower()
+            resultados = [
+                f
+                for f in resultados
+                if getattr(f.campo.esmalte, "nombre", "").lower() == esmalte_canon
+            ]
+
+        if mueble and mueble.strip():
+            mueble_canon = mueble.strip().lower()
+            resultados = [
+                f
+                for f in resultados
+                if any(m.nombre.lower() == mueble_canon for m in f.campo.muebles)
+            ]
+
+        if adorno and adorno.strip():
+            adorno_canon = adorno.strip().lower()
+            resultados = [
+                f
+                for f in resultados
+                if f.adorno_exterior
+                and f.adorno_exterior.nombre.lower() == adorno_canon
+            ]
+
+        return [_to_dict(f) for f in resultados]

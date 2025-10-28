@@ -22,11 +22,18 @@ def create_app() -> Flask:
 
     @app.get("/search")
     def search():
-        q = (request.args.get("q") or "").strip()
+        q = request.args.get("q", "").strip()
+        esmalte = request.args.get("esmalte", "").strip()
+        mueble = request.args.get("mueble", "").strip()
+        adorno = request.args.get("adorno", "").strip()
         repo: CatalogoUI = app.config["repo"]
 
-        # Si no hay criterio, mostrar todo el catálogo
-        results = repo.buscar_libre(q) if q else repo.obtener_todos()
+        if q or esmalte or mueble or adorno:
+            results = repo.buscar_combinada(
+                texto=q, esmalte=esmalte, mueble=mueble, adorno=adorno
+            )
+        else:
+            results = repo.obtener_todos()
 
         def _badge(label: str, value: str) -> str:
             return f"<span style='display:inline-block;padding:0.15rem 0.5rem;margin:0 0.3rem 0.3rem 0;border:1px solid #ccc;border-radius:999px;font-size:0.9rem'>{label}: {value}</span>"
@@ -67,7 +74,6 @@ def create_app() -> Flask:
             )
             items_parts.append(card)
 
-        # Cambiar el título según si hay búsqueda o no
         titulo = f'Resultados para "{q}"' if q else "Catálogo completo"
         items_html = (
             "<ul style='padding-left:0;'>" + "".join(items_parts) + "</ul>"

@@ -522,3 +522,40 @@ Una vez todas las pruebas pasaron, la interfaz permite realizar búsquedas reale
 visualizar los resultados con sus atributos y, en ausencia de filtro, listar el catálogo completo.
 Este avance completa la conexión entre la capa de presentación y el modelo de dominio,
 dejando la aplicación en un estado funcional y demostrable.
+
+\subsubsection{Búsqueda combinada con filtros}
+Una vez implementada la visualización básica de resultados, se añadió la funcionalidad de búsqueda 
+combinada mediante múltiples criterios simultáneos. El objetivo es permitir a \hyperref[sec:hu1]{HU1} 
+y \hyperref[sec:hu2]{HU2} refinar los resultados aplicando varios filtros de forma conjunta, reduciendo 
+el conjunto de escudos mostrados únicamente a aquellos que cumplen todas las condiciones especificadas.
+
+Para ello, se implementó el método par ala búsqueda combinada en \texttt{CatalogoUI}, que acepta 
+cuatro parámetros opcionales:
+
+\begin{itemize}
+    \item \textbf{texto}: búsqueda libre que filtra por nombre, portador o provincia.
+    \item \textbf{esmalte}: filtra escudos por el color del campo.
+    \item \textbf{mueble}: filtra por la presencia de un mueble heráldico específico.
+    \item \textbf{adorno}: filtra por el adorno exterior.
+\end{itemize}
+
+La implementación aplica los filtros de manera secuencial sobre el conjunto de 
+resultados, reduciendo progresivamente la lista hasta obtener solo aquellos escudos que satisfacen 
+todas las condiciones. Únicamente se aplican los filtros que tienen valor, permitiendo combinaciones 
+flexibles.
+
+Para evitar duplicar datos en el código, las listas de valores disponibles para los filtros se 
+cargan dinámicamente desde los archivos JSON de configuración ubicados en el directorio \texttt{data/}.
+Esto mantiene la separación entre datos y lógica, facilitando futuras ampliaciones del catálogo 
+sin necesidad de modificar el código fuente.
+
+La interfaz web se actualizó para aceptar parámetros de búsqueda mediante la URL. Con esta funcionalidad
+implementada, la interfaz permite realizar búsquedas precisas y complejas sobre el catálogo, mejorando 
+significativamente la utilidad del sistema para los usuarios.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figuras/busquedaCombinada.png}
+    \caption{URL y resultados de la búsqueda combinada.}
+    \label{fig:busqueda-combinada}
+\end{figure}
