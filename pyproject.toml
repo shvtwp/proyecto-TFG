@@ -1,29 +1,25 @@
-[project]
+[tool.poetry]
 name = "heraldica"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Luzía",email = "luciaglsn@correo.ugr.es"}
-]
+authors = ["Luzía <luciaglsn@correo.ugr.es>"]
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-    "sqlmodel (>=0.0.27,<0.0.28)",
-    "requests (>=2.32.5,<3.0.0)",
-    "beautifulsoup4 (>=4.14.2,<5.0.0)",
-    "flask (>=3.1.2,<4.0.0)"
-]
+package-mode = false
 
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+sqlmodel = ">=0.0.27,<0.0.28"
+requests = ">=2.32.5,<3.0.0"
+beautifulsoup4 = ">=4.14.2,<5.0.0"
+flask = ">=3.1.2,<4.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.4.2,<9.0.0"
+ruff = ">=0.13.3,<0.14.0"
+
+[tool.poetry.scripts]
+app = "heraldica.ui_web:run"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[dependency-groups]
-dev = [
-    "pytest (>=8.4.2,<9.0.0)",
-    "ruff (>=0.13.3,<0.14.0)"
-]
-
-[tool.poetry]
-package-mode = false
