@@ -164,3 +164,7 @@ GET
 target
 indicator
 loading
+Vercel
+Render
+Pages
+refactorización
