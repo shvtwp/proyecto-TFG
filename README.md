@@ -45,7 +45,7 @@ textidote proyecto.tex > /ruta/para/el/report.html
 Para instalar las dependencias del proyecto, primero instala Poetry si no lo tienes:
 
 ```bash
-curl -sSL https://install.python-poetry.org | python3 -
+curl -sSL https://install.python-poetry.org | python -
 ```
 
 Después, desde la raíz del proyecto:
