@@ -67,5 +67,8 @@ def create_app() -> Flask:
 
     return app
 
-
 app = create_app()
+
+def run():
+    # Equivalent to: flask --app heraldica/ui_web.py --debug run
+    app.run(debug=True)
