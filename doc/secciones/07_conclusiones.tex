@@ -11,32 +11,27 @@ de una aplicación web funcional. El proyecto ha cumplido su propósito principa
 tecnológica que permita analizar, consultar y gestionar información heráldica de forma estructurada 
 y accesible.
 
-El sistema desarrollado responde directamente a las dos historias de usuario definidas al inicio 
-del proyecto, las cuales guiaron su diseño funcional:
+El sistema desarrollado está pensado para responder a las necesidades de distintos tipos de usuarios 
+interesados en la heráldica. Por un lado, ofrece una herramienta útil para estudiantes de Historia del 
+Arte u otras disciplinas afines que, al encontrarse ante un escudo en una obra arquitectónica o en un 
+monumento, deseen identificar su procedencia. La aplicación permite realizar búsquedas a partir de
+atributos visuales, mostrando resultados relevantes y contextualizados. Aunque esta funcionalidad cumple
+su propósito, la cantidad de escudos disponibles en la base de datos sigue siendo limitada, por lo que 
+se prevé su ampliación en futuras versiones.
 
-\begin{itemize}
-    \item \textbf{HU1: Estudiante de Historia del Arte.} 
-    El proyecto proporciona una plataforma que permite la búsqueda y consulta de escudos heráldicos 
-    a partir de descripciones o atributos, de manera que un usuario interesado, como un estudiante 
-    que se encuentra ante un escudo en un edificio o monumento, pueda identificar fácilmente 
-    su procedencia y obtener información contextual. Aunque la funcionalidad se cumple, el número 
-    de escudos disponibles en la base de datos es todavía limitado, por lo que se prevé su ampliación 
-    en futuras versiones.
-
-    \item \textbf{HU2: Investigador en heráldica.} 
-    El sistema facilita el análisis, clasificación y filtrado de escudos a través de una base de datos 
-    estructurada y consultas textuales flexibles, lo que reduce la dependencia de fuentes analógicas 
-    dispersas y mejora la eficiencia en los procesos de estudio y catalogación. Al igual que en el caso 
-    anterior, el potencial del sistema aumentará conforme se amplíe el número de registros 
-    heráldicos disponibles.
-\end{itemize}
+Por otro lado, el sistema resulta especialmente valioso para investigadores en heráldica, al facilitar el
+análisis, la clasificación y el filtrado de escudos mediante una base de datos estructurada. Esto reduce
+la dependencia de fuentes analógicas dispersas y mejora la eficiencia en los procesos de estudio y 
+catalogación. Al igual que en el caso anterior, el potencial de la herramienta aumentará conforme se 
+amplíe el número de registros heráldicos y se incorporen nuevas funcionalidades de análisis.
 
 De este modo, ambas historias de usuario se han satisfecho mediante el desarrollo de una herramienta 
 web accesible y funcional que combina aspectos técnicos y humanísticos.
 
 A lo largo del trabajo se han alcanzado los objetivos definidos inicialmente. Se ha diseñado una base 
 de datos coherente con la lógica de la heráldica, se ha implementado una interfaz web con 
-\textbf{Flask} y \textbf{HTML/CSS}, y se ha desarrollado un sistema de búsqueda textual capaz de 
+\textbf{Flask} y el motor de plantillas \textbf{Jinja2}, utilizando \textbf{Pico.css} para la maquetación 
+y el diseño de una interfaz ligera y adaptable, y se ha desarrollado un sistema de búsqueda textual capaz de 
 reconocer esmaltes, figuras y otros atributos relevantes. Además, se han aplicado técnicas de 
 normalización lingüística para mejorar la calidad de las consultas, teniendo en cuenta variantes y 
 sinónimos del vocabulario heráldico.
