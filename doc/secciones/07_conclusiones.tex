@@ -1,2 +1,84 @@
 \chapter{Conclusiones y trabajos futuros}
 
+En este capítulo se presentan las conclusiones derivadas del desarrollo del proyecto y las posibles 
+líneas de trabajo que podrían continuarlo o ampliarlo en el futuro.
+
+\section{Conclusiones}
+
+El desarrollo de este Trabajo de Fin de Grado ha supuesto una experiencia integral que ha abarcado 
+desde la recopilación y normalización de información heráldica hasta el diseño y la implementación 
+de una aplicación web funcional. El proyecto ha cumplido su propósito principal: crear una base 
+tecnológica que permita analizar, consultar y gestionar información heráldica de forma estructurada 
+y accesible.
+
+El sistema desarrollado está pensado para responder a las necesidades de distintos tipos de usuarios 
+interesados en la heráldica. Por un lado, ofrece una herramienta útil para estudiantes de Historia del 
+Arte u otras disciplinas afines que, al encontrarse ante un escudo en una obra arquitectónica o en un 
+monumento, deseen identificar su procedencia. La aplicación permite realizar búsquedas a partir de
+atributos visuales, mostrando resultados relevantes y contextualizados. Aunque esta funcionalidad cumple
+su propósito, la cantidad de escudos disponibles en la base de datos sigue siendo limitada, por lo que 
+se prevé su ampliación en futuras versiones.
+
+Por otro lado, el sistema resulta especialmente valioso para investigadores en heráldica, al facilitar el
+análisis, la clasificación y el filtrado de escudos mediante una base de datos estructurada. Esto reduce
+la dependencia de fuentes analógicas dispersas y mejora la eficiencia en los procesos de estudio y 
+catalogación. Al igual que en el caso anterior, el potencial de la herramienta aumentará conforme se 
+amplíe el número de registros heráldicos y se incorporen nuevas funcionalidades de análisis.
+
+De este modo, ambas historias de usuario se han satisfecho mediante el desarrollo de una herramienta 
+web accesible y funcional que combina aspectos técnicos y humanísticos.
+
+A lo largo del trabajo se han alcanzado los objetivos definidos inicialmente. Se ha diseñado una base 
+de datos coherente con la lógica de la heráldica, se ha implementado una interfaz web con 
+\textbf{Flask} y el motor de plantillas \textbf{Jinja2}, utilizando \textbf{Pico.css} para la maquetación 
+y el diseño de una interfaz ligera y adaptable, y se ha desarrollado un sistema de búsqueda textual capaz de 
+reconocer esmaltes, figuras y otros atributos relevantes. Además, se han aplicado técnicas de 
+normalización lingüística para mejorar la calidad de las consultas, teniendo en cuenta variantes y 
+sinónimos del vocabulario heráldico.
+
+Durante el desarrollo se han puesto en práctica metodologías ágiles, control de versiones con 
+\textbf{Git} y validación del código mediante herramientas automáticas como \textbf{Ruff} o 
+\textbf{Textidote}. Estos aspectos han permitido mantener un flujo de trabajo ordenado, 
+reproducible y fácilmente ampliable.
+
+En el ámbito personal y académico, este proyecto me ha ayudado a trabajar de una forma mucho más 
+organizada y cercana a la realidad del desarrollo profesional. He podido aplicar una metodología ágil 
+adaptada al contexto del TFG, lo que me ha permitido dividir el trabajo en tareas claras y ver avances 
+reales en cada iteración. Esta manera de trabajar me ha resultado motivadora y útil para mantener el 
+ritmo y la coherencia entre lo planificado y lo implementado.
+
+También ha sido una oportunidad para experimentar con distintas maneras de estructurar una aplicación 
+real, desde la definición de modelos y vistas hasta la integración de plantillas y la validación del 
+código. A lo largo del proceso he aprendido a tomar decisiones de diseño fundamentadas, resolver 
+problemas de manera autónoma y consolidar conocimientos técnicos en entornos reales de desarrollo.
+
+En conjunto, este proyecto ha servido para afianzar mi experiencia en el desarrollo web y en la 
+organización del trabajo con criterios profesionales, reforzando la relación entre planificación, 
+implementación y mantenimiento del software.
+
+\section{Trabajos futuros}
+
+Aunque el sistema actual cumple los objetivos planteados, el proyecto deja abiertas diversas líneas de mejora que podrían abordarse en el futuro. Algunas de las más relevantes son las siguientes:
+
+\begin{itemize}
+    \item \textbf{Ampliar la base de datos heráldica:} incorporar más escudos, descripciones y fuentes 
+    documentales. Esto permitiría ofrecer resultados más variados y precisos, y cubrir una mayor 
+    diversidad geográfica y estilística.
+    \item \textbf{Integrar técnicas de inteligencia artificial:} explorar el uso de modelos que asocien 
+    imágenes de blasones con sus descripciones o que asistan en la interpretación automática del lenguaje
+    heráldico.
+    \item \textbf{Mejorar la búsqueda semántica:} refinar la normalización y el tratamiento del lenguaje, 
+    incluyendo detección de sinónimos y variantes ortográficas, con el objetivo de que las consultas sean
+    más naturales y flexibles.
+    \item \textbf{Generar representaciones visuales:} implementar un sistema que permita crear o 
+    reconstruir blasones a partir de descripciones textuales, combinando análisis semántico y 
+    renderización gráfica.
+    \item \textbf{Publicar y desplegar la aplicación:} poner el sistema a disposición de otros usuarios 
+    o investigadores a través de un despliegue en la nube, con el fin de facilitar su utilización y 
+    fomentar la colaboración.
+\end{itemize}
+
+Estas posibles ampliaciones permitirían que el proyecto evolucionara hacia una herramienta más completa y
+útil tanto para la comunidad investigadora como para quienes se interesen por la heráldica. Además, 
+abrirían la puerta a la aplicación de técnicas de inteligencia artificial en un ámbito en el que aún 
+existen pocas soluciones digitales.
