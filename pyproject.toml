@@ -33,5 +33,5 @@ dev = [
 [tool.poetry]
 #package-mode = false
 
-[tool.poetry.scripts]
+[project.scripts]
 app = "heraldica.ui_web:run"
