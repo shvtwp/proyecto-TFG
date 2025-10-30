@@ -80,13 +80,13 @@ poetry run python scripts/importar_json_db.py
 Para analizar y corregir el código automáticamente con Ruff:
 
 ```bash
-poetry run ruff check --fix heraldica tests
+poetry run lint
 ```
 
 Para formatear el código:
 
 ```bash
-poetry run ruff format heraldica tests
+poetry run format
 ```
 
 ## Tests
@@ -95,7 +95,7 @@ El proyecto incluye pruebas unitarias y de integración para verificar la funcio
 Se ejecutan con:
 
 ```bash
-poetry run pytest
+poetry run test
 ```
 
 Esto comprobará que las rutas principales y los componentes del sistema funcionan correctamente.
