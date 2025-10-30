@@ -75,6 +75,7 @@ def run():
     # Equivalent to: flask --app heraldica/ui_web.py run
     app.run()
 
+
 def run_debug():
     # Equivalent to: flask --app heraldica/ui_web.py --debug run
     app.run(debug=True)
