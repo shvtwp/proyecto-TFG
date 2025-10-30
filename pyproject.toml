@@ -26,7 +26,7 @@ dev = [
 ]
 
 [tool.poetry]
-package-mode = false
+#package-mode = false
 
 [tool.poetry.scripts]
 app = "heraldica.ui_web:run"
