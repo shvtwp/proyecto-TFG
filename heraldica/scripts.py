@@ -2,19 +2,22 @@ import subprocess
 import sys
 
 
+def run_command(command: list[str]) -> None:
+    """Ejecuta un comando en un subproceso y sale con su código de retorno."""
+    result = subprocess.run(command, check=False)
+    sys.exit(result.returncode)
+
+
 def lint():
     """Run ruff check on heraldica and tests"""
-    result = subprocess.run(["ruff", "check", "heraldica", "tests"], check=False)
-    sys.exit(result.returncode)
+    run_command(["ruff", "check", "heraldica", "tests"])
 
 
 def format_code():
     """Run ruff format on heraldica and tests"""
-    result = subprocess.run(["ruff", "format", "heraldica", "tests"], check=False)
-    sys.exit(result.returncode)
+    run_command(["ruff", "format", "heraldica", "tests"])
 
 
 def test():
     """Run pytest"""
-    result = subprocess.run(["pytest", "-q"], check=False)
-    sys.exit(result.returncode)
+    run_command(["pytest", "-q"])
