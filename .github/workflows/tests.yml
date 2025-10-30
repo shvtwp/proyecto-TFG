@@ -19,7 +19,7 @@ jobs:
 
       - name: Instala las dependencias (incluye dev)
         run: |
-          poetry install --with dev --no-interaction
+          poetry install --extras "dev" --no-interaction
 
       - name: Ejecuta pytest
         run: poetry run pytest -q
