@@ -17,7 +17,7 @@ jobs:
         
       - name: Instala las dependencias (incluye dev)
         run: |
-          poetry install --with dev --no-interaction
+          poetry install --extras "dev" --no-interaction
 
       - name: Lint (ruff check)
         run: poetry run ruff check heraldica tests
