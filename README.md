@@ -59,10 +59,14 @@ poetry install
 Para ejecutar la aplicación web en modo desarrollo:
 
 ```bash
-poetry run flask --app heraldica/ui_web.py --debug run
+poetry run app_debug
 ```
 
-Para desactivar el modo desarrollo simplemente hay que prescindir del ```--debug```.
+Para ejecutar la  aplicación web en modo normal:
+```bash
+poetry run app
+```
+
 La aplicación estará disponible en `http://localhost:5000`
 
 Para cargar los datos a la base de datos:

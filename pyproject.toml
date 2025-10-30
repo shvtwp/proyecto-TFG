@@ -22,6 +22,7 @@ dev = [
 
 [project.scripts]
 app = "heraldica.ui_web:run"
+app_debug = "heraldica.ui_web:run_debug"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
