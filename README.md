@@ -59,10 +59,14 @@ poetry install
 Para ejecutar la aplicación web en modo desarrollo:
 
 ```bash
-poetry run flask --app heraldica/ui_web.py --debug run
+poetry run app_debug
 ```
 
-Para desactivar el modo desarrollo simplemente hay que prescindir del ```--debug```.
+Para ejecutar la  aplicación web en modo normal:
+```bash
+poetry run app
+```
+
 La aplicación estará disponible en `http://localhost:5000`
 
 Para cargar los datos a la base de datos:
@@ -76,13 +80,13 @@ poetry run python scripts/importar_json_db.py
 Para analizar y corregir el código automáticamente con Ruff:
 
 ```bash
-poetry run ruff check --fix heraldica tests
+poetry run lint
 ```
 
 Para formatear el código:
 
 ```bash
-poetry run ruff format heraldica tests
+poetry run format
 ```
 
 ## Tests
@@ -91,7 +95,7 @@ El proyecto incluye pruebas unitarias y de integración para verificar la funcio
 Se ejecutan con:
 
 ```bash
-poetry run pytest
+poetry run test
 ```
 
 Esto comprobará que las rutas principales y los componentes del sistema funcionan correctamente.
