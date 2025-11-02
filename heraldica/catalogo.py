@@ -292,13 +292,11 @@ class Catalogo:
     def listar_desde_bd(self) -> List[Ficha]:
         """Load catalog entries from database using injected session factory."""
         if self._session_factory is None:
-            # Fallback to default session if not injected
             from .db.session import get_session, crear_bd
-
             crear_bd()
-            session_factory = get_session
-        else:
-            session_factory = self._session_factory
+            self._session_factory = get_session
+
+        session_factory = self._session_factory
 
         fichas: List[Ficha] = []
         with session_factory() as s:
