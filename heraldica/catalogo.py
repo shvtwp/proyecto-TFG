@@ -117,7 +117,6 @@ class Catalogo:
 
         self._cargar_opciones_filtros()
 
-
     @classmethod
     def set_session_factory(cls, session_factory: Callable[[], Session]) -> None:
         """Set the session factory for database operations."""
@@ -293,6 +292,7 @@ class Catalogo:
         """Load catalog entries from database using injected session factory."""
         if self._session_factory is None:
             from .db.session import get_session, crear_bd
+
             crear_bd()
             self._session_factory = get_session
 

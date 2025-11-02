@@ -4,8 +4,6 @@ import tempfile
 from heraldica.catalogo import Catalogo
 from heraldica.db.session import crear_bd
 from scripts.importar_json_db import cargar as cargar_catalogo_desde_json
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
 
 
 def _setup_tmp_db():
@@ -14,6 +12,7 @@ def _setup_tmp_db():
     crear_bd()
     cargar_catalogo_desde_json()
     return tmpdir
+
 
 def get_test_session():
     """Crea una base SQLite temporal y devuelve una fábrica de sesiones."""
@@ -26,7 +25,7 @@ def get_test_session():
     os.environ.pop("DATABASE_URL", None)
 
     fd, path = tempfile.mkstemp(suffix=".db")
-    os.close(fd) 
+    os.close(fd)
 
     engine = create_engine(f"sqlite:///{path}")
 
@@ -75,6 +74,7 @@ def test_ui_repo_pieza_y_portador():
     finally:
         Catalogo.reset_instance()
         td.cleanup()
+
 
 def test_catalogo_inyectado_con_sesion_temporal():
     """Comprueba que Catalogo funciona con una sesión inyectada."""
