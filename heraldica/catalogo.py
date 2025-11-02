@@ -20,24 +20,18 @@ class Ficha:
     imagen_src: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convert Ficha to dictionary representation for UI."""
+        """Convierte la Ficha a una representación en diccionario para la interfaz de usuario."""
+        campo = self.campo
+
         return {
-            "nombre": self.nombre if self.nombre else "",
-            "campo": self.campo.esmalte.nombre
-            if self.campo and self.campo.esmalte
-            else "",
-            "muebles": [m.nombre for m in self.campo.muebles]
-            if self.campo and self.campo.muebles
-            else [],
-            "pieza_heraldica": self.campo.pieza_heraldica.nombre
-            if self.campo and self.campo.pieza_heraldica
-            else "",
-            "portador": self.portador if self.portador else "",
-            "adorno_exterior": self.adorno_exterior.nombre
-            if self.adorno_exterior
-            else "",
-            "provincia": self.provincia if self.provincia else "",
-            "imagen_src": self.imagen_src if self.imagen_src else "",
+            "nombre": self.nombre or "",
+            "campo": getattr(campo.esmalte, "nombre", ""),
+            "muebles": [m.nombre for m in campo.muebles] if campo.muebles else [],
+            "pieza_heraldica": getattr(campo.pieza_heraldica, "nombre", ""),
+            "portador": self.portador or "",
+            "adorno_exterior": getattr(self.adorno_exterior, "nombre", ""),
+            "provincia": self.provincia or "",
+            "imagen_src": self.imagen_src or "",
         }
 
 
