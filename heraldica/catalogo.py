@@ -20,7 +20,7 @@ class Ficha:
     imagen_src: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convierte la Ficha a una representación en diccionario para la interfaz de usuario."""
+        """Convierte la Ficha a una resentación en diccionario para la interfaz de usuario."""
         campo = self.campo
 
         return {
@@ -103,14 +103,20 @@ class Catalogo:
         return cls._instance
 
     def __init__(self, session_factory: Optional[Callable[[], Session]] = None) -> None:
-        """Initialize the catalog. Only runs once due to singleton pattern."""
-        if self._initialized:
+        """Inicializa el catálogo y carga datos automáticamente."""
+        if getattr(self, "_initialized", False):
             return
+
         self._initialized = True
-        if session_factory is not None:
-            self._session_factory = session_factory
-        self._fichas: List[Ficha] = listar()
+        self._session_factory = session_factory
+
+        try:
+            self._fichas: List[Ficha] = self.listar_desde_bd()
+        except Exception:
+            self._fichas: List[Ficha] = listar()
+
         self._cargar_opciones_filtros()
+
 
     @classmethod
     def set_session_factory(cls, session_factory: Callable[[], Session]) -> None:
