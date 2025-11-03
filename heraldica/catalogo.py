@@ -94,28 +94,27 @@ class Catalogo:
     _session_factory: Optional[Callable[[], Session]] = None
 
     def __new__(cls, session_factory: Optional[Callable[[], Session]] = None):
-        """Singleton implementation with optional session factory injection."""
-        if cls._instance is None:
+        """Singleton con carga automática desde BD o JSON."""
+        if getattr(cls, "_instance", None) is None:
             cls._instance = super().__new__(cls)
-            cls._instance._initialized = False
-        if session_factory is not None:
-            cls._session_factory = session_factory
+            cls._instance._initialized = True
+
+            if session_factory is not None:
+                cls._session_factory = session_factory
+
+            try:
+                cls._instance._fichas = cls._instance.listar_desde_bd()
+            except Exception:
+                cls._instance._fichas = listar()
+
+            cls._instance._cargar_opciones_filtros()
+
         return cls._instance
 
     def __init__(self, session_factory: Optional[Callable[[], Session]] = None) -> None:
-        """Inicializa el catálogo y carga datos automáticamente."""
-        if getattr(self, "_initialized", False):
-            return
-
-        self._initialized = True
-        self._session_factory = session_factory
-
-        try:
-            self._fichas: List[Ficha] = self.listar_desde_bd()
-        except Exception:
-            self._fichas: List[Ficha] = listar()
-
-        self._cargar_opciones_filtros()
+        """Inicializa el catálogo (sin recargar datos si ya está creado)."""
+        if session_factory is not None:
+            self._session_factory = session_factory
 
     @classmethod
     def set_session_factory(cls, session_factory: Callable[[], Session]) -> None:
