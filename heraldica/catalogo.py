@@ -104,7 +104,7 @@ class Catalogo:
 
     def __new__(cls, session_factory: Optional[Callable[[], Session]] = None):
         """Singleton con carga automática desde BD o JSON."""
-        if getattr(cls, "_instance", None) is None:
+        if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls._instance._initialized = True
 
