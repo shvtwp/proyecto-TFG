@@ -20,25 +20,28 @@ class Ficha:
     imagen_src: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convert Ficha to dictionary representation for UI."""
-        return {
-            "nombre": self.nombre if self.nombre else "",
-            "campo": self.campo.esmalte.nombre
-            if self.campo and self.campo.esmalte
-            else "",
-            "muebles": [m.nombre for m in self.campo.muebles]
-            if self.campo and self.campo.muebles
-            else [],
-            "pieza_heraldica": self.campo.pieza_heraldica.nombre
-            if self.campo and self.campo.pieza_heraldica
-            else "",
-            "portador": self.portador if self.portador else "",
-            "adorno_exterior": self.adorno_exterior.nombre
-            if self.adorno_exterior
-            else "",
-            "provincia": self.provincia if self.provincia else "",
-            "imagen_src": self.imagen_src if self.imagen_src else "",
+        """Convierte la Ficha a una representación en diccionario para la interfaz de usuario."""
+        campo = self.campo
+
+        resultado = {
+            attr: getattr(self, attr)
+            for attr in ["nombre", "portador", "provincia", "imagen_src"]
         }
+
+        resultado.update(
+            {
+                "campo": campo.esmalte.nombre,
+                "muebles": [m.nombre for m in campo.muebles] if campo.muebles else [],
+                "pieza_heraldica": campo.pieza_heraldica.nombre
+                if campo.pieza_heraldica
+                else "",
+                "adorno_exterior": self.adorno_exterior.nombre
+                if self.adorno_exterior
+                else "",
+            }
+        )
+
+        return resultado
 
 
 _DATA = Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
@@ -100,23 +103,27 @@ class Catalogo:
     _session_factory: Optional[Callable[[], Session]] = None
 
     def __new__(cls, session_factory: Optional[Callable[[], Session]] = None):
-        """Singleton implementation with optional session factory injection."""
+        """Singleton con carga automática desde BD o JSON."""
         if cls._instance is None:
             cls._instance = super().__new__(cls)
-            cls._instance._initialized = False
-        if session_factory is not None:
-            cls._session_factory = session_factory
+            cls._instance._initialized = True
+
+            if session_factory is not None:
+                cls._session_factory = session_factory
+
+            try:
+                cls._instance._fichas = cls._instance.listar_desde_bd()
+            except Exception:
+                cls._instance._fichas = listar()
+
+            cls._instance._cargar_opciones_filtros()
+
         return cls._instance
 
     def __init__(self, session_factory: Optional[Callable[[], Session]] = None) -> None:
-        """Initialize the catalog. Only runs once due to singleton pattern."""
-        if self._initialized:
-            return
-        self._initialized = True
+        """Inicializa el catálogo (sin recargar datos si ya está creado)."""
         if session_factory is not None:
             self._session_factory = session_factory
-        self._fichas: List[Ficha] = listar()
-        self._cargar_opciones_filtros()
 
     @classmethod
     def set_session_factory(cls, session_factory: Callable[[], Session]) -> None:
@@ -292,13 +299,12 @@ class Catalogo:
     def listar_desde_bd(self) -> List[Ficha]:
         """Load catalog entries from database using injected session factory."""
         if self._session_factory is None:
-            # Fallback to default session if not injected
             from .db.session import get_session, crear_bd
 
             crear_bd()
-            session_factory = get_session
-        else:
-            session_factory = self._session_factory
+            self._session_factory = get_session
+
+        session_factory = self._session_factory
 
         fichas: List[Ficha] = []
         with session_factory() as s:
