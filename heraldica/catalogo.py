@@ -20,20 +20,22 @@ class Ficha:
     imagen_src: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convierte la Ficha a una resentación en diccionario para la interfaz de usuario."""
+        """Convierte la Ficha a una representación en diccionario para la interfaz de usuario."""
         campo = self.campo
-
-        return {
-            "nombre": self.nombre or "",
-            "campo": getattr(campo.esmalte, "nombre", ""),
-            "muebles": [m.nombre for m in campo.muebles] if campo.muebles else [],
-            "pieza_heraldica": getattr(campo.pieza_heraldica, "nombre", ""),
-            "portador": self.portador or "",
-            "adorno_exterior": getattr(self.adorno_exterior, "nombre", ""),
-            "provincia": self.provincia or "",
-            "imagen_src": self.imagen_src or "",
+        
+        resultado = {
+            attr: getattr(self, attr)
+            for attr in ["nombre", "portador", "provincia", "imagen_src"]
         }
-
+        
+        resultado.update({
+            "campo": campo.esmalte.nombre,
+            "muebles": [m.nombre for m in campo.muebles] if campo.muebles else [],
+            "pieza_heraldica": campo.pieza_heraldica.nombre if campo.pieza_heraldica else "",
+            "adorno_exterior": self.adorno_exterior.nombre if self.adorno_exterior else "",
+        })
+        
+        return resultado
 
 _DATA = Path(__file__).resolve().parents[1] / "data" / "catalogo_demo.json"
 
